@@ -1,0 +1,34 @@
+[config.wallpaper]
+command = "feh"
+arguments = ["--bg-fill"]
+set = false
+
+[templates.quickshell]
+input_path = './templates/quickshell-colours.json'
+output_path = '~/.config/quickshell/settings/colours.json'
+
+[templates.gtk3]
+input_path = './templates/gtk-colours.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+
+[templates.gtk4]
+input_path = './templates/gtk-colours.css'
+output_path = '~/.config/gtk-4.0/gtk.css'
+
+[templates.alacritty]
+input_path = './templates/alacritty.toml'
+output_path = '~/.config/alacritty/colors.toml'
+
+[templates.cava]
+input_path = './templates/cava'
+output_path = '~/.config/cava/config'
+
+#[templates.kitty]
+#input_path = './templates/kitty-colours.conf'
+#output_path = '~/.config/kitty/colours.conf'
+#post_hook = "kitty +kitten themes --reload-in=all colours"
+
+#[templates.equibop_flatpak]
+#input_path = './templates/discord.css'
+#output_path = '~/.var/app/io.github.equicord.equibop/config/equibop/themes/theme.css'

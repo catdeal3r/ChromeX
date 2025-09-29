@@ -1,0 +1,72 @@
+#!/bin/sh
+
+function start()
+{
+	$(which qs) kill
+	env DISPLAY=:0 $(which qs) --daemonize
+}
+
+function startDebug()
+{
+	$(which qs) kill
+	env DISPLAY=:0 $(which qs) 
+}
+
+function toggleBar()
+{
+	$(which qs) ipc call root toggleBar
+}
+
+function toggleLock()
+{
+	$(which qs) ipc call lock lock
+}
+
+function toggleLauncher() 
+{
+	$(which qs) ipc call root toggleLauncher
+}
+
+function setWall() {
+	wall="$1"
+
+	pkill swaybg
+	swaybg -o \* -m fill -i $wall >/dev/null 2>&1 & disown
+
+	echo "#!/bin/sh" > ~/.config/wayfire_wall.sh
+	echo "swaybg -o \\* -m fill -i $wall >/dev/null 2>&1 & disown" >> ~/.config/wayfire_wall.sh
+	
+	$(which qs) ipc call root setWallpaper $wall
+}
+
+function clearNotifs() {
+	$(which qs) ipc call root clearNotifs
+}
+
+function rebuildQuickshell() {
+	cd ~
+	if [[ $(ls quickshell-git) ]]; then
+		cd quickshell-git
+		git reset --hard origin/master
+		git pull
+		sudo cmake -GNinja -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWAYLAND=ON -DSERVICE_PAM=ON -DHYPRLAND=OFF
+		sudo cmake --build build
+		qs kill
+		sudo cmake --install build
+		qs --daemonize
+	else
+		echo "The 'quickshell-git' directory has not been found in the home directory. Did you follow the install instructions exactly?"
+	fi
+}
+
+case $1 in
+--start) start ;;
+--debug) startDebug ;;
+--setConfig) setConfig ;;
+--toggleBar) toggleBar ;;
+--toggleLauncher) toggleLauncher ;;
+--lock) toggleLock ;;
+--setWall) setWall $2 ;;
+--clearNotifs) clearNotifs ;;
+--updateQuickshell) rebuildQuickshell ;;
+esac

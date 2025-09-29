@@ -1,0 +1,7 @@
+[general]
+bar_width = 1
+
+[color]
+gradient = 1
+gradient_color_1 = '#e9e1dd'
+gradient_color_2 = '#e7bfa3'

@@ -1,0 +1,44 @@
+* {
+  border-radius: 0;
+}
+
+window {
+  margin: 5px;
+  background-color: black;
+}
+
+#input {
+  margin: 5px;
+  background-color: black;
+}
+
+#input:selected {
+  border: none;
+}
+
+#inner-box {
+  margin: 5px;
+  background-color: black;
+}
+
+#outer-box {
+  margin: 5px;
+  background-color: black;
+}
+
+#scroll {
+  margin: 5px;
+  background-color: black;
+}
+
+#entry:selected {
+  background-color: white;
+}
+
+#text {
+  margin: 5px;
+} 
+
+#text:selected {
+  color: black;
+}
