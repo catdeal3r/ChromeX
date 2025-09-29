@@ -1,5 +1,6 @@
 <a name="top_marker"/>
 <div align="center">
+<img src=".github/icon.png" alt="ChromeX Icon">
 
 # ChromeX
 
