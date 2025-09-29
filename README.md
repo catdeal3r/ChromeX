@@ -1,8 +1,7 @@
 <a name="top_marker"/>
 <div align="center">
-<img src=".github/icon.png" alt="fibreglass_icon" width="410" height="410">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Roboto&weight=400&size=35&duration=3500&pause=2000&color=FFFFFF&center=true&vCenter=true&width=435&lines=Fibreglass+(v0.3))](https://github.com/dealerofallthecats/fibreglass)
+# ChromeX
 
 ![commits](https://img.shields.io/github/last-commit/catdeal3r/ChromeX?style=for-the-badge&labelColor=1B1919&color=74be88)
 ![top language](https://img.shields.io/github/languages/top/catdeal3r/ChromeX?color=6d92bf&style=for-the-badge&labelColor=1B1919)
@@ -13,15 +12,10 @@
 
 </div>
 
-> [!IMPORTANT]
-> You might notice that all the code/configs are gone. This is because I'm doing a complete refactor, as well as switching to using [`Quickshell`](https://quickshell.outfoxxed.me/) for the widgets.
-> If you would like to read the old code, check [here](https://github.com/dealerofallthecats/fibreglass/tree/old), or look through the branches.
-
 ## Table of Contents
 - [Showcase](#showcase)
 - [Install](#install)
 - [Issues](#known-issues)
-- [Todo](#todo)
 - [Credits](#credits)
 - [Inspirations](#allowing-me-to-steal-designs-inspirations)
 
