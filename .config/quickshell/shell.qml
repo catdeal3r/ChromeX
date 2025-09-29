@@ -6,12 +6,11 @@ import Quickshell.Io
 
 import QtQuick
 import qs.modules
-import qs.modules.common.desktop
 import qs.services
 import qs.config
 
 Scope {
-	ThemeLoader {}
+	Modules {}
 	
 	Component.onCompleted: {
 		Notifications.dummyInit()
