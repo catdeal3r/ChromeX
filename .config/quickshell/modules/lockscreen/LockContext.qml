@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pam
 
-import qs.modules.oneb.lockscreen
+import qs.modules.lockscreen
 
 Scope {
 	id: root

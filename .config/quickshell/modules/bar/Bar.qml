@@ -11,16 +11,12 @@ import qs.modules
 import qs.modules.bar
 import qs.config
 import qs.modules.common
-import qs.modules.bar.dashboard
+import qs.services
 
 Scope {
 	signal finished();
 	id: root
 
-	property int sliderValue: 45
-	property int barWidth: 40
-	property int dashWidth: 450
-	property bool isBar: true
 	
 	Variants {
 		model: Quickshell.screens;
@@ -40,213 +36,217 @@ Scope {
 
 			color: "transparent"
 			
-			implicitWidth: root.dashWidth + 35
+			implicitWidth: 40
 			
 			visible: true
 			
-			exclusiveZone: root.sliderValue
+			exclusiveZone: 40
 
 			mask: Region {
-				item: maskId
+				item: barBase
 			}
 
 			Rectangle {
-				id: maskId
-				width: root.barWidth + root.sliderValue
-				height: parent.height
-				color: "transparent"
+				id: barBase
+				anchors.left: parent.left
 
-				Loader {
-					active: root.isBar
-					
-					sourceComponent: Rectangle {
-						id: barBase
-						anchors.left: parent.left
-						anchors.leftMargin: {
-							if (root.sliderValue > width + 5) {
-								return 0
-							} else {
-								return root.sliderValue - width - 5
-							}
-						}
+				width: 40
+				height: barWindow.height
+				color: Colours.palette.surface
 
-						width: root.barWidth
-						height: barWindow.height
-						color: Colours.palette.surface
-
-						Text {
-							anchors.top: parent.top
-							anchors.left: parent.left
-							anchors.leftMargin: (parent.width / 2) - ((font.pixelSize + 2) / 2)
-							anchors.topMargin: 5
-
-							text: ""
-							color: Colours.palette.on_surface
-							font.pixelSize: 18
-						}
-
-						WorkspacesWidget {
-							monitor: modelData.name
-						}
-						
-						ColumnLayout {
-							spacing: 15
-							anchors.left: parent.left
-
-							width: parent.width - 5
-							anchors.bottom: parent.bottom
-							
-							SysTray {
-								Layout.preferredHeight: (SystemTray.items.values.length * 25)
-								Layout.preferredWidth: 20
-								Layout.alignment: Qt.AlignHCenter
-								bar: barWindow
-							}
-							
-							BluetoothWidget {
-								color: Bluetooth.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
-									
-								font.family: Config.settings.iconFont
-								font.weight: 600
-
-								Layout.preferredHeight: 15
-								
-								font.pixelSize: 17
-								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-								Layout.leftMargin: 1
-
-								MouseArea {
-									anchors.fill: parent
-									cursorShape: Qt.PointingHandCursor
-
-									onClicked: Bluetooth.toggle()
-								}
-							}
-								
-							NetworkWidget {
-								color: Network.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
-							
-								font.family: Config.settings.iconFont
-								font.weight: 600
-
-								Layout.preferredHeight: 15
-								
-								font.pixelSize: 17
-								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-								Layout.leftMargin: 1
-
-								MouseArea {
-									anchors.fill: parent
-									cursorShape: Qt.PointingHandCursor
-
-									onClicked: Quickshell.execDetached([ Quickshell.shellDir + "/scripts/network.out" ])
-								}
-							}
-							
-							BatteryWidget {
-								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-							
-								color: Qt.alpha(Colours.palette.on_surface, 0.8)
-
-								font.family: Config.settings.iconFont
-								font.weight: 600
-
-								Layout.preferredHeight: 19
-								Layout.leftMargin: 1
-								font.pixelSize: 21
-							}
-							
-							TimeWidget {
-								color: Qt.alpha(Colours.palette.on_surface, 0.8)
-			
-								font.family: Config.settings.font
-								font.weight: 600
-
-								Layout.preferredHeight: 60
-								
-								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-								
-								font.pixelSize: 13
-								Layout.leftMargin: 2
-							}
-						}
-					}
-				}
-
-				Dashboard {
-					isDashboardOpen: !root.isBar
-					dash_width: root.sliderValue - 5
-				}
-
-				Slider {
-					id: slider
-					property bool isHovered: false
+				Text {
 					anchors.top: parent.top
-					anchors.topMargin: (parent.height / 2) - (height / 2)
-					width: root.dashWidth + 5
-					
-					height: 50
-					
-					background: Rectangle {
-						color: "transparent"
+					anchors.left: parent.left
+					anchors.leftMargin: (parent.width / 2) - ((font.pixelSize + 3) / 2)
+					anchors.topMargin: 5
+					text: "shapes"
+					color: Colours.palette.on_surface
+					font.pixelSize: 22
+					font.weight: 400
+					font.family: Config.settings.iconFont
+				}
 
-						HoverHandler {
-							parent: parent
-							cursorShape: Qt.DragMoveCursor
+				WorkspacesWidget {
+					monitor: modelData.name
+				}
+						
+				ColumnLayout {
+					spacing: 10
+					anchors.left: parent.left
+
+					width: parent.width - 5
+					anchors.bottom: parent.bottom
 							
-							acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-							
-							onHoveredChanged: {
-								slider.isHovered = hovered
+					SysTray {
+						Layout.preferredHeight: (SystemTray.items.values.length * 25)
+						Layout.preferredWidth: 20
+						Layout.alignment: Qt.AlignHCenter
+						bar: barWindow
+					}
+
+					Rectangle {
+						id: notificationButton
+						property bool hovered: false
+						property string time
+
+						Layout.preferredHeight: 50
+						Layout.preferredWidth: barBase.width - 10
+						Layout.alignment: Qt.AlignHCenter
+						Layout.bottomMargin: -4
+
+						topLeftRadius: Config.settings.borderRadius
+						topRightRadius: Config.settings.borderRadius
+
+						bottomLeftRadius: 5
+						bottomRightRadius: 5
+
+						color: hovered ? Colours.palette.primary : Colours.palette.surface_container
+
+						ColumnLayout {
+							width: parent.width
+							height: parent.height
+
+							Text {
+								color: notificationButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
+
+								text: Notifications.list.length != 0 ? "notifications_unread" : "notifications"
+						
+								font.family: Config.settings.iconFont
+								font.weight: 400
+									
+								font.pixelSize: 18
+								Layout.preferredHeight: 20
+								Layout.leftMargin: 0
+								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+								Behavior on color {
+									PropertyAnimation {
+										duration: 150
+										easing.type: Easing.InSine
+									}
+								}
 							}
 						}
-					}
-					
-					enabled: true
-					
-					from: 5
-					value: root.sliderValue
-					to: width
 
-					onMoved: {
-						let snapAmount = 105;
-						root.sliderValue = value;
-						if (value > root.barWidth + snapAmount) {
-							root.isBar = false;
-							root.sliderValue = root.dashWidth;
-						}
-						
-						if (value > root.barWidth + 5 && value < root.barWidth + snapAmount) {
-							root.sliderValue = root.barWidth + 5;
-						}
-						
-						if (value < root.barWidth + snapAmount + 1) {
-							root.isBar = true;
-						}
-
-						//console.log(value);
-					}
-					
-					handle: Rectangle {
-						height: parent.height
-						anchors.left: parent.left
-						anchors.leftMargin: (slider.value / slider.to) * slider.width
-						color: "#FFFFFF"
-
-						opacity: slider.isHovered ? 1 : 0
-
-						Behavior on opacity {
+						Behavior on color {
 							PropertyAnimation {
-								duration: 200
+								duration: 150
 								easing.type: Easing.InSine
 							}
 						}
 
-						width: 5
-						radius: 10
+
+						MouseArea {
+							anchors.fill: parent
+							hoverEnabled: true
+							cursorShape: Qt.PointingHandCursor
+
+							onEntered: notificationButton.hovered = true
+							onExited: notificationButton.hovered = false
+						}
+					}
+						
+					
+					Rectangle {
+						id: quickActionsButton
+						property bool hovered: false
+						Layout.preferredHeight: 100
+						Layout.preferredWidth: barBase.width - 10
+						Layout.alignment: Qt.AlignHCenter
+						Layout.bottomMargin: 10
+
+						topLeftRadius: 5
+						topRightRadius: 5
+
+						bottomLeftRadius: Config.settings.borderRadius
+						bottomRightRadius: Config.settings.borderRadius
+
+						color: hovered ? Colours.palette.primary : Colours.palette.surface_container
+
+						Behavior on color {
+							PropertyAnimation {
+								duration: 150
+								easing.type: Easing.InSine
+							}
+						}
+
+						ColumnLayout {
+							width: parent.width
+							height: parent.height
+							spacing: 7
+							
+							TimeWidget {
+								color: quickActionsButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
+					
+								font.family: Config.settings.font
+								font.weight: 400
+								
+								font.pixelSize: 12
+								Layout.preferredHeight: 7
+								Layout.topMargin: 9
+
+								Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+								Behavior on color {
+									PropertyAnimation {
+										duration: 150
+										easing.type: Easing.InSine
+									}
+								}
+
+							}
+
+							NetworkWidget {
+								color: quickActionsButton.hovered ? Colours.palette.on_primary : Network.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
+									
+								font.family: Config.settings.iconFont
+								font.weight: 600
+
+								Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+								Layout.preferredHeight: 8
+
+								font.pixelSize: 15
+
+								Behavior on color {
+									PropertyAnimation {
+										duration: 150
+										easing.type: Easing.InSine
+									}
+								}
+							}
+									
+							BatteryWidget {
+									
+								color: quickActionsButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
+
+								font.family: Config.settings.iconFont
+								font.weight: 600
+								
+								Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+								Layout.preferredHeight: 12
+								font.pixelSize: 17
+
+								Behavior on color {
+									PropertyAnimation {
+										duration: 150
+										easing.type: Easing.InSine
+									}
+								}
+							}
+						}
+
+						MouseArea {
+							anchors.fill: parent
+							hoverEnabled: true
+							cursorShape: Qt.PointingHandCursor
+
+							onEntered: quickActionsButton.hovered = true
+							onExited: quickActionsButton.hovered = false
+						}
 					}
 				}
 			}
 		}
 	}
 }
+

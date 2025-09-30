@@ -8,7 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import QtQuick.Controls
 
-import qs.modules.oneb.launcher
+import qs.modules.launcher
 import qs.config
 import qs.modules.common
 import qs.modules

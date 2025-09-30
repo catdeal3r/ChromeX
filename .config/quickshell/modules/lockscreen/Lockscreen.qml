@@ -3,7 +3,7 @@ import Quickshell.Io
 import Quickshell.Wayland
 
 import qs.modules
-import qs.modules.oneb.lockscreen
+import qs.modules.lockscreen
 
 ShellRoot {
 

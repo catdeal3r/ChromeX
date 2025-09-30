@@ -19,6 +19,7 @@
 - [Issues](#known-issues)
 - [Credits](#credits)
 - [Inspirations](#allowing-me-to-steal-designs-inspirations)
+- [Disclaimer](#disclaimer)
 
 ---
 
@@ -72,6 +73,14 @@ TODO
 ## Waho
 
 [![Stargazers over time](https://starchart.cc/catdeal3r/ChromeX.svg?variant=adaptive)](https://starchart.cc/dealerofallthecats/fibreglass)
+
+## Disclaimer
+
+This repository is maintained by a person who doesn't and hasn't had any association with Google.
+
+Therefore, the design is stored here to be shared non-commerically, for purely aesthetic reasons, with no claim of ownership over the original design or branding.
+
+No profit is made.
 
 ---
 *[Back to top](#top_marker)*

@@ -12,7 +12,7 @@ Singleton {
     Process {
 		id: dateProc
 
-		command: [ "date", "+%I%n%M%n%p" ]
+		command: [ "date", "+%I%n%M" ]
 		running: true
 
 		stdout: SplitParser {

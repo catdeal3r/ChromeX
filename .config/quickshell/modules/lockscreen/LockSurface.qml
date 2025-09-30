@@ -7,11 +7,11 @@ import Quickshell.Wayland
 import Quickshell
 import Quickshell.Widgets
 
-import qs.modules.oneb.lockscreen
+import qs.modules.lockscreen
 import qs.config
 import qs.modules.common
 
-import qs.modules.oneb.lockscreen
+import qs.modules.lockscreen
 
 Rectangle {
 	id: root
