@@ -100,7 +100,7 @@ Scope {
 						bottomLeftRadius: 5
 						bottomRightRadius: 5
 
-						color: hovered ? Colours.palette.primary : Colours.palette.surface_container
+						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
 
 						ColumnLayout {
 							width: parent.width
@@ -161,7 +161,7 @@ Scope {
 						bottomLeftRadius: Config.settings.borderRadius
 						bottomRightRadius: Config.settings.borderRadius
 
-						color: hovered ? Colours.palette.primary : Colours.palette.surface_container
+						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
 
 						Behavior on color {
 							PropertyAnimation {

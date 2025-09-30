@@ -19,7 +19,6 @@ Time:        NotificationUtils.getFriendlyNotifTimeString(modelData.time)
 App Name:    modelData.appName
 */
 
-
 Rectangle {
 	id: singleNotif
 	property bool popup: false
