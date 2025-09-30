@@ -35,7 +35,7 @@ Rectangle {
 				Layout.alignment: Qt.AlignHCenter
 				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 15 : root.width - 17
 				Layout.preferredHeight: 40
-				Layout.rightMargin: 7
+				Layout.rightMargin: 2
 
 				color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.primary : Colours.palette.surface_container
 

@@ -80,6 +80,7 @@ Scope {
 					SysTray {
 						Layout.preferredHeight: (SystemTray.items.values.length * 25)
 						Layout.preferredWidth: 20
+						Layout.leftMargin: 3.5
 						Layout.alignment: Qt.AlignHCenter
 						bar: barWindow
 					}
@@ -93,6 +94,7 @@ Scope {
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
 						Layout.bottomMargin: -4
+						Layout.leftMargin: 3
 
 						topLeftRadius: Config.settings.borderRadius
 						topRightRadius: Config.settings.borderRadius
@@ -153,6 +155,7 @@ Scope {
 						Layout.preferredHeight: 100
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
+						Layout.leftMargin: 3
 						Layout.bottomMargin: 10
 
 						topLeftRadius: 5
