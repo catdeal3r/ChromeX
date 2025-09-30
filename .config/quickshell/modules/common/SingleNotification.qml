@@ -44,7 +44,7 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
 		acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
-        //onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.id) : Notifications.discardNotification(modelData.id)
+        onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.id) : Notifications.discardNotification(modelData.id)
 
 		onPressed: event => {
 			startX = event.x;
@@ -52,7 +52,7 @@ Rectangle {
 				Notifications.discardNotification(modelData.id)
 		}
 
-		onReleased: event => {
+		onPositionChanged: event => {
 			if (event.x > startX) {
 				if (singleNotif.popup)
 					Notifications.timeoutNotification(modelData.id)
