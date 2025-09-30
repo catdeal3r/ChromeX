@@ -6,6 +6,7 @@ import Quickshell.Services.SystemTray
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import qs.modules
 import qs.modules.bar
@@ -54,16 +55,22 @@ Scope {
 				height: barWindow.height
 				color: Colours.palette.surface
 
-				Text {
+				IconImage {
+					id: icon
+					width: 30
+					height: 30
 					anchors.top: parent.top
 					anchors.left: parent.left
-					anchors.leftMargin: (parent.width / 2) - ((font.pixelSize + 6) / 2)
+					anchors.leftMargin: (parent.width / 2) - (width / 2) - 1
 					anchors.topMargin: 5
-					text: "shapes"
-					color: Colours.palette.on_surface
-					font.pixelSize: 20
-					font.weight: 500
-					font.family: Config.settings.iconFont
+					source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/icon.png")
+				}
+
+				MultiEffect {
+					source: icon
+					anchors.fill: icon
+					colorizationColor: Colours.palette.on_surface
+					colorization: 1.0
 				}
 
 				WorkspacesWidget {

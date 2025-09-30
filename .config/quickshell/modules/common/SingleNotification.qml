@@ -81,7 +81,7 @@ Rectangle {
                 radius: 1000
                 height: iconImage.size
                 width: iconImage.size
-                color: Colours.palette.primary
+                color: "transparent"
                 
                 IconImage {
                     visible: (modelData.appIcon == "") ? false : true
@@ -223,6 +223,7 @@ Rectangle {
                 width: 25
                 radius: 1000
                 color: hovered ? Colours.palette.surface_container_highest : "transparent"
+                visible: bodyElided.elidedText == modelData.body ? false : true
                 
                 Behavior on color {
                     PropertyAnimation {
@@ -239,6 +240,7 @@ Rectangle {
                     font.weight: 600
                     font.pixelSize: 13
                     rotation: singleNotif.expanded ? 180 : 0
+                    visible: parent.visible
                     
                     Behavior on rotation {
                         PropertyAnimation {
