@@ -51,19 +51,6 @@ Singleton {
 				Wallpaper.loadWallpaper()
 			}
 			
-			property string currentRice: "fibreglass"
-			
-			onCurrentRiceChanged: {
-				if (currentRice == "fibreglass" || currentRice == "windows" || currentRice == "cavern" || currentRice == "wyvern" || currentRice == "resett" || currentRice == "oneb") {
-					console.log(`Switched to rice: ${currentRice}`)
-					if (currentRice == "wyvern") {
-						Quickshell.execDetached(["swaymsg", "default_border", "none"])
-					} 
-				} else {
-					console.log(`Can't handle rice selection: ${currentRice}`)
-				}
-			}
-			
 			property string font: "SF Pro Display"
 			property string iconFont: "Material Symbols Rounded"
 			property int borderRadius: 20

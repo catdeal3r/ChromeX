@@ -23,9 +23,26 @@ Rectangle {
     id: singleNotif
     property bool popup: false
     property bool expanded: false
+
+    property bool areActions: !(modelData.actions.length == 0)
+
+    property var actions: modelData.actions
+
     radius: Config.settings.borderRadius + 5
     color: Colours.palette.surface
-    implicitHeight: expanded ? 100 : 70
+
+    implicitHeight: {
+        if (expanded)
+        {
+            if (areActions)
+                return 130
+            else
+                return 100
+        }
+        else
+            return 70
+    }
+
     implicitWidth: 400
     
     Behavior on implicitHeight {
@@ -109,9 +126,23 @@ Rectangle {
         Rectangle {
             id: textContent
             property int cWidth: singleNotif.implicitWidth - iconImage.size - (Config.settings.borderRadius * 3)
+            property int padding: 10
+
             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
             Layout.topMargin: Config.settings.borderRadius
-            Layout.preferredHeight: singleNotif.expanded ? iconImage.size + 30 : iconImage.size
+
+            Layout.preferredHeight: {
+                if (singleNotif.expanded)
+                {
+                    if (singleNotif.areActions)
+                        return iconImage.size + 60
+                    else
+                        return iconImage.size + 30
+                }
+                else
+                    return iconImage.size
+            }
+
             Layout.preferredWidth: cWidth
             
             Behavior on Layout.preferredHeight {
@@ -124,41 +155,52 @@ Rectangle {
             color: "transparent"
 
             ColumnLayout {
-                spacing: 5
+                spacing: 3
+                anchors.fill: parent
 
-                RowLayout {
-                    spacing: 5
-                    TextMetrics {
-                        id: summaryElided
-                        text: modelData.summary
-                        font.family: Config.settings.font
-                        elideWidth: textContent.cWidth - 130
-                        elide: Text.ElideRight
-                    }
+                Rectangle {
+                    Layout.preferredHeight: (singleNotif.modelData.body == "") ? 20 : 15
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                    Layout.preferredWidth: textContent.cWidth - textContent.padding * 3
+                    color: "transparent"
 
-                    Text {
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                        text: summaryElided.elidedText
-                        font.family: Config.settings.font
-                        font.weight: 500
-                        font.pixelSize: 14
-                        color: Colours.palette.on_surface
-                    }
+                    RowLayout {
+                        spacing: 5
+                        
+                        TextMetrics {
+                            id: summaryElided
+                            text: modelData.summary
+                            font.family: Config.settings.font
+                            elideWidth: textContent.cWidth - 130
+                            elide: Text.ElideRight
+                        }
 
-                    Text {
-                        text: "·"
-                        color: Colours.palette.on_surface
-                        font.family: Config.settings.font
-                        font.weight: 600
-                        font.pixelSize: 11
-                    }
+                        Text {
+                            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                            text: summaryElided.elidedText
+                            font.family: Config.settings.font
+                            font.weight: 500
+                            font.pixelSize: 14
+                            color: Colours.palette.on_surface
+                        }
 
-                    Text {
-                        color: Colours.palette.outline
-                        text: NotificationUtils.getFriendlyNotifTimeString(modelData.time)
-                        font.family: Config.settings.font
-                        font.weight: 600
-                        font.pixelSize: 11
+                        Text {
+                            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                            text: "·"
+                            color: Colours.palette.on_surface
+                            font.family: Config.settings.font
+                            font.weight: 600
+                            font.pixelSize: 11
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                            color: Colours.palette.outline
+                            text: NotificationUtils.getFriendlyNotifTimeString(modelData.time)
+                            font.family: Config.settings.font
+                            font.weight: 600
+                            font.pixelSize: 11
+                        }
                     }
                 }
 
@@ -166,23 +208,28 @@ Rectangle {
                     id: bodyElided
                     text: modelData.body
                     font.family: Config.settings.font
-                    elideWidth: textContent.cWidth - 10
+                    elideWidth: textContent.cWidth - textContent.padding
                     elide: Text.ElideRight
                 }
 
                 Text {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                    Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                     text: bodyElided.elidedText
                     font.family: Config.settings.font
                     font.weight: 500
                     font.pixelSize: 11
-                    visible: !singleNotif.expanded
+                    visible: {
+                        if (singleNotif.expanded) return false
+                        if (singleNotif.modelData.body == "") return false
+                        return true
+                    }
+
                     color: Qt.alpha(Colours.palette.on_surface, 0.7)
                 }
 
                 ScrollView {
                     visible: singleNotif.expanded
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                    Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                     implicitWidth: textContent.cWidth - 25
                     implicitHeight: singleNotif.expanded ? 40 : 10
 
@@ -257,6 +304,64 @@ Rectangle {
                     onEntered: parent.hovered = true
                     onExited: parent.hovered = false
                     onClicked: singleNotif.expanded = !singleNotif.expanded
+                }
+            }
+
+            Rectangle {
+                id: actionsButtons
+                anchors.bottom: parent.bottom
+                width: textContent.cWidth - textContent.padding * 3
+                height: 25
+                visible: singleNotif.areActions && singleNotif.expanded
+                color: "transparent"
+
+                RowLayout {
+                    spacing: 5
+
+                    Repeater {
+                        model: singleNotif.actions
+
+                        delegate: Rectangle {
+                            property bool hovered: false
+                            Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 5
+                            Layout.preferredHeight: 22
+                            radius: Config.settings.borderRadius
+                            color: hovered ? Qt.alpha(Colours.palette.primary_container, 0.8) : Colours.palette.surface
+
+                            Behavior on color {
+                                PropertyAnimation {
+                                    duration: 150
+                                    easing.type: Easing.InSine
+                                }
+                            }
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: modelData.text
+                                color: parent.hovered ? Colours.palette.on_primary_container : Colours.palette.on_surface
+                                font.family: Config.settings.font
+                                font.pixelSize: 10
+
+                                Behavior on color {
+                                    PropertyAnimation {
+                                        duration: 150
+                                        easing.type: Easing.InSine
+                                    }
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+
+                                onEntered: parent.hovered = true
+                                onExited: parent.hovered = false
+
+                                onClicked: Notifications.attemptInvokeAction(singleNotif.modelData.id, modelData.identifier);
+                            }
+                        }
+                    }
                 }
             }
         }

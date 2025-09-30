@@ -57,8 +57,8 @@ Scope {
 
 				IconImage {
 					id: icon
-					width: 30
-					height: 30
+					width: 25
+					height: 25
 					anchors.top: parent.top
 					anchors.left: parent.left
 					anchors.leftMargin: (parent.width / 2) - (width / 2) - 1
@@ -69,7 +69,7 @@ Scope {
 				MultiEffect {
 					source: icon
 					anchors.fill: icon
-					colorizationColor: Colours.palette.on_surface
+					colorizationColor: Qt.alpha(Colours.palette.on_surface, 0.8)
 					colorization: 1.0
 				}
 
