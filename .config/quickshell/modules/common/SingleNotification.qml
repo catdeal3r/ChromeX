@@ -184,10 +184,12 @@ Rectangle {
                     visible: singleNotif.expanded
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
                     implicitWidth: textContent.cWidth - 25
-                    implicitHeight: 40
+                    implicitHeight: singleNotif.expanded ? 40 : 10
+
                     ScrollBar.horizontal: ScrollBar {
                         policy: ScrollBar.AlwaysOff
                     }
+
                     ScrollBar.vertical: ScrollBar {
                         policy: ScrollBar.AlwaysOff
                     }
@@ -204,7 +206,7 @@ Rectangle {
                         color: Qt.alpha(Colours.palette.on_surface, 0.7)
                     }
 
-                    Behavior on visible {
+                    Behavior on implicitHeight {
                         PropertyAnimation {
                             duration: 150
                             easing.type: Easing.InSine
