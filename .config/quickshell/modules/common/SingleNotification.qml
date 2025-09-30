@@ -11,36 +11,33 @@ import qs.services
 import "root:/scripts/notification_utils.js" as NotificationUtils
 import qs.modules.common
 
+/*
+Summary:     modelData.summary
+Body:        modelData.body
+Icon Path:   Qt.resolvedUrl(modelData.appIcon)
+Time:        NotificationUtils.getFriendlyNotifTimeString(modelData.time)
+App Name:    modelData.appName
+*/
+
 
 Rectangle {
 	id: singleNotif
-	property bool expanded
 	property bool popup: false
-	
-	property real currentTime: 5000
-	
-	property real notifSize: {
-		if (modelData.body == bodyPreviewMetrics.elidedText && expanded) return 100
-		if (modelData.body != bodyPreviewMetrics.elidedText && expanded) return 120
-		else return 80
-	}
+	property bool expanded: false
 					
-	radius: Config.settings.borderRadius
+	radius: Config.settings.borderRadius + 5
 	color: Colours.palette.surface
-	implicitHeight:	notifSize
+	implicitHeight:	expanded ? 100 : 70
 	implicitWidth: 400
-	
-	border.width: 2
-	border.color: Colours.palette.surface_container
-	
-	anchors.topMargin: 20
-	
+
 	Behavior on implicitHeight {
 		PropertyAnimation {
-			duration: 200
+			duration: 150
 			easing.type: Easing.InSine
 		}
 	}
+	
+	anchors.topMargin: 20
 					
 	MouseArea {
 		anchors.fill: parent
@@ -48,332 +45,225 @@ Rectangle {
 			
 		onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.id) : Notifications.discardNotification(modelData.id)
 	}
-	
-	Loader {
-		active: singleNotif.popup
-		
-		sourceComponent: Timer {
-			id: dismissTimer
-			interval: 100
-			running: (singleNotif.currentTime > 0)
-			repeat: false
-			onTriggered: singleNotif.currentTime -= 100
-		}
-	}
-	
-	ClippingRectangle {
-		anchors.fill: parent
-		color: "transparent"
-		radius: parent.radius
-		
-		Rectangle {
-			anchors.bottom: parent.bottom
-			width: singleNotif.popup ? (singleNotif.currentTime / singleNotif.modelData.timer.interval) * parent.width : 0
-			height: 4
-			color: Colours.palette.tertiary
-			
-			Behavior on width {
-				PropertyAnimation {
-					duration: 200
-					easing.type: Easing.InSine
-				}
-			}
-		}
-	}
-	
 
 	RowLayout {
-		anchors.centerIn: parent
-						
-		anchors.topMargin: 13
-		anchors.bottomMargin: 13
-		anchors.leftMargin: 5
-		anchors.rightMargin: 10
-						
-		implicitWidth: 400
-		spacing: 2
-						
-		ClippingWrapperRectangle { //image
-			visible: (modelData.appIcon == "") ? false : true
-			radius: Config.settings.borderRadius
-						
-			Layout.alignment: root.expanded ? Qt.AlignLeft | Qt.AlignTop : Qt.AlignLeft
-			Layout.leftMargin: 0
-			Layout.preferredWidth: 50
-			Layout.preferredHeight: 50
-			
-			Behavior on Layout.alignment {
-				PropertyAnimation {
-					duration: 200
-					easing.type: Easing.InSine
-				}
-			}
-							
+		anchors.fill: parent
+		spacing: Config.settings.borderRadius - 5
+
+		Rectangle {
+			id: iconImage
+			property int size: 40
+			Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
+			Layout.topMargin: Config.settings.borderRadius
+			Layout.leftMargin: Config.settings.borderRadius
+
+			Layout.preferredHeight: size
+			Layout.preferredWidth: size
 			color: "transparent"
-			
-			IconImage {				
+
+			ClippingWrapperRectangle {
 				visible: (modelData.appIcon == "") ? false : true
-				source: Qt.resolvedUrl(modelData.appIcon)
+				radius: 1000
+				height: iconImage.size
+				width: iconImage.size
+				
+				color: Colours.palette.primary
+
+				IconImage {
+					visible: (modelData.appIcon == "") ? false : true
+					source: Qt.resolvedUrl(modelData.appIcon)
+					//fillMode: Image.PreserveAspectCrop
+					//mipmap: true
+				}
+			}
+
+			Rectangle {
+				visible: (modelData.appIcon == "")
+				radius: 1000
+				height: iconImage.size
+				width: iconImage.size
+				
+				color: Colours.palette.primary
+
+				Text {
+					anchors.centerIn: parent
+					text: "view_object_track"
+					font.family: Config.settings.iconFont
+					font.pixelSize: 19
+					color: Colours.palette.on_primary
+				}
 			}
 		}
-		
-		Text { //backup image			
-			Layout.alignment: root.expanded ? Qt.AlignLeft | Qt.AlignTop : Qt.AlignLeft
-			Layout.leftMargin: 5
-			Layout.rightMargin: 10
-			
-			Behavior on Layout.alignment {
+
+		Rectangle {
+			id: textContent
+			property int cWidth: singleNotif.implicitWidth - iconImage.size - (Config.settings.borderRadius * 3)
+
+			Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+			Layout.topMargin: Config.settings.borderRadius
+
+			Layout.preferredHeight: singleNotif.expanded ? iconImage.size + 30 : iconImage.size
+			Layout.preferredWidth: cWidth
+
+			Behavior on Layout.preferredHeight {
 				PropertyAnimation {
-					duration: 200
+					duration: 150
 					easing.type: Easing.InSine
 				}
 			}
-			
-			visible: (modelData.appIcon == "") ? true : false
-			text: "chat"
-				
-			color: Colours.palette.on_surface
-									
-			font.family: Config.settings.iconFont
-			font.pixelSize: 35
-		}
-					
-		ColumnLayout { //content
-			id: textWrapper
-						
-			Layout.alignment: Qt.AlignLeft
-			Layout.preferredWidth: 240
-			Layout.leftMargin: 10
-			
-			RowLayout { //expanded bit
-				Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-				Layout.topMargin: expanded ? 0 : 15
-				spacing: 4
-				
-				visible: (Layout.topMargin == 0) ? true : false
-				
-				clip: true
-				
-				Behavior on Layout.topMargin {
-					PropertyAnimation {
-						duration: 200
-						easing.type: Easing.InSine
+
+			color: "transparent"
+
+			ColumnLayout {
+				spacing: 5
+
+				RowLayout {
+					spacing: 5
+
+					TextMetrics {
+						id: summaryElided
+						text: modelData.summary
+						font.family: Config.settings.font
+						elideWidth: textContent.cWidth - 130
+						elide: Text.ElideRight
 					}
-				}
-				
-				Text {
-					text: modelData.appName
-					color: Colours.palette.primary
+
+					Text {
+						Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+						text: summaryElided.elidedText
+						font.family: Config.settings.font
+						font.weight: 500
+						font.pixelSize: 14
+						color: Colours.palette.on_surface
+					}
+
+					Text {
+						text: "·"
+						color: Colours.palette.on_surface
+									
+						font.family: Config.settings.font
+						font.weight: 600
+						font.pixelSize: 11
+					}
+
+					Text {
+						color: Colours.palette.outline
+									
+						text: NotificationUtils.getFriendlyNotifTimeString(modelData.time)
 										
-					font.family: Config.settings.font
-					font.weight: 600
-					font.pixelSize: 11
-					
-					visible: parent.visible
-					
-					Behavior on visible {
-						PropertyAnimation {
-							duration: 200
-							easing.type: Easing.InSine
-						}
-					}
-					
-				}
-				Text {
-					text: "·"
-					color: Colours.palette.on_surface
-									
-					font.family: Config.settings.font
-					font.weight: 600
-					font.pixelSize: 11
-					
-					visible: parent.visible
-					
-					Behavior on visible {
-						PropertyAnimation {
-							duration: 200
-							easing.type: Easing.InSine
-						}
+						font.family: Config.settings.font
+						font.weight: 600
+						font.pixelSize: 11
 					}
 				}
-				Text {
-					color: Accents.disab
-									
-					text: NotificationUtils.getFriendlyNotifTimeString(modelData.time)
-									
-					font.family: Config.settings.font
-					font.weight: 600
-					font.pixelSize: 11
-					
-					visible: parent.visible
-					
-					Behavior on visible {
-						PropertyAnimation {
-							duration: 200
-							easing.type: Easing.InSine
-						}
-					}
-				}
-			
-			}
-			
-			// Text content
-				
-			Text {
-				Layout.alignment: Qt.AlignLeft
-								
-				text: summaryPreviewMetrics.elidedText
-				
-				visible: {
-					if (modelData.summary == "") return false
-					else return true
-				}
-				
-				Behavior on visible {
-					PropertyAnimation {
-						duration: 150
-						easing.type: Easing.InSine
-					}
-				}
-									
-				color: Colours.palette.on_surface
-									
-				font.family: Config.settings.font
-				font.weight: 600
-				font.pixelSize: 15
-			}
-			
-			TextMetrics {
-				id: summaryPreviewMetrics
-									
-				text: modelData.summary
-				font.family: Config.settings.font
-									
-				elide: Qt.ElideRight
-				elideWidth: 210
-			}
-								
-			Text {
-				id: bodyPreview
-				Layout.alignment: Qt.AlignLeft
-								
-				text: bodyPreviewMetrics.elidedText
-									
-				color: Colours.palette.primary
-								
-				font.family: Config.settings.font
-				font.pixelSize: 13
-									
-				visible: {
-					if (singleNotif.notifSize == 100) return true
-					if (singleNotif.notifSize == 120) return false
-					if (modelData.body == "") return false
-					else return true
-				}
-				
-				Behavior on visible {
-					PropertyAnimation {
-						duration: 150
-						easing.type: Easing.InSine
-					}
-				}
-			}
-							
-			TextMetrics {
-				id: bodyPreviewMetrics
-									
-				text: modelData.body
-				font.family: Config.settings.font
-									
-				elide: Qt.ElideRight
-				elideWidth: 240
-			}
-			
-			ScrollView {
-				visible:  {
-					if (singleNotif.notifSize == 100) return false
-					if (singleNotif.notifSize == 120) return true
-					else return false
-				}
-				Layout.alignment: Qt.AlignLeft
-				
-				implicitWidth: 240
-				implicitHeight: 35
-				
-				ScrollBar.horizontal: ScrollBar {
-					policy: ScrollBar.AlwaysOff
-				}
-				
-				ScrollBar.vertical: ScrollBar {
-					policy: ScrollBar.AlwaysOff
-				}
-				
-				Text {
-					width: 240
-					height: 50
+
+				TextMetrics {
+					id: bodyElided
 					text: modelData.body
-					
 					font.family: Config.settings.font
-					font.pixelSize: 13
-					color: Colours.palette.primary
-					
-					visible: singleNotif.expanded
-					
-					wrapMode: Text.Wrap
+					elideWidth: textContent.cWidth - 10
+					elide: Text.ElideRight
 				}
-				
-				Behavior on visible {
-					PropertyAnimation {
-						duration: 150
-						easing.type: Easing.InSine
+
+				Text {
+					Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+					text: bodyElided.elidedText
+					font.family: Config.settings.font
+					font.weight: 500
+					font.pixelSize: 11
+					visible: !singleNotif.expanded
+					color: Qt.alpha(Colours.palette.on_surface, 0.7)
+				}
+
+				ScrollView {
+					visible: singleNotif.expanded
+					Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+					
+					implicitWidth: textContent.cWidth - 25
+					implicitHeight: 40
+					
+					ScrollBar.horizontal: ScrollBar {
+						policy: ScrollBar.AlwaysOff
+					}
+					
+					ScrollBar.vertical: ScrollBar {
+						policy: ScrollBar.AlwaysOff
+					}
+					
+					Text {
+						width: 240
+						height: 50
+						text: modelData.body
+						
+						
+						visible: singleNotif.expanded
+						
+						wrapMode: Text.Wrap
+
+						font.family: Config.settings.font
+						font.weight: 500
+						font.pixelSize: 11
+						color: Qt.alpha(Colours.palette.on_surface, 0.7)
+					}
+					
+					Behavior on visible {
+						PropertyAnimation {
+							duration: 150
+							easing.type: Easing.InSine
+						}
 					}
 				}
 			}
-		}
-		
-		// Expand button				
-		ColumnLayout {
-			Layout.alignment: Qt.AlignTop
-			Layout.preferredWidth: 45
-			Layout.preferredHeight: 25
-			Layout.leftMargin: 20
-								
-			Rectangle {	
-				Layout.alignment: Qt.AlignTop
-				id: expandBtn
-				width: 45
+
+			Rectangle {
+				property bool hovered: false
+				anchors.top: parent.top
+				anchors.right: parent.right
 				height: 25
-				color: Colours.palette.surface_container
-				radius: 50
-				visible: true 
-				
+				width: 25
+
+				//visible: bodyElided.elidedText == modelData.body ? false : true
+
+				radius: 1000
+
+				color: hovered ? Colours.palette.surface_container_highest : "transparent"
+
 				Behavior on color {
 					PropertyAnimation {
 						duration: 150
 						easing.type: Easing.InSine
 					}
 				}
-									
+
 				Text {
 					anchors.centerIn: parent
-										
+
+					text: "keyboard_arrow_up"
 					color: Colours.palette.on_surface
-					text: singleNotif.expanded ? "expand_less" : "expand_more"
-										
 					font.family: Config.settings.iconFont
-					font.pixelSize: 24
-									
+					font.weight: 600
+					font.pixelSize: 13
+				//	visible: parent.visible
+
+					rotation: singleNotif.expanded ? 180 : 0
+
+					Behavior on rotation {
+						PropertyAnimation {
+							duration: 150
+							easing.type: Easing.InSine
+						}
+					}
 				}
-									
+
 				MouseArea {
 					anchors.fill: parent
-					cursorShape: Qt.PointingHandCursor
-											
 					hoverEnabled: true
-										
+					cursorShape: Qt.PointingHandCursor
+
+					onEntered: parent.hovered = true
+					onExited: parent.hovered = false
 					onClicked: singleNotif.expanded = !singleNotif.expanded
-					onEntered: parent.color = Colours.palette.surface_container_high
-					onExited: parent.color = Colours.palette.surface_container
 				}
 			}
 		}

@@ -61,8 +61,8 @@ Scope {
 					anchors.topMargin: 5
 					text: "shapes"
 					color: Colours.palette.on_surface
-					font.pixelSize: 22
-					font.weight: 600
+					font.pixelSize: 20
+					font.weight: 500
 					font.family: Config.settings.iconFont
 				}
 
@@ -179,7 +179,7 @@ Scope {
 								color: quickActionsButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
 					
 								font.family: Config.settings.font
-								font.weight: 400
+								font.weight: 500
 								
 								font.pixelSize: 12
 								Layout.preferredHeight: 7
