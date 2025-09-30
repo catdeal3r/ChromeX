@@ -89,5 +89,25 @@
     "summary": "Screenshot Saved",
     "time": 1759198600280,
     "urgency": "1"
+  },
+  {
+    "id": 12,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "View"
+      },
+      {
+        "identifier": "1",
+        "text": "Open Folder"
+      }
+    ],
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-09-30-15-33-11.png",
+    "appName": "notify-send",
+    "body": "Copied to clipboard",
+    "image": "",
+    "summary": "Screenshot Saved",
+    "time": 1759199595641,
+    "urgency": "1"
   }
 ]

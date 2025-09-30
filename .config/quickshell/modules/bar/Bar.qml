@@ -57,12 +57,12 @@ Scope {
 				Text {
 					anchors.top: parent.top
 					anchors.left: parent.left
-					anchors.leftMargin: (parent.width / 2) - ((font.pixelSize + 3) / 2)
+					anchors.leftMargin: (parent.width / 2) - ((font.pixelSize + 6) / 2)
 					anchors.topMargin: 5
 					text: "shapes"
 					color: Colours.palette.on_surface
 					font.pixelSize: 22
-					font.weight: 400
+					font.weight: 600
 					font.family: Config.settings.iconFont
 				}
 
