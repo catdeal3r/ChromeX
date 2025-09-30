@@ -29,17 +29,14 @@ Scope {
 			aboveWindows: true
 			exclusionMode: ExclusionMode.Ignore
 			
-			implicitHeight: 400
+			implicitHeight: 800
 			implicitWidth: 450
 			
 			color: "transparent"
 	
 			property int notificationCount: Notifications.popupList.length
 		
-			visible: {
-				if (Config.settings.isInMinimalMode == true) return false;
-				else return true;
-			}
+			visible: true
 			
 			mask: Region {
 				item: maskId.contentItem
@@ -51,8 +48,8 @@ Scope {
 					values: [...Notifications.popupList].reverse()
 				}
 				
-				implicitHeight: 400
-				implicitWidth: 400//(notificationCount > 0) ? 400 : 1
+				implicitHeight: 600
+				implicitWidth: 400
 				
 				anchors.top: parent.top
 				anchors.topMargin: 20
