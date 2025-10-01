@@ -117,7 +117,7 @@ Rectangle {
 		
 		Rectangle {
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-			Layout.topMargin: 20
+			Layout.topMargin: 15
 			
 			Layout.preferredWidth: root.rWidth / 10
 			Layout.preferredHeight: root.rHeight / 10
@@ -144,23 +144,21 @@ Rectangle {
 		
 		Rectangle {
 			Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-			Layout.topMargin: 5
-            Layout.leftMargin: 13
+			Layout.topMargin: 10
 			
-			Layout.preferredWidth: root.rWidth * 0.7
-			Layout.preferredHeight: root.rHeight / 3
+			Layout.preferredWidth: root.rWidth * 0.6
+			Layout.preferredHeight: root.rHeight / 4
 			color: "transparent"
 			
 			Text {
 				anchors.centerIn: parent
-                width: parent.Layout.preferredWidth - 15
 				
 				text: bigText
 				font.family: Config.settings.font
 			
 				font.pixelSize: bigTextSize
 				font.weight: 500
-                wrapMode: Text.Wrap
+                //wrapMode: Text.Wrap
 				
 				color: root.getColour()
 				

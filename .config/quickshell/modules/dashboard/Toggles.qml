@@ -23,8 +23,8 @@ Rectangle {
     property int spacing: 10
 
     property int rowHeight: 90
-    property int wideBtnWidth: (rowHeight * 2) + 40
-    property int cudeBtnWidth: (rowHeight - (spacing / 2)) + 20
+    property int wideBtnWidth: (rowHeight * 2) + 60
+    property int cudeBtnWidth: (rowHeight - (spacing / 2)) + 30
 
     Layout.preferredWidth: fWidth
     Layout.preferredHeight: fHeight
@@ -84,7 +84,7 @@ Rectangle {
 
 				isToggled: Notifications.popupInhibited
 					
-				bigText: Notifications.popupInhibited ? "Do Not Disturb" : "Disturb"
+				bigText: Notifications.popupInhibited ? "Do Not\nDisturb" : "Disturb"
 				iconCode: Notifications.popupInhibited ? "do_not_disturb_on" : "do_not_disturb_off"
 
                 iconSize: 25

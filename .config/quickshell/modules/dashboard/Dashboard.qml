@@ -17,7 +17,7 @@ Loader {
 	id: root
 	required property bool isDashboardOpen
 
-    property int dashWidth: 480
+    property int dashWidth: 515
     property int dashHeight: 600
 
     property int dashHoriPadding: 50
