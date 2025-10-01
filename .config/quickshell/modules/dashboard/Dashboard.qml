@@ -173,7 +173,7 @@ Loader {
                         }
 
                         Component.onCompleted: {
-                            Recorder.startRecording()
+                            Recorder.startRecording();
                         }
 					}
 				}

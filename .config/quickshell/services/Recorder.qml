@@ -1,11 +1,14 @@
+pragma Singleton
+
 import Quickshell
+import Quickshell.Io
 
 import QtQuick
 import QtMultimedia
 
 import qs.config
 
-Scope {
+Singleton {
 	id: root
     property bool isRecording: false
     property bool isRecordingRunning: false
