@@ -93,9 +93,111 @@ Scope {
 					}
 
 					Rectangle {
+						id: recordingButton
+						property bool hovered: false
+
+						Layout.preferredHeight: {
+							if (!Recorder.isRecordingRunning)
+								return 0
+							else if (hovered)
+								return 55
+							else
+								return 50
+						}
+
+						Layout.preferredWidth: barBase.width - 10
+						Layout.alignment: Qt.AlignHCenter
+						Layout.bottomMargin: -4
+						Layout.leftMargin: 3
+						visible: Layout.preferredHeight == 0 ? false : true
+
+						topLeftRadius: Config.settings.borderRadius
+						topRightRadius: Config.settings.borderRadius
+
+						bottomLeftRadius: hovered ? Config.settings.borderRadius : 5
+						bottomRightRadius: hovered ? Config.settings.borderRadius : 5
+
+						color: hovered ? Colours.palette.error_container : Qt.alpha(Colours.palette.error_container, 0.8)
+
+						Behavior on bottomLeftRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on bottomRightRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on color {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on Layout.preferredHeight {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						ColumnLayout {
+							width: parent.width
+							height: parent.height
+
+							Text {
+								color: Colours.palette.on_error_container
+
+								text: "screen_record"
+						
+								font.family: Config.settings.iconFont
+								font.weight: 400
+									
+								font.pixelSize: 18
+								Layout.preferredHeight: 20
+								Layout.leftMargin: 0
+								Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+								opacity: Recorder.isRecordingRunning ? 1 : 0
+								visible: recordingButton.visible
+
+								Behavior on color {
+									PropertyAnimation {
+										duration: Config.settings.animationSpeed
+										easing.type: Easing.InSine
+									}
+								}
+
+								Behavior on opacity {
+									PropertyAnimation {
+										duration: Config.settings.animationSpeed
+										easing.type: Easing.InSine
+									}
+								}
+							}
+						}
+
+
+						MouseArea {
+							anchors.fill: parent
+							hoverEnabled: true
+							cursorShape: Qt.PointingHandCursor
+
+							onEntered: recordingButton.hovered = true
+							onExited: recordingButton.hovered = false
+							onClicked: Recorder.stopRecording()
+						}
+					}
+
+					Rectangle {
 						id: notificationButton
 						property bool hovered: false
-						property string time
 
 						Layout.preferredHeight: hovered ? 55 : 50
 						Layout.preferredWidth: barBase.width - 10
@@ -103,8 +205,17 @@ Scope {
 						Layout.bottomMargin: -4
 						Layout.leftMargin: 3
 
-						topLeftRadius: Config.settings.borderRadius
-						topRightRadius: Config.settings.borderRadius
+						function getTopRadius() {
+							if (hovered)
+								return Config.settings.borderRadius
+							else if (Recorder.isRecordingRunning)
+								return 5
+							else
+								return Config.settings.borderRadius
+						}
+
+						topLeftRadius: getTopRadius()
+						topRightRadius: getTopRadius()
 
 						bottomLeftRadius: hovered ? Config.settings.borderRadius : 5
 						bottomRightRadius: hovered ? Config.settings.borderRadius : 5
@@ -119,6 +230,20 @@ Scope {
 						}
 
 						Behavior on bottomRightRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on topLeftRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on topRightRadius {
 							PropertyAnimation {
 								duration: Config.settings.animationSpeed
 								easing.type: Easing.InSine

@@ -10,7 +10,6 @@ import qs.config
 
 Singleton {
 	id: root
-    property bool isRecording: false
     property bool isRecordingRunning: false
     property string outputFile: "capture_undefined.mp4"
     property string fullOutputFile: `${Config.settings.recorder.output_loc}/${root.outputFile}`
