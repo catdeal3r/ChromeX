@@ -12,17 +12,95 @@ Singleton {
 	id: root
     property bool isRecording: false
     property bool isRecordingRunning: false
-    property string output_file: "capture_undefined.mp4"
+    property string outputFile: "capture_undefined.mp4"
+    property string fullOutputFile: `${Config.settings.recorder.output_loc}/${root.outputFile}`
+
+    property int seconds: 0
+    property int minutes: 0
+    property int hours: 0
+
+    property string fullTime: "00:00:00"
+
+    Timer {
+        interval: 1000
+        running: isRecordingRunning
+        repeat: true
+        onTriggered: {
+            seconds += 1;
+            if (seconds == 60)
+            {
+                minutes += 1;
+                seconds = 0;
+            }
+
+            if (minutes == 60)
+            {
+                hours += 1;
+                minutes = 0;
+            }
+
+            let formattedSeconds = "00";
+            let formattedMinutes = "00";
+            let formattedHours = "00";
+
+            if (seconds < 10)
+                formattedSeconds = `0${seconds}`;
+            else
+                formattedSeconds = `${seconds}`;
+
+            
+            if (minutes < 10)
+                formattedMinutes = `0${minutes}`;
+            else
+                formattedMinutes = `${minutes}`;
+
+            if (hours < 10)
+                formattedHours = `0${hours}`;
+            else
+                formattedHours = `${hours}`;
+
+            fullTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
+    }
+
+    function resetTime() {
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        fullTime = "00:00:00";
+    }
+
+    onOutputFileChanged: {
+        fullOutputFile = `${Config.settings.recorder.output_loc}/${root.outputFile}`;
+        //console.log(`Output file now is ${outputFile}.\nFull output file now is ${fullOutputFile}`);
+
+        if (isRecordingRunning != true) {
+            //console.log(`\nrunning wf-recorder .... \ncommand:\nwf-recorder -o ${Config.settings.recorder.screen} -c ${Config.settings.recorder.encoder} -f ${fullOutputFile}`);
+            Quickshell.execDetached([ "wf-recorder", "-o", `${Config.settings.recorder.screen}`, "-c", `${Config.settings.recorder.encoder}`, "-f", `${fullOutputFile}` ]);
+        }
+    }
+
+    function closeRecording() {
+        Quickshell.execDetached([ "pkill", "wf-recorder" ]);
+    }
 
 	function startRecording() {
-        root.isRecording = true
-        dateProc.running = true
-        console.log(isRecordingRunning)
+        resetTime();
+        dateProc.running = true;
+        console.log(isRecordingRunning);
     }
 
     function stopRecording() {
-        root.isRecording = false
-        dateProc.running = false
+        resetTime();
+        dateProc.running = false;
+        closeRecording();
+    }
+
+    function toggleRecording() {
+        if (isRecordingRunning == true)
+            stopRecording();
+        else
+            startRecording();
     }
 
     Process {
@@ -32,9 +110,9 @@ Singleton {
 
         onExited: (exitCode) => {
             if (exitCode != 0)
-                isRecordingRunning = false
+                isRecordingRunning = false;
             else
-                isRecordingRunning = true
+                isRecordingRunning = true;
         }
     }
 
@@ -50,7 +128,7 @@ Singleton {
         running: false
         command: [ "date", "+%Y-%m-%d-%H-%M-%S" ]
         stdout: SplitParser {
-            onRead: data => console.log(`capture_${data}.mp4`)//output_file = `capture_${data}.mp4`
+            onRead: data => outputFile = `capture_${data}.mp4`
         }
     }
 }

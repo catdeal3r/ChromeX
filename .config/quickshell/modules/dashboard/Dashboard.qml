@@ -171,10 +171,6 @@ Loader {
 
                             Toggles {}
                         }
-
-                        Component.onCompleted: {
-                            Recorder.startRecording();
-                        }
 					}
 				}
 			}

@@ -76,6 +76,19 @@ Rectangle {
             CubeToggle {
                 rWidth: root.cudeBtnWidth
                 rHeight: root.rowHeight
+
+                isToggled: Recorder.isRecordingRunning
+
+                bigText: Recorder.isRecordingRunning ? Recorder.fullTime : "Screen Capture"
+                iconCode: "screen_record"
+
+                bgColour: Qt.alpha(Colours.palette.error_container, 0.8)
+                colour: Colours.palette.on_error_container
+
+                bgColourHovered: Colours.palette.error_container
+                colourHovered: Colours.palette.on_error_container
+
+                toRun: () => Recorder.toggleRecording()
 			}
 
             CubeToggle {
