@@ -1,0 +1,18 @@
+{
+    "bar": {
+        "barLocation": "top",
+        "smoothEdgesShown": true
+    },
+    "borderRadius": 15,
+    "colours": {
+        "genType": "scheme-tonal-spot",
+        "mode": "dark"
+    },
+    "currentWallpaper": "/run/media/catdealer/Data/Pictures/wallpapers/minimal/kenny-eliason-C8HVCiuu8c0-unsplash.jpg",
+    "font": "Product Sans",
+    "iconFont": "Material Symbols Rounded",
+    "isInMinimalMode": false,
+    "minutesBetweenHealthNotif": 30,
+    "weatherLocation": "REPLACE",
+    "animationSpeed": 200
+}
