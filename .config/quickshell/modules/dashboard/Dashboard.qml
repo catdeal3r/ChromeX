@@ -11,7 +11,7 @@ import qs.modules.dashboard
 import qs.config
 import qs.modules.common
 import qs.modules
-
+import qs.services
 
 Loader {
 	id: root
@@ -170,6 +170,10 @@ Loader {
                             spacing: 10
 
                             Toggles {}
+                        }
+
+                        Component.onCompleted: {
+                            Recorder.startRecording()
                         }
 					}
 				}

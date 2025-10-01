@@ -69,6 +69,12 @@ Singleton {
 					Wallpaper.changeColourProp()
 				}
 			}
+
+			property JsonObject recorder: JsonObject {
+				property string screen: "eDP-1"
+				property string encoder: "libx264"
+				property string output_loc: "/home/catdealer/"
+			}
 			
 			onBorderRadiusChanged: {
 				Quickshell.execDetached(["swaymsg", "corner_radius", `${root.settings.borderRadius}`])
