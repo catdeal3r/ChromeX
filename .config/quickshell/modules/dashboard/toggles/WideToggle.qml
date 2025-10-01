@@ -149,7 +149,7 @@ Rectangle {
 			Layout.leftMargin: 15
 			
 			Layout.preferredWidth: root.rWidth * 0.7
-			Layout.preferredHeight: root.rHeight / 1.8
+			Layout.preferredHeight: root.rHeight / 1.5
 			color: "transparent"
 			
 			Text {

@@ -22,9 +22,9 @@ Rectangle {
     property int padding: 10
     property int spacing: 10
 
-    property int rowHeight: 110
-    property int wideBtnWidth: rowHeight * 2
-    property int cudeBtnWidth: rowHeight - (spacing / 2)
+    property int rowHeight: 90
+    property int wideBtnWidth: (rowHeight * 2) + 40
+    property int cudeBtnWidth: (rowHeight - (spacing / 2)) + 20
 
     Layout.preferredWidth: fWidth
     Layout.preferredHeight: fHeight
