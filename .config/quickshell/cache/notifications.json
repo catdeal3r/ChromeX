@@ -5130,5 +5130,25 @@
     "summary": "monke",
     "time": 1759295340672,
     "urgency": "1"
+  },
+  {
+    "id": 6270,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "View"
+      },
+      {
+        "identifier": "1",
+        "text": "Open Folder"
+      }
+    ],
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-02-11-39-08.png",
+    "appName": "notify-send",
+    "body": "Copied to clipboard",
+    "image": "",
+    "summary": "Screenshot Saved",
+    "time": 1759358350726,
+    "urgency": "1"
   }
 ]
