@@ -83,7 +83,7 @@ Rectangle {
                 iconCode: "screen_record"
 
                 bgColour: Qt.alpha(Colours.palette.error_container, 0.8)
-                colour: Colours.palette.on_error_container
+                colour: Qt.alpha(Colours.palette.on_error_container, 0.8)
 
                 bgColourHovered: Colours.palette.error_container
                 colourHovered: Colours.palette.on_error_container
