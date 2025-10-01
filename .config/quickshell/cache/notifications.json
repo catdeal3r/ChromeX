@@ -4971,5 +4971,164 @@
     "summary": "catdeal3r",
     "time": 1759276170025,
     "urgency": "1"
+  },
+  {
+    "id": 6234,
+    "actions": [],
+    "appIcon": "",
+    "appName": "",
+    "body": "",
+    "image": "",
+    "summary": "",
+    "time": 1759293317523,
+    "urgency": "normal"
+  },
+  {
+    "id": 6235,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "Reply"
+      },
+      {
+        "identifier": "1",
+        "text": "Mute"
+      }
+    ],
+    "appIcon": "/run/media/catdealer/Data/Pictures/drawn_cat_pfp.png",
+    "appName": "notify-send",
+    "body": "But why is that a problem? I thought that George had already patched that in the latest release, along with the upload downtime error ....",
+    "image": "",
+    "summary": "catdeal3r",
+    "time": 1759293322348,
+    "urgency": "1"
+  },
+  {
+    "id": 6238,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "Reply"
+      },
+      {
+        "identifier": "1",
+        "text": "Mute"
+      }
+    ],
+    "appIcon": "/run/media/catdealer/Data/Pictures/drawn_cat_pfp.png",
+    "appName": "notify-send",
+    "body": "But why is that a problem? I thought that George had already patched that in the latest release, along with the upload downtime error ....",
+    "image": "",
+    "summary": "catdeal3r",
+    "time": 1759293374046,
+    "urgency": "1"
+  },
+  {
+    "id": 6242,
+    "actions": [],
+    "appIcon": "",
+    "appName": "",
+    "body": "",
+    "image": "",
+    "summary": "",
+    "time": 1759293494920,
+    "urgency": "normal"
+  },
+  {
+    "id": 6243,
+    "actions": [],
+    "appIcon": "",
+    "appName": "",
+    "body": "",
+    "image": "",
+    "summary": "",
+    "time": 1759294113767,
+    "urgency": "normal"
+  },
+  {
+    "id": 6244,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "View"
+      },
+      {
+        "identifier": "1",
+        "text": "Open Folder"
+      }
+    ],
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-01-18-04-26.png",
+    "appName": "notify-send",
+    "body": "Copied to clipboard",
+    "image": "",
+    "summary": "Screenshot Saved",
+    "time": 1759295069644,
+    "urgency": "1"
+  },
+  {
+    "id": 6245,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Log out and in for the gtk4 theme to take effect.",
+    "image": "",
+    "summary": "Wallpaper and theme set!",
+    "time": 1759295140362,
+    "urgency": "1"
+  },
+  {
+    "id": 6246,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759295258094,
+    "urgency": "1"
+  },
+  {
+    "id": 6255,
+    "actions": [],
+    "appIcon": "",
+    "appName": "",
+    "body": "",
+    "image": "",
+    "summary": "",
+    "time": 1759295317535,
+    "urgency": "normal"
+  },
+  {
+    "id": 6256,
+    "actions": [],
+    "appIcon": "",
+    "appName": "",
+    "body": "",
+    "image": "",
+    "summary": "",
+    "time": 1759295323212,
+    "urgency": "normal"
+  },
+  {
+    "id": 6257,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "",
+    "image": "",
+    "summary": "monke",
+    "time": 1759295333554,
+    "urgency": "1"
+  },
+  {
+    "id": 6269,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "",
+    "image": "",
+    "summary": "monke",
+    "time": 1759295340672,
+    "urgency": "1"
   }
 ]

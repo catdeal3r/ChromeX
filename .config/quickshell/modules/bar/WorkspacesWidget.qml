@@ -8,7 +8,7 @@ import qs.modules.common
 Rectangle {
 	id: root
 	width: 40
-	height: 40 * workspaceCount
+	height: 40 * workspaceCount + 5
 	color: Colours.palette.surface
 
 	anchors.top: parent.top
@@ -34,7 +34,7 @@ Rectangle {
 			Rectangle {
 				Layout.alignment: Qt.AlignHCenter
 				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 15 : root.width - 16
-				Layout.preferredHeight: 40
+				Layout.preferredHeight: index + 1 == Workspaces.focusedWorkspace ? 45 : 40
 				Layout.rightMargin: 2
 
 				color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.primary : Colours.palette.surface_container

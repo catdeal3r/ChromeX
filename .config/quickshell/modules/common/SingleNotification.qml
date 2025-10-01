@@ -47,7 +47,7 @@ Rectangle {
     
     Behavior on implicitHeight {
         PropertyAnimation {
-            duration: 150
+            duration: Config.settings.animationSpeed
             easing.type: Easing.InSine
         }
     }
@@ -115,9 +115,9 @@ Rectangle {
                 
                 Text {
                     anchors.centerIn: parent
-                    text: "view_object_track"
+                    text: "notifications"
                     font.family: Config.settings.iconFont
-                    font.pixelSize: 19
+                    font.pixelSize: 20
                     color: Colours.palette.on_primary
                 }
             }
@@ -147,7 +147,7 @@ Rectangle {
             
             Behavior on Layout.preferredHeight {
                 PropertyAnimation {
-                    duration: 150
+                    duration: Config.settings.animationSpeed
                     easing.type: Easing.InSine
                 }
             }
@@ -255,7 +255,7 @@ Rectangle {
 
                     Behavior on implicitHeight {
                         PropertyAnimation {
-                            duration: 150
+                            duration: Config.settings.animationSpeed
                             easing.type: Easing.InSine
                         }
                     }
@@ -274,7 +274,7 @@ Rectangle {
                 
                 Behavior on color {
                     PropertyAnimation {
-                        duration: 150
+                        duration: Config.settings.animationSpeed
                         easing.type: Easing.InSine
                     }
                 }
@@ -291,7 +291,7 @@ Rectangle {
                     
                     Behavior on rotation {
                         PropertyAnimation {
-                            duration: 150
+                            duration: Config.settings.animationSpeed
                             easing.type: Easing.InSine
                         }
                     }
@@ -325,12 +325,19 @@ Rectangle {
                             property bool hovered: false
                             Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 5
                             Layout.preferredHeight: 22
-                            radius: Config.settings.borderRadius
+                            radius: hovered ? Config.settings.borderRadius : 5
                             color: hovered ? Qt.alpha(Colours.palette.primary_container, 0.8) : Colours.palette.surface
 
                             Behavior on color {
                                 PropertyAnimation {
-                                    duration: 150
+                                    duration: Config.settings.animationSpeed
+                                    easing.type: Easing.InSine
+                                }
+                            }
+
+                            Behavior on radius {
+                                PropertyAnimation {
+                                    duration: Config.settings.animationSpeed
                                     easing.type: Easing.InSine
                                 }
                             }
@@ -344,7 +351,7 @@ Rectangle {
 
                                 Behavior on color {
                                     PropertyAnimation {
-                                        duration: 150
+                                        duration: Config.settings.animationSpeed
                                         easing.type: Easing.InSine
                                     }
                                 }

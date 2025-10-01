@@ -11,6 +11,7 @@ import qs.modules.launcher
 import qs.modules.lockscreen
 import qs.modules.notificationslist
 import qs.modules.desktop
+import qs.modules.dashboard
 
 Scope {
 	NotificationList {}
@@ -21,6 +22,10 @@ Scope {
 		sourceComponent: Bar {
 			onFinished: IPCLoader.toggleBar()
 		}
+	}
+
+	Dashboard {
+		isDashboardOpen: IPCLoader.isDashboardOpen
 	}
 
 	Launcher {

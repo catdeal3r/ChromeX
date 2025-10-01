@@ -54,6 +54,8 @@ Singleton {
 			property string font: "SF Pro Display"
 			property string iconFont: "Material Symbols Rounded"
 			property int borderRadius: 20
+
+			property int animationSpeed: 200
 			
 			property JsonObject colours: JsonObject {
 				property string genType: "scheme-expressive"

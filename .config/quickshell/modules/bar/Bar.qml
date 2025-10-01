@@ -97,7 +97,7 @@ Scope {
 						property bool hovered: false
 						property string time
 
-						Layout.preferredHeight: 50
+						Layout.preferredHeight: hovered ? 55 : 50
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
 						Layout.bottomMargin: -4
@@ -106,10 +106,38 @@ Scope {
 						topLeftRadius: Config.settings.borderRadius
 						topRightRadius: Config.settings.borderRadius
 
-						bottomLeftRadius: 5
-						bottomRightRadius: 5
+						bottomLeftRadius: hovered ? Config.settings.borderRadius : 5
+						bottomRightRadius: hovered ? Config.settings.borderRadius : 5
 
 						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
+
+						Behavior on bottomLeftRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on bottomRightRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on color {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on Layout.preferredHeight {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
 
 						ColumnLayout {
 							width: parent.width
@@ -130,17 +158,10 @@ Scope {
 
 								Behavior on color {
 									PropertyAnimation {
-										duration: 150
+										duration: Config.settings.animationSpeed
 										easing.type: Easing.InSine
 									}
 								}
-							}
-						}
-
-						Behavior on color {
-							PropertyAnimation {
-								duration: 150
-								easing.type: Easing.InSine
 							}
 						}
 
@@ -159,23 +180,56 @@ Scope {
 					Rectangle {
 						id: quickActionsButton
 						property bool hovered: false
-						Layout.preferredHeight: 100
+						Layout.preferredHeight: hovered ? 105 : 100
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
 						Layout.leftMargin: 3
 						Layout.bottomMargin: 10
 
-						topLeftRadius: 5
-						topRightRadius: 5
+						topLeftRadius: hovered ? Config.settings.borderRadius : 5
+						topRightRadius: hovered ? Config.settings.borderRadius : 5
 
 						bottomLeftRadius: Config.settings.borderRadius
 						bottomRightRadius: Config.settings.borderRadius
 
-						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
+						function isColoured() {
+							if (hovered) {
+								return true
+							}
+							else {
+								if (IPCLoader.isDashboardOpen)
+									return true
+								else
+									return false
+							}
+						}
+
+						color: isColoured() ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
 
 						Behavior on color {
 							PropertyAnimation {
-								duration: 150
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on Layout.preferredHeight {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on topLeftRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+
+						Behavior on topRightRadius {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
 								easing.type: Easing.InSine
 							}
 						}
@@ -186,7 +240,7 @@ Scope {
 							spacing: 7
 							
 							TimeWidget {
-								color: quickActionsButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
+								color: quickActionsButton.isColoured() ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
 					
 								font.family: Config.settings.font
 								font.weight: 500
@@ -199,7 +253,7 @@ Scope {
 
 								Behavior on color {
 									PropertyAnimation {
-										duration: 150
+										duration: Config.settings.animationSpeed
 										easing.type: Easing.InSine
 									}
 								}
@@ -207,7 +261,7 @@ Scope {
 							}
 
 							NetworkWidget {
-								color: quickActionsButton.hovered ? Colours.palette.on_primary : Network.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
+								color: quickActionsButton.isColoured() ? Colours.palette.on_primary : Network.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
 									
 								font.family: Config.settings.iconFont
 								font.weight: 600
@@ -219,7 +273,7 @@ Scope {
 
 								Behavior on color {
 									PropertyAnimation {
-										duration: 150
+										duration: Config.settings.animationSpeed
 										easing.type: Easing.InSine
 									}
 								}
@@ -227,7 +281,7 @@ Scope {
 									
 							BatteryWidget {
 									
-								color: quickActionsButton.hovered ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
+								color: quickActionsButton.isColoured() ? Colours.palette.on_primary : Qt.alpha(Colours.palette.on_surface, 0.8)
 
 								font.family: Config.settings.iconFont
 								font.weight: 600
@@ -238,7 +292,7 @@ Scope {
 
 								Behavior on color {
 									PropertyAnimation {
-										duration: 150
+										duration: Config.settings.animationSpeed
 										easing.type: Easing.InSine
 									}
 								}
@@ -252,6 +306,7 @@ Scope {
 
 							onEntered: quickActionsButton.hovered = true
 							onExited: quickActionsButton.hovered = false
+							onClicked: IPCLoader.toggleDashboard()
 						}
 					}
 				}
