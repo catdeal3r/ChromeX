@@ -75,37 +75,19 @@ Singleton {
 				property string encoder: "libx264"
 				property string output_loc: "/home/catdealer/"
 			}
+
+			property string nightmodeColourTemp: "4500K"
+			property bool nightmodeOnStartup: true
 			
 			onBorderRadiusChanged: {
 				Quickshell.execDetached(["swaymsg", "corner_radius", `${root.settings.borderRadius}`])
 			}
 			
-			property bool isInMinimalMode: false
 			
 			property string weatherLocation: "REPLACE"
 			
 			onWeatherLocationChanged: {
 				Weather.reload()
-			}
-			
-			onIsInMinimalModeChanged: {
-				if (isInMinimalMode == true) {
-					Quickshell.execDetached(["swaymsg", "gaps", "outer", "0"])
-					Quickshell.execDetached(["swaymsg", "gaps", "inner", "0"])
-					Quickshell.execDetached(["swaymsg", "corner_radius", "0"])
-					
-					Wallpaper.setBlankWall();
-					Quickshell.execDetached(["$HOME/.config/scripts/setBordersDefault.sh"])
-					
-				} else {
-					Quickshell.execDetached(["swaymsg", "gaps", "outer", "0"])
-					Quickshell.execDetached(["swaymsg", "gaps", "inner", "0"])
-					Quickshell.execDetached(["swaymsg", "corner_radius", `${root.settings.borderRadius}`])
-					
-					
-					Wallpaper.loadWallpaper();
-					Quickshell.execDetached(["$HOME/.config/scripts/setBorders.sh"])
-				}
 			}
 		}
 	}

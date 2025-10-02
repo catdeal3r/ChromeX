@@ -13,8 +13,9 @@ Scope {
 	Modules {}
 	
 	Component.onCompleted: {
-		Notifications.dummyInit()
-		SessionHandler.loadBasicSession()
+		Notifications.dummyInit();
+		if (Config.settings.nightmodeOnStartup)
+			Nightmode.turnOn();
 	}
 
 	//Desktop {}

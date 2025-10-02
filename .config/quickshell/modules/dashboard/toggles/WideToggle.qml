@@ -151,13 +151,21 @@ Rectangle {
 			Layout.preferredWidth: root.rWidth * 0.7
 			Layout.preferredHeight: root.rHeight / 1.5
 			color: "transparent"
+
+			TextMetrics {
+				id: bigTextMetrics
+				text: bigText
+                font.family: Config.settings.font
+                elideWidth: rWidth - 130
+                elide: Text.ElideRight
+			}
 			
 			Text {
 				anchors.left: parent.left
 				anchors.top: parent.top
 				
 				anchors.topMargin: parent.height / 5 
-				text: bigText
+				text: bigTextMetrics.elidedText
 				font.family: Config.settings.font
 			
 				font.pixelSize: bigTextSize
@@ -173,12 +181,20 @@ Rectangle {
 				}
 			}
 
+			TextMetrics {
+				id: smallTextMetrics
+				text: smallText
+                font.family: Config.settings.font
+                elideWidth: rWidth - 110
+                elide: Text.ElideRight
+			}
+
             Text {
 				anchors.left: parent.left
 				anchors.bottom: parent.bottom
 				
 				anchors.bottomMargin: parent.height / 6
-				text: smallText
+				text: smallTextMetrics.elidedText
 				font.family: Config.settings.font
 			
 				font.pixelSize: smallTextSize

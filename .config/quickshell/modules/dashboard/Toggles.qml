@@ -22,7 +22,7 @@ Rectangle {
     property int padding: 10
     property int spacing: 10
 
-    property int rowHeight: 90
+    property int rowHeight: 87
     property int wideBtnWidth: (rowHeight * 2) + 60
     property int cudeBtnWidth: (rowHeight - (spacing / 2)) + 30
 
@@ -140,6 +140,15 @@ Rectangle {
             WideToggle {
                 rWidth: root.wideBtnWidth
                 rHeight: root.rowHeight
+
+                isToggled: Nightmode.isNightmodeOn
+					
+				bigText: Nightmode.isNightmodeOn ? "Nightmode On" : "Nightmode Off"
+                smallText: Nightmode.isNightmodeOn ? "Warm temperature" : "Cool temperature"
+
+				iconCode: Nightmode.isNightmodeOn ? "bedtime" : "bedtime_off"
+	
+				toRun: () => Nightmode.toggle()
 			}
         }
 
