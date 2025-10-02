@@ -111,7 +111,7 @@ Slider {
 
     from: 0
 	value: 10
-	to: 100
+	//to: 100
 			
 	handle: Item {}
 }

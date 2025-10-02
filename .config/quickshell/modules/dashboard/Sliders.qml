@@ -38,8 +38,10 @@ Rectangle {
 
         MSlider {
             rWidth: 400
-            iconCode: "volume_up"
-            value: 30
+            iconCode: Audio.muted ? "volume_off" : "volume_up"
+            value: Audio.volume
+            isEnabled: !Audio.muted
+            onMoved: Audio.setVolume(value)
         }
 
         MSlider {
