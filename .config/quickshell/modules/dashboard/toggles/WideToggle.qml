@@ -85,9 +85,9 @@ Rectangle {
 	}
 
     function getRadius() {
-        if (root.isToggled) 
+        if (root.isHovered) 
             return Config.settings.borderRadius + 12
-        if (root.isHovered)
+        if (root.isToggled)
             return Config.settings.borderRadius + 10
         else
             return Config.settings.borderRadius
