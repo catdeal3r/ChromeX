@@ -31,6 +31,13 @@ Rectangle {
     radius: Config.settings.borderRadius + 5
     color: Colours.palette.surface
 
+    Timer {
+        running: true
+        repeat: false
+        interval: 5000
+        onTriggered: Notifications.timeoutNotification(modelData.notificationId)
+    }
+
     implicitHeight: {
         if (expanded)
         {
