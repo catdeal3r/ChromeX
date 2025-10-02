@@ -61,20 +61,20 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
 		acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
-        onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.id) : Notifications.discardNotification(modelData.id)
+        onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.notificationId) : Notifications.discardNotification(modelData.notificationId)
 
 		onPressed: event => {
 			startX = event.x;
 			if (event.button === Qt.MiddleButton)
-				Notifications.discardNotification(modelData.id)
+				Notifications.discardNotification(modelData.notificationId)
 		}
 
 		onPositionChanged: event => {
 			if (event.x > startX) {
 				if (singleNotif.popup)
-					Notifications.timeoutNotification(modelData.id)
+					Notifications.timeoutNotification(modelData.notificationId)
 				else 
-					Notifications.discardNotification(modelData.id)
+					Notifications.discardNotification(modelData.notificationId)
 			}
 		}
     }
@@ -101,8 +101,13 @@ Rectangle {
                 color: "transparent"
                 
                 IconImage {
-                    visible: (modelData.appIcon == "") ? false : true
-                    source: Qt.resolvedUrl(modelData.appIcon)
+                    visible: (modelData.appIcon == "" && modelData.image == "") ? false : true
+                    source: {
+                        if (modelData.image != "")
+                            return Qt.resolvedUrl(modelData.image)
+                        else if (modelData.appIcon != "")
+                            return Quickshell.iconPath(modelData.appIcon)
+                    }
                 }
             }
 
@@ -365,7 +370,7 @@ Rectangle {
                                 onEntered: parent.hovered = true
                                 onExited: parent.hovered = false
 
-                                onClicked: Notifications.attemptInvokeAction(singleNotif.modelData.id, modelData.identifier);
+                                onClicked: Notifications.attemptInvokeAction(singleNotif.modelData.notificationId, modelData.identifier);
                             }
                         }
                     }

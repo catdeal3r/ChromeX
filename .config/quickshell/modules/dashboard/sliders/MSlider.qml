@@ -17,7 +17,7 @@ Slider {
 	property bool isEnabled: true
 	property bool isHovered: false
 
-	height: isHovered ? rHeight + 4 : rHeight
+	height: rHeight//isHovered ? rHeight + 4 : rHeight
 	width: rWidth
 
 	Behavior on height {
@@ -58,9 +58,16 @@ Slider {
 					return Colours.palette.surface_container
 				}
 			}
-            radius: Config.settings.borderRadius
+            radius: slider.isHovered ? Config.settings.borderRadius : Config.settings.borderRadius - 5
 
 			Behavior on color {
+				PropertyAnimation {
+					duration: Config.settings.animationSpeed
+					easing.type: Easing.InSine
+				}
+			}
+
+			Behavior on radius {
 				PropertyAnimation {
 					duration: Config.settings.animationSpeed
 					easing.type: Easing.InSine
@@ -70,9 +77,6 @@ Slider {
 			Text {
 				anchors.left: parent.left
 				anchors.leftMargin: 3
-
-				anchors.top: parent.top
-				anchors.topMargin: slider.isHovered ? 2 : 0
 
 				text: iconCode
 				font.family: Config.settings.iconFont
