@@ -46,12 +46,6 @@ Rectangle {
             Layout.preferredHeight: root.rowHeight
             spacing: root.spacing
 
-            /*Rectangle {
-                Layout.preferredHeight: root.rowHeight
-                Layout.preferredWidth: root.wideBtnWidth
-                radius: Config.settings.borderRadius
-            }*/
-
             WideToggle {
                 rWidth: root.wideBtnWidth
                 rHeight: root.rowHeight

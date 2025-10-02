@@ -170,6 +170,8 @@ Loader {
                             spacing: 10
 
                             Toggles {}
+
+							Sliders {}
                         }
 					}
 				}
