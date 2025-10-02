@@ -88,6 +88,9 @@ Rectangle {
                 bgColourHovered: Colours.palette.error_container
                 colourHovered: Colours.palette.on_error_container
 
+                bgColourHoveredUntoggled: Qt.alpha(Colours.palette.error_container, 0.5)
+                colourHoveredUntoggled: Qt.alpha(Colours.palette.on_error_container, 0.8)
+
                 toRun: () => Recorder.toggleRecording()
 			}
 
