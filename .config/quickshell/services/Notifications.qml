@@ -72,7 +72,7 @@ Singleton {
     property var filePath: Directories.notificationsPath
     property list<Notif> list: []
     property var popupList: list.filter((notif) => notif.popup);
-    property bool popupInhibited: (GlobalStates?.sidebarRightOpen ?? false) || silent
+    property bool popupInhibited: silent
     property var latestTimeForApp: ({})
     Component {
         id: notifComponent
@@ -85,6 +85,10 @@ Singleton {
 
     function stringifyList(list) {
         return JSON.stringify(list.map((notif) => notifToJSON(notif)), null, 2);
+    }
+
+    function toggleDND() {
+        popupInhibited = !popupInhibited
     }
     
     onListChanged: {
