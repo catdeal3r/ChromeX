@@ -32,14 +32,27 @@ Rectangle {
 			model: workspaceCount
 
 			Rectangle {
+				property bool hovered: false
+
 				Layout.alignment: Qt.AlignHCenter
 				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 15 : root.width - 16
-				Layout.preferredHeight: index + 1 == Workspaces.focusedWorkspace ? 45 : 40
+
+				Layout.preferredHeight: {
+					if (hovered)
+						return 45;
+					if (index + 1 == Workspaces.focusedWorkspace)
+						return 45
+					else
+						return 40
+				}
+
 				Layout.rightMargin: 2
 
 				color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.primary : Colours.palette.surface_container
 
 				function getTopRadius() {
+					if (hovered)
+						return Config.settings.borderRadius;
 					if (index + 1 == Workspaces.focusedWorkspace)
 						return Config.settings.borderRadius;
 					if (index == 0)
@@ -48,6 +61,8 @@ Rectangle {
 				}
 
 				function getBottomRadius() {
+					if (hovered)
+						return Config.settings.borderRadius;
 					if (index + 1 == Workspaces.focusedWorkspace)
 						return Config.settings.borderRadius;
 					if (index + 1 == root.workspaceCount)
@@ -63,28 +78,35 @@ Rectangle {
 
 				Behavior on topLeftRadius {
 					PropertyAnimation {
-						duration: 200
+						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
 					}
 				}
 
 				Behavior on topRightRadius {
 					PropertyAnimation {
-						duration: 200
+						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
 					}
 				}
 
 				Behavior on bottomLeftRadius {
 					PropertyAnimation {
-						duration: 200
+						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
 					}
 				}
 
 				Behavior on bottomRightRadius {
 					PropertyAnimation {
-						duration: 200
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+
+				Behavior on Layout.preferredHeight {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
 					}
 				}
@@ -96,7 +118,7 @@ Rectangle {
 					anchors.topMargin: parent.height / 2 - 8
 					anchors.leftMargin: parent.width / 2 - 6.5
 
-					text: ""//index + 1
+					text: ""
 					color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.on_primary : Colours.palette.outline
 
 					Behavior on color {
@@ -108,6 +130,14 @@ Rectangle {
 
 					font.family: Config.settings.font
 					font.pixelSize: 13
+				}
+
+				MouseArea {
+					anchors.fill: parent
+					hoverEnabled: true
+
+					onEntered: parent.hovered = true
+					onExited: parent.hovered = false
 				}
 			}
 		}

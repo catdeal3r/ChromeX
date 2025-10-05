@@ -83,7 +83,6 @@ Singleton {
 				Quickshell.execDetached(["swaymsg", "corner_radius", `${root.settings.borderRadius}`])
 			}
 			
-			
 			property string weatherLocation: "REPLACE"
 			
 			onWeatherLocationChanged: {
