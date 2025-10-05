@@ -11,12 +11,14 @@ Singleton {
 	id: root
 	
 	property int workspaceCount: 8
-	property var workspacesState
 	property int focusedWorkspace: 1
-	property string monitor: "eDP-1"
+	property string monitor: "1"
 
 	function setMonitor(m) {
-		root.monitor = m;
+		if (m == "eDP-1")
+			root.monitor = "1";
+		else
+			root.montior = "2";
 	}
 	
 	function getWorkspaceColour(state) {
@@ -34,27 +36,12 @@ Singleton {
 	function getWorkspaceHeight(state) {
 		return 10
 	}
-	
-	Process {
-		command: [ Quickshell.shellDir + "/scripts/workspaces.out" ]
-		running: true
-		
-		stdout: SplitParser {
-			onRead: data => workspacesState = JSON.parse(data)
-		}
-	}
-
 
 	Process {
 		id: focusedProc
 		running: true
 
-		command: {
-			if (root.monitor == "eDP-1")
-				return [ Quickshell.shellDir + "/scripts/python/exe.sh", "i", "1" ];
-			else
-				return [ Quickshell.shellDir + "/scripts/python/exe.sh", "i", "2" ];
-		}
+		command: [ Quickshell.shellDir + "/scripts/python/exe.sh", "i", `${root.monitor}` ];
 		
 		stdout: SplitParser {
 			onRead: data => focusedWorkspace = data
