@@ -49,6 +49,7 @@ Rectangle {
             iconCode: "brightness_medium"
             value: Brightness.brightnessPercent
             onMoved: Brightness.setBrightnessPercent(value)
+            to: 100
         }
     }
 }
