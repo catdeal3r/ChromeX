@@ -140,7 +140,6 @@ Loader {
 						}
 					}
 					
-					
 					Rectangle {
 						anchors.fill: parent
 						

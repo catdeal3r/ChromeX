@@ -20,6 +20,17 @@ Singleton {
 
     property string fullTime: "00:00:00"
 
+    property int recorderExitCode: 0
+    property bool readyToNotif: false
+
+    onRecorderExitCodeChanged: {
+        console.log(`${recorderExitCode}`);
+        if (recorderExitCode != 0) {
+            Quickshell.execDetached(["notify-send", "Failed to start recorder", `Monitor ${Config.settings.recorder.screen} possibly doesn't exist.`]);
+            recorderExitCode = 0;
+        }
+    }
+
     Timer {
         interval: 1000
         running: isRecordingRunning
@@ -69,13 +80,26 @@ Singleton {
         fullTime = "00:00:00";
     }
 
+    Process {
+        id: recorderProc
+        running: false
+
+        onExited: (exitCode) => {
+            console.log(`${exitCode}`); 
+            recorderExitCode = `${exitCode}`;
+        }
+    }
+
     onOutputFileChanged: {
+        //console.log(isRecordingRunning);
         fullOutputFile = `${Config.settings.recorder.output_loc}/${root.outputFile}`;
         //console.log(`Output file now is ${outputFile}.\nFull output file now is ${fullOutputFile}`);
 
         if (isRecordingRunning != true) {
             //console.log(`\nrunning wf-recorder .... \ncommand:\nwf-recorder -o ${Config.settings.recorder.screen} -c ${Config.settings.recorder.encoder} -f ${fullOutputFile}`);
-            Quickshell.execDetached([ "wf-recorder", "-o", `${Config.settings.recorder.screen}`, "-c", `${Config.settings.recorder.encoder}`, "-f", `${fullOutputFile}` ]);
+           // Quickshell.execDetached([ "wf-recorder", "-o", `${Config.settings.recorder.screen}`, "-c", `${Config.settings.recorder.encoder}`, "-f", `${fullOutputFile}` ]);
+            recorderProc.command = [ "wf-recorder", "-o", `${Config.settings.recorder.screen}`, "-c", `${Config.settings.recorder.encoder}`, "-f", `${fullOutputFile}` ];
+            recorderProc.running = true;
         }
     }
 
