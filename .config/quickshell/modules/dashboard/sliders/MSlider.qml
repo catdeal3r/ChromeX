@@ -34,9 +34,10 @@ Slider {
 		Rectangle {
 			id: bgRec
 			height: parent.height / 5
-            width: parent.width
+            width: ((1 - (slider.value / slider.to)) * parent.parent.width) - 5
             anchors.top: parent.top
             anchors.topMargin: (parent.height / 2) - (height / 2)
+			anchors.right: parent.right
 			radius: Config.settings.borderRadius
 
 			color: Colours.palette.surface_container	

@@ -171,6 +171,8 @@ Loader {
                             Toggles {}
 
 							Sliders {}
+
+							Bottom {}
                         }
 					}
 				}

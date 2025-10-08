@@ -26,7 +26,7 @@ Singleton {
     onRecorderExitCodeChanged: {
         console.log(`${recorderExitCode}`);
         if (recorderExitCode != 0) {
-            Quickshell.execDetached(["notify-send", "Failed to start recorder", `Monitor ${Config.settings.recorder.screen} possibly doesn't exist.`]);
+            Quickshell.execDetached(["notify-send", "Failed to start recording", `Monitor ${Config.settings.recorder.screen} possibly doesn't exist.`]);
             recorderExitCode = 0;
         }
     }

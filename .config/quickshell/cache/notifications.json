@@ -284,5 +284,146 @@
     "summary": "Audio output changed",
     "time": 1759563188056,
     "urgency": "1"
+  },
+  {
+    "notificationId": 27,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759722176493,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 28,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759723976471,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 29,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759725776392,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 30,
+    "actions": [
+      {
+        "identifier": "0",
+        "text": "View"
+      },
+      {
+        "identifier": "1",
+        "text": "Open Folder"
+      }
+    ],
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-06-18-04-19.png",
+    "appName": "notify-send",
+    "body": "Copied to clipboard",
+    "image": "",
+    "summary": "Screenshot Saved",
+    "time": 1759727066105,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 31,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759727576384,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 32,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Now using: WH-CH520",
+    "image": "",
+    "summary": "Audio output changed",
+    "time": 1759728190651,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 33,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Now using: WH-CH520",
+    "image": "",
+    "summary": "Audio input changed",
+    "time": 1759728190656,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 34,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759729376314,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 35,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Now using: Built-in Audio Analog Stereo",
+    "image": "",
+    "summary": "Audio output changed",
+    "time": 1759730501895,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 36,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Now using: Built-in Audio Analog Stereo",
+    "image": "",
+    "summary": "Audio input changed",
+    "time": 1759730501897,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 37,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759734760198,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 38,
+    "actions": [],
+    "appIcon": "",
+    "appName": "notify-send",
+    "body": "Look around and take a break.",
+    "image": "",
+    "summary": "Protect your eyes.",
+    "time": 1759787961231,
+    "urgency": "1"
   }
 ]
