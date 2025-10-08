@@ -41,13 +41,14 @@ Rectangle {
     Text {
         id: icon
         anchors.left: parent.left
-        anchors.leftMargin: 5
+        anchors.leftMargin: 8
+
         anchors.top: parent.top
         anchors.topMargin: 5
         text: root.iconCode
         font.family: Config.settings.iconFont
         font.pixelSize: 16
-        color: root.hovered ? Colours.palette.on_primary_container : Colours.palette.on_surface
+        color: root.hovered ? Colours.palette.on_primary_container : Qt.alpha(Colours.palette.on_surface, 0.8)
 
         Behavior on color {
             PropertyAnimation {
@@ -67,7 +68,7 @@ Rectangle {
         text: root.text
         font.family: Config.settings.font
         font.pixelSize: 14
-        color: root.hovered ? Colours.palette.on_primary_container : Colours.palette.on_surface
+        color: root.hovered ? Colours.palette.on_primary_container : Qt.alpha(Colours.palette.on_surface, 0.8)
 
         Behavior on color {
             PropertyAnimation {

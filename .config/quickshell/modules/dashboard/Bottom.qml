@@ -154,7 +154,17 @@ Rectangle {
         anchors.bottomMargin: 23
 
         font.family: Config.settings.font
-        text: Battery.charging ? `${Battery.percent}% (Charging)` : `${Battery.percent}%`
+        text: {
+            if (Battery.charging) {
+                if (Battery.percent == 100)
+                    return `${Battery.percent}% (Full)`
+                else
+                    return `${Battery.percent}% (Charging)`
+            }
+            else
+                return `${Battery.percent}% (Discharging)`
+        }
+
         font.pixelSize: 13
             
         color: Qt.alpha(Colours.palette.on_surface, 0.8)
@@ -204,7 +214,7 @@ Rectangle {
         visible: height == 30 ? false : true
 
         border.width: 1
-        border.color: Colours.palette.outline_variant
+        border.color: Colours.palette.surface_container_high
 
         Behavior on opacity {
             PropertyAnimation {

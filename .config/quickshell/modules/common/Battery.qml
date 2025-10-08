@@ -9,7 +9,7 @@ import qs.config
  
  Singleton {
 	id: root
-	property string percent
+	property int percent
 	property bool charging
 	
 	function getBatteryColour(percent) {
@@ -24,7 +24,7 @@ import qs.config
 		running: true
 
 		stdout: SplitParser {
-			onRead: data => root.percent = `${data}`
+			onRead: data => root.percent = data
 		}
 	}
 	
