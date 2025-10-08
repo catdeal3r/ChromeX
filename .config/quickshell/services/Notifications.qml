@@ -88,7 +88,11 @@ Singleton {
     }
 
     function toggleDND() {
-        popupInhibited = !popupInhibited
+        popupInhibited = !popupInhibited;
+    }
+
+    function dummyInit() {
+        console.log("[Notifications] Loaded server");
     }
     
     onListChanged: {

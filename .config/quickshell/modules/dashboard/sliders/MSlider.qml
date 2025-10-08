@@ -10,14 +10,14 @@ import qs.config
 Slider {
 	id: slider
 	property int rWidth: 300
-	property int rHeight: 25
+	property int rHeight: 30
 	property int minIndicator: 25
 	property string iconCode: "bedtime"
 
 	property bool isEnabled: true
 	property bool isHovered: false
 
-	height: rHeight//isHovered ? rHeight + 4 : rHeight
+	height: rHeight
 	width: rWidth
 
 	Behavior on height {
@@ -40,7 +40,14 @@ Slider {
 			anchors.right: parent.right
 			radius: Config.settings.borderRadius
 
-			color: Colours.palette.surface_container	
+			color: slider.isHovered ? Colours.palette.surface_container_high : Qt.alpha(Colours.palette.surface_container, 0.8)
+
+			Behavior on color {
+				PropertyAnimation {
+					duration: Config.settings.animationSpeed
+					easing.type: Easing.InSine
+				}
+			}
 		}
 				
 		Rectangle {
@@ -78,6 +85,9 @@ Slider {
 			Text {
 				anchors.left: parent.left
 				anchors.leftMargin: 3
+
+				anchors.top: parent.top
+				anchors.topMargin: 3
 
 				text: iconCode
 				font.family: Config.settings.iconFont

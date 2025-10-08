@@ -8,7 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Effects
 
 import qs.modules
-import qs.modules.common.desktop
+import qs.modules.desktop
 import qs.config
 import qs.modules.common
 

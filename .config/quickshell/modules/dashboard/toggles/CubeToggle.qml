@@ -40,11 +40,6 @@ Rectangle {
 	property string iconCode: "settings"
 	property real iconSize: 25
 
-	
-	function doToggle() {
-		//root.isToggled = !root.isToggled
-		root.toRun()
-	}
 
 	Layout.preferredWidth: isHovered ? rWidth + 10 : rWidth
 	Layout.preferredHeight: rHeight
@@ -180,6 +175,6 @@ Rectangle {
 		
 		onEntered: parent.isHovered = true
 		onExited: parent.isHovered = false
-		onClicked: parent.doToggle()
+		onClicked: parent.toRun()
 	}
 }

@@ -17,7 +17,7 @@ import qs.modules
 
 Rectangle {
     id: root
-    property int fHeight: 350
+    property int fHeight: 410
     property int fWidth: parent.parent.width
     property int padding: 10
     property int spacing: 10
@@ -149,14 +149,102 @@ Rectangle {
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredHeight: root.rowHeight
-            spacing: 5
+            spacing: root.spacing
+
+            WideToggle {
+                rWidth: root.wideBtnWidth
+                rHeight: root.rowHeight
+
+				isToggled: Bluetooth.getBool()
+					
+				bigText: Bluetooth.textLabel
+                smallText: {
+                    if (Bluetooth.textLabel == "Not Connected")
+                        return "No devices connected"
+                    else if (Bluetooth.textLabel == "Bluetooth Off")
+                        return "Wireless disabled"
+                    else
+                        return "Connected"
+                }
+
+				iconCode: Bluetooth.getIcon()
+					
+					
+				toRun: () => Bluetooth.toggle()
+			}
+
+            WideToggle {
+                rWidth: root.wideBtnWidth
+                rHeight: root.rowHeight
+
+				isToggled: Bluetooth.getBool()
+					
+				bigText: Bluetooth.textLabel
+                smallText: {
+                    if (Bluetooth.textLabel == "Not Connected")
+                        return "No devices connected"
+                    else if (Bluetooth.textLabel == "Bluetooth Off")
+                        return "Wireless disabled"
+                    else
+                        return "Connected"
+                }
+
+				iconCode: Bluetooth.getIcon()
+					
+					
+				toRun: () => Bluetooth.toggle()
+			}
             
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredHeight: root.rowHeight
-            spacing: 5
+            spacing: root.spacing
+
+            WideToggle {
+                rWidth: root.wideBtnWidth
+                rHeight: root.rowHeight
+
+				isToggled: Bluetooth.getBool()
+					
+				bigText: Bluetooth.textLabel
+                smallText: {
+                    if (Bluetooth.textLabel == "Not Connected")
+                        return "No devices connected"
+                    else if (Bluetooth.textLabel == "Bluetooth Off")
+                        return "Wireless disabled"
+                    else
+                        return "Connected"
+                }
+
+				iconCode: Bluetooth.getIcon()
+					
+					
+				toRun: () => Bluetooth.toggle()
+			}
+
+            WideToggle {
+                rWidth: root.wideBtnWidth
+                rHeight: root.rowHeight
+
+				isToggled: Bluetooth.getBool()
+					
+				bigText: Bluetooth.textLabel
+                smallText: {
+                    if (Bluetooth.textLabel == "Not Connected")
+                        return "No devices connected"
+                    else if (Bluetooth.textLabel == "Bluetooth Off")
+                        return "Wireless disabled"
+                    else
+                        return "Connected"
+                }
+
+				iconCode: Bluetooth.getIcon()
+					
+					
+				toRun: () => Bluetooth.toggle()
+			}
             
         }
     }

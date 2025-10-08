@@ -27,17 +27,17 @@ Rectangle {
 
     ColumnLayout {
         height: root.fHeight - 20
-        width: root.fWidth - 100
+        width: root.fWidth - 40
         
         anchors.top: parent.top
-        anchors.topMargin: 15
+        anchors.topMargin: 10
 
         anchors.left: parent.left
         anchors.leftMargin: (root.fWidth / 2) - (width / 2)
         spacing: root.spacing
 
         MSlider {
-            rWidth: 400
+            rWidth: 440
             iconCode: Audio.muted ? "volume_off" : "volume_up"
             value: Audio.volume
             isEnabled: !Audio.muted
@@ -45,7 +45,7 @@ Rectangle {
         }
 
         MSlider {
-            rWidth: 400
+            rWidth: 440
             iconCode: "brightness_medium"
             value: Brightness.brightnessPercent
             onMoved: Brightness.setBrightnessPercent(value)

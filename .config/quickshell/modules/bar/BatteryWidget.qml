@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import qs.config
+import qs.modules.common
 
 /*Rectangle {
 	id: root
