@@ -13,6 +13,9 @@
 
 </div>
 
+- **What's this?**: This is recreation of ChromeOS, made in quickshell for wayfire. It was designed to also fit with the Material 3 Expressive design language, and also has a few other tweaks ...
+- **This looks cool; should I use it?**: Not yet. Many things are not complete, including a settings menu, network and bluetooth menus, the launcher, and the notification history + calendar. It's best if you wait until those have been made.
+
 ## Table of Contents
 - [Showcase](#showcase)
 - [Install](#install)
@@ -27,7 +30,9 @@
 
 ### Photos
 
-TODO
+| **Dashboard and Notifications** |
+| ---- |
+| <img src=".github/setup1.png" alt="ChromeX Dashboard and Notifications"> |
 
 ---
 
