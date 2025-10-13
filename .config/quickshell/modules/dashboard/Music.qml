@@ -115,7 +115,7 @@ Rectangle {
 			
 				Loader {
 					anchors.fill: parent
-					active: ( root.artUrl != "" )
+					active: ( root.player?.trackArtUrl != "" )
 				
 					sourceComponent: Item {
 						anchors.fill: parent
@@ -123,7 +123,7 @@ Rectangle {
 						Image {
 							id: backgroundImage
 							anchors.fill: parent
-							source: root.player?.trackArtUrl
+							source: root.player?.trackArtUrl?
 							fillMode: Image.PreserveAspectCrop
                             layer.enabled: true
                             layer.effect: MultiEffect {
@@ -132,10 +132,10 @@ Rectangle {
 						}
 					}
 				}
+
 				Loader {
-				
 					anchors.centerIn: parent
-					active: ( root.artUrl == "" )
+					active: ( root.player?.trackArtUrl == "" ) || root.meaningfulPlayers.length == 0
 				
 					sourceComponent: Text {
 						anchors.centerIn: parent
@@ -143,20 +143,50 @@ Rectangle {
 						color: Colours.palette.outline
 						text: "music_note"
 						font.family: Config.settings.iconFont
-						font.pixelSize: art.width / 7
+						font.pixelSize: art.width / 3
 					}
 				}
 			}
         }
         
         Rectangle {
-			Layout.preferredHeight: 60
+			Layout.preferredHeight: 50
             Layout.preferredWidth: 180
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 			
 			color: "transparent"
+
+            Text {
+				anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.topMargin: 12
+				font.pixelSize: 18
+				font.family: Config.settings.font
+
+                opacity: (root.meaningfulPlayers.length == 0) ? 1 : 0
+					
+				color: Colours.palette.on_surface
+				text: "No media playing"
+
+                Behavior on opacity {
+                    PropertyAnimation {
+                        duration: Config.settings.animationSpeed
+                        easing.type: Easing.InSine
+                    }
+                }	
+			}
 		
 			ColumnLayout {
                 spacing: 10
+
+                opacity: (root.meaningfulPlayers.length == 0) ? 0 : 1
+
+                Behavior on opacity {
+                    PropertyAnimation {
+                        duration: Config.settings.animationSpeed
+                        easing.type: Easing.InSine
+                    }
+                }
 				
 				TextMetrics {
 					id: titleMetrics
@@ -207,13 +237,23 @@ Rectangle {
 		}
 
         Rectangle {
-            Layout.preferredHeight: 30
+            Layout.preferredHeight: 40
             Layout.preferredWidth: 120
+            Layout.alignment: Qt.AlignVCenter
 
             color: "transparent"
 
             RowLayout {
                 spacing: 10
+
+                opacity: (root.meaningfulPlayers.length == 0) ? 0 : 1
+
+                Behavior on opacity {
+                    PropertyAnimation {
+                        duration: Config.settings.animationSpeed
+                        easing.type: Easing.InSine
+                    }
+                }
 
                 PlayerControl {
                     Layout.alignment: Qt.AlignHCenter
