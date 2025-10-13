@@ -7,7 +7,7 @@ import qs.modules.common
 
 Rectangle {
 	id: root
-	width: 40
+	width: 45
 	height: 40 * workspaceCount + 5
 	color: Colours.palette.surface
 
@@ -35,7 +35,7 @@ Rectangle {
 				property bool hovered: false
 
 				Layout.alignment: Qt.AlignHCenter
-				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 15 : root.width - 16
+				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 17 : root.width - 18
 
 				Layout.preferredHeight: {
 					if (hovered)
