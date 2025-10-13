@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell.Widgets
 import QtQuick.Controls
 
@@ -29,7 +30,7 @@ Rectangle {
     property var actions: modelData.actions
 
     radius: Config.settings.borderRadius + 5
-    color: Colours.palette.surface
+    color: singleNotif.popup ? Colours.palette.surface : Qt.alpha(Colours.palette.surface_container_low, 0.6)
 
     Timer {
         running: true
@@ -107,13 +108,20 @@ Rectangle {
                 width: iconImage.size
                 color: "transparent"
                 
-                IconImage {
+                child: IconImage {
+                    id: iconRaw
                     visible: (modelData.appIcon == "" && modelData.image == "") ? false : true
                     source: {
                         if (modelData.image != "")
                             return Qt.resolvedUrl(modelData.image)
                         else if (modelData.appIcon != "")
                             return Quickshell.iconPath(modelData.appIcon)
+                    }
+
+                    MultiEffect {
+                        source: iconRaw
+                        anchors.fill: iconRaw
+                        saturation: Config.settings.colours.genType == "scheme-monochrome" ? -1.0 : 1.0
                     }
                 }
             }
@@ -338,7 +346,19 @@ Rectangle {
                             Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 5
                             Layout.preferredHeight: 22
                             radius: hovered ? Config.settings.borderRadius : 5
-                            color: hovered ? Qt.alpha(Colours.palette.primary_container, 0.8) : Colours.palette.surface
+                            color: {
+                                if (singleNotif.popup) {
+                                    if (hovered) 
+                                        return Qt.alpha(Colours.palette.primary_container, 0.8)
+                                    else
+                                        return Colours.palette.surface
+                                } else {
+                                    if (hovered) 
+                                        return Qt.alpha(Colours.palette.primary_container, 0.8)
+                                    else
+                                        return Qt.alpha(Colours.palette.surface_container_low, 0.6)
+                                }
+                            }
 
                             Behavior on color {
                                 PropertyAnimation {

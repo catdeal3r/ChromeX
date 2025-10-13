@@ -46,8 +46,6 @@ Rectangle {
 						return 40
 				}
 
-				Layout.rightMargin: 2
-
 				color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.primary : Colours.palette.surface_container
 
 				function getTopRadius() {

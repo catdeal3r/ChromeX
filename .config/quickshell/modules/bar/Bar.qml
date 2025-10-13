@@ -37,7 +37,7 @@ Scope {
 
 			color: "transparent"
 			
-			implicitWidth: 40
+			implicitWidth: 45
 			
 			visible: true
 			
@@ -51,9 +51,15 @@ Scope {
 				id: barBase
 				anchors.left: parent.left
 
-				width: 40
-				height: barWindow.height
+				width: barWindow.implicitWidth
+				height: barWindow.height - 115
 				color: Colours.palette.surface
+
+				anchors.top: parent.top
+				anchors.topMargin: (parent.height / 2) - (height / 2)
+
+				topRightRadius: Config.settings.borderRadius
+				bottomRightRadius: Config.settings.borderRadius
 
 				IconImage {
 					id: icon
@@ -62,7 +68,7 @@ Scope {
 					anchors.top: parent.top
 					anchors.left: parent.left
 					anchors.leftMargin: (parent.width / 2) - (width / 2) - 1
-					anchors.topMargin: 5
+					anchors.topMargin: 15
 					source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/icon.png")
 				}
 
@@ -83,6 +89,7 @@ Scope {
 
 					width: parent.width - 5
 					anchors.bottom: parent.bottom
+					anchors.bottomMargin: 5
 							
 					SysTray {
 						Layout.preferredHeight: (SystemTray.items.values.length * 25)

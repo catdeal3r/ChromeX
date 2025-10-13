@@ -18,10 +18,10 @@ Loader {
 	required property bool isDashboardOpen
 
     property int dashWidth: 515
-    property int dashHeight: 600
+    property int dashHeight: 960
 
-    property int dashHoriPadding: 50
-    property int dashVertPadding: 10
+    property int dashHoriPadding: 60
+    property int dashVertPadding: 60
 	
 	property bool ani
 	
@@ -117,7 +117,6 @@ Loader {
 					anchors.bottomMargin: root.dashVertPadding
 					
 					clip: true
-					
 
                     Behavior on anchors.leftMargin {
 						PropertyAnimation {
@@ -139,9 +138,23 @@ Loader {
 							easing.type: Easing.InSine
 						}
 					}
+
+					Rectangle {
+						anchors.top: parent.top
+						width: root.dashWidth
+						height: 415
+						
+						color: Colours.palette.surface
+						
+						radius: Config.settings.borderRadius
+
+						NotificationLog {}
+					}
 					
 					Rectangle {
-						anchors.fill: parent
+						anchors.bottom: parent.bottom
+						width: root.dashWidth
+						height: 525
 						
 						color: Colours.palette.surface
 						
@@ -169,6 +182,8 @@ Loader {
                             spacing: 10
 
                             Toggles {}
+
+							Music {}
 
 							Sliders {}
 

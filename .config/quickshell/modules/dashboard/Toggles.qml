@@ -17,7 +17,7 @@ import qs.modules
 
 Rectangle {
     id: root
-    property int fHeight: 410
+    property int fHeight: 210
     property int fWidth: parent.parent.width
     property int padding: 10
     property int spacing: 10

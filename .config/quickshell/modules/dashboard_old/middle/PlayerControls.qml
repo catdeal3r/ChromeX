@@ -19,7 +19,7 @@ Rectangle {
 	width: 400
 	height: 200
 	color: "transparent"
-	
+
 	function isRealPlayer(player) {
         // return true
         return (
