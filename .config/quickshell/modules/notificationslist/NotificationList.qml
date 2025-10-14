@@ -23,7 +23,6 @@ Scope {
 		
 			anchors {
 				top: true
-				right: true
 			}
 		
 			aboveWindows: true
@@ -70,8 +69,8 @@ Scope {
 					NumberAnimation {
 						duration: 500
 						easing.bezierCurve: Anim.standard
-						from: 500
-						property: "x"
+						from: -500
+						property: "y"
 					}
 				}
 				
@@ -92,8 +91,8 @@ Scope {
 					NumberAnimation {
 						duration: 500
 						easing.bezierCurve: Anim.standard
-						property: "x"
-						to: 500
+						property: "y"
+						to: -500
 					}
 				}
 				

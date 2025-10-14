@@ -69,6 +69,11 @@ Singleton {
 				onModeChanged: {
 					Wallpaper.changeColourProp()
 				}
+
+				onUseCustomChanged: {
+					if (useCustom == false)
+						Wallpaper.changeColourProp()
+				}
 			}
 
 			property JsonObject recorder: JsonObject {

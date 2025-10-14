@@ -64,6 +64,7 @@ Rectangle {
 
     MouseArea {
 		property int startX
+        property int startY
 
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
@@ -72,18 +73,25 @@ Rectangle {
         onClicked: singleNotif.popup ? Notifications.timeoutNotification(modelData.notificationId) : Notifications.discardNotification(modelData.notificationId)
 
 		onPressed: event => {
-			startX = event.x;
+            if (singleNotif.popup)
+                startY = event.y
+            else
+		    	startX = event.x;
+
 			if (event.button === Qt.MiddleButton)
 				Notifications.discardNotification(modelData.notificationId)
 		}
 
 		onPositionChanged: event => {
-			if (event.x > startX) {
-				if (singleNotif.popup)
-					Notifications.timeoutNotification(modelData.notificationId)
-				else 
-					Notifications.discardNotification(modelData.notificationId)
-			}
+            if (singleNotif.popup) {
+                if (event.y < startY) {
+                    Notifications.timeoutNotification(modelData.notificationId)
+                }
+            } else {
+                if (event.x > startX) {
+                    Notifications.discardNotification(modelData.notificationId)
+                }
+            }
 		}
     }
 
