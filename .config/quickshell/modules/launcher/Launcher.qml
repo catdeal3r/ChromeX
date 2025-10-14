@@ -123,7 +123,6 @@ Loader {
 						property list<DesktopEntry> appList: Apps.list
 
 						onCurrentSearchChanged: {
-							console.log(currentSearch)
 							placeHolderText.text = currentSearch
 						}
 

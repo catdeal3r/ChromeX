@@ -16,8 +16,15 @@ Rectangle {
     property bool selected: false
 
 	width: parent.width
-    height: 40
-    color: hovered ? Qt.alpha(Colours.palette.surface_container_low, 0.4) : Qt.alpha(Colours.palette.surface_container_low, 0.2)
+    height: 45
+    color: {
+        if (selected)
+            return Colours.palette.primary
+        if (hovered)
+            return Colours.palette.surface_container
+        else
+            return Qt.alpha(Colours.palette.surface_container_low, 0.2)
+    }
     radius: Config.settings.borderRadius
 
     Behavior on color {
@@ -26,9 +33,6 @@ Rectangle {
 			easing.type: Easing.InSine
 		}
 	}
-
-    border.width: selected ? 2 : 0
-    border.color: Colours.palette.surface_container
 
     ClippingWrapperRectangle {
         id: entryIcon
@@ -41,7 +45,7 @@ Rectangle {
         property int size: 22
         height: size
         width: size
-        radius: Config.settings.borderRadius
+        radius: 1000
 
         color: Colours.palette.surface_container
 
@@ -59,7 +63,14 @@ Rectangle {
         font.weight: 400
         text: modelData.name
         font.pixelSize: 15
-        color: root.hovered ? Colours.palette.on_surface : Colours.palette.outline 
+        color: {
+            if (root.selected)
+                return Colours.palette.on_primary
+            if (root.hovered)
+                return Colours.palette.on_surface
+            else
+                return Colours.palette.outline
+        }
 
         Behavior on color {
 			PropertyAnimation {
@@ -72,6 +83,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
         onEntered: root.hovered = true
         onExited: root.hovered = false
