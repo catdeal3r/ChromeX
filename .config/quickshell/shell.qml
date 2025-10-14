@@ -1,5 +1,6 @@
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 //@ pragma UseQApplication
+//@ pragma Env QT_SCALE_FACTOR=1
 
 import Quickshell
 import Quickshell.Io
@@ -8,6 +9,7 @@ import QtQuick
 import qs.modules
 import qs.services
 import qs.config
+import qs.modules.desktop
 
 Scope {
 	Modules {}
@@ -18,7 +20,7 @@ Scope {
 			Nightmode.turnOn();
 	}
 
-	//Desktop {}
+	Desktop {}
 	
 	EyeProtection {}
 }

@@ -43,7 +43,7 @@ Rectangle {
         if (expanded)
         {
             if (areActions)
-                return 130
+                return 140
             else
                 return 100
         }
@@ -344,7 +344,7 @@ Rectangle {
                         delegate: Rectangle {
                             property bool hovered: false
                             Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 5
-                            Layout.preferredHeight: 22
+                            Layout.preferredHeight: 32
                             radius: hovered ? Config.settings.borderRadius : 5
                             color: {
                                 if (singleNotif.popup) {

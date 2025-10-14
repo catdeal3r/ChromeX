@@ -79,9 +79,7 @@ Scope {
 					colorization: 1.0
 				}
 
-				WorkspacesWidget {
-					monitor: modelData.name
-				}
+				WorkspacesWidget {}
 						
 				ColumnLayout {
 					spacing: 10

@@ -8,7 +8,7 @@ import qs.modules.common
 Rectangle {
 	id: root
 	width: 45
-	height: 40 * workspaceCount + 5
+	height: 40 * Workspaces.niriWorkspaces.length + 5
 	color: Colours.palette.surface
 
 	anchors.top: parent.top
@@ -16,12 +16,6 @@ Rectangle {
 
 	anchors.left: parent.left
 
-	required property string monitor
-
-	Component.onCompleted: {
-		Workspaces.setMonitor(monitor);
-	}
-	
 	property int workspaceCount: 5
 
 	ColumnLayout {
@@ -29,29 +23,29 @@ Rectangle {
 		spacing: 3
 
 		Repeater {
-			model: workspaceCount
+			model: Workspaces.niriWorkspaces
 
 			Rectangle {
 				property bool hovered: false
 
 				Layout.alignment: Qt.AlignHCenter
-				Layout.preferredWidth: index + 1 == Workspaces.focusedWorkspace ? root.width - 17 : root.width - 18
+				Layout.preferredWidth: Workspaces.niriWorkspaces[index].is_focused ? root.width - 17 : root.width - 18
 
 				Layout.preferredHeight: {
 					if (hovered)
 						return 45;
-					if (index + 1 == Workspaces.focusedWorkspace)
-						return 45
+					if (Workspaces.niriWorkspaces[index].is_focused)
+						return 45;
 					else
-						return 40
+						return 40;
 				}
 
-				color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.primary : Colours.palette.surface_container
+				color: Workspaces.niriWorkspaces[index].is_focused ? Colours.palette.primary : Colours.palette.surface_container
 
 				function getTopRadius() {
 					if (hovered)
 						return Config.settings.borderRadius;
-					if (index + 1 == Workspaces.focusedWorkspace)
+					if (Workspaces.niriWorkspaces[index].is_focused)
 						return Config.settings.borderRadius;
 					if (index == 0)
 						return Config.settings.borderRadius;
@@ -61,9 +55,9 @@ Rectangle {
 				function getBottomRadius() {
 					if (hovered)
 						return Config.settings.borderRadius;
-					if (index + 1 == Workspaces.focusedWorkspace)
+					if (Workspaces.niriWorkspaces[index].is_focused)
 						return Config.settings.borderRadius;
-					if (index + 1 == root.workspaceCount)
+					if (index + 1 == Workspaces.niriWorkspaces.length)
 						return Config.settings.borderRadius;
 					return 4;
 				}
@@ -117,7 +111,7 @@ Rectangle {
 					anchors.leftMargin: parent.width / 2 - 6.5
 
 					text: ""
-					color: index + 1 == Workspaces.focusedWorkspace ? Colours.palette.on_primary : Colours.palette.outline
+					color: Workspaces.niriWorkspaces[index].is_focused ? Colours.palette.on_primary : Colours.palette.outline
 
 					Behavior on color {
 						PropertyAnimation {

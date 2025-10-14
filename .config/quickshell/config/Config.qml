@@ -60,6 +60,7 @@ Singleton {
 			property JsonObject colours: JsonObject {
 				property string genType: "scheme-expressive"
 				property string mode: "dark"
+				property bool useCustom: false
 				
 				onGenTypeChanged: {
 					Wallpaper.changeColourProp()
