@@ -54,30 +54,58 @@ Rectangle {
         }
     }
 
-    Text {
+    ColumnLayout {
         anchors.left: entryIcon.right
         anchors.leftMargin: 10
         anchors.top: parent.top
-		anchors.topMargin: (parent.height / 2) - ((font.pixelSize + 5) / 2)
-        font.family: Config.settings.font
-        font.weight: 400
-        text: modelData.name
-        font.pixelSize: 15
-        color: {
-            if (root.selected)
-                return Colours.palette.on_primary
-            if (root.hovered)
-                return Colours.palette.on_surface
-            else
-                return Colours.palette.outline
+        anchors.topMargin: (parent.height / 2) - (height / 2)
+
+        height: 40
+        spacing: -3
+
+        Text {
+            font.family: Config.settings.font
+            font.weight: 400
+            text: modelData.name
+            font.pixelSize: 15
+            color: {
+                if (root.selected)
+                    return Colours.palette.on_primary
+                if (root.hovered)
+                    return Colours.palette.on_surface
+                else
+                    return Colours.palette.outline
+            }
+
+            Behavior on color {
+                PropertyAnimation {
+                    duration: 200
+                    easing.type: Easing.InSine
+                }
+            }
         }
 
-        Behavior on color {
-			PropertyAnimation {
-				duration: 200
-				easing.type: Easing.InSine
-			}
-		}
+        Text {
+            font.family: Config.settings.font
+            font.weight: 400
+            text: modelData.comment
+            font.pixelSize: 13
+            color: {
+                if (root.selected)
+                    return Qt.alpha(Colours.palette.on_primary, 0.7)
+                if (root.hovered)
+                    return Qt.alpha(Colours.palette.on_surface, 0.7)
+                else
+                    return Qt.alpha(Colours.palette.outline, 0.7)
+            }
+
+            Behavior on color {
+                PropertyAnimation {
+                    duration: 200
+                    easing.type: Easing.InSine
+                }
+            }
+        }
     }
 
     MouseArea {
