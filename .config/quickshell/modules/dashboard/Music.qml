@@ -123,7 +123,7 @@ Rectangle {
 						Image {
 							id: backgroundImage
 							anchors.fill: parent
-							source: root.player?.trackArtUrl?
+							source: root.player?.trackArtUrl
 							fillMode: Image.PreserveAspectCrop
                             layer.enabled: true
                             layer.effect: MultiEffect {

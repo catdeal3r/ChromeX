@@ -43,6 +43,7 @@ Singleton {
 			property JsonObject bar: JsonObject {
 				property string barLocation: "bottom"
 				property bool smoothEdgesShown: false
+				property bool desktopRoundingShown: true
 			}
 			
 			property string currentWallpaper: Quickshell.shellDir + "/assets/default_blank.png"
@@ -56,6 +57,9 @@ Singleton {
 			property int borderRadius: 20
 
 			property int animationSpeed: 200
+
+			property bool usePfpInsteadOfLogo: false
+			property string pfpLocation: "~/.face"
 			
 			property JsonObject colours: JsonObject {
 				property string genType: "scheme-expressive"

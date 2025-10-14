@@ -18,12 +18,10 @@ Rectangle {
 	width: parent.width
     height: 45
     color: {
-        if (selected)
-            return Colours.palette.primary
-        if (hovered)
-            return Colours.palette.surface_container
+        if (selected || hovered)
+            return Colours.palette.surface_container_high
         else
-            return Qt.alpha(Colours.palette.surface_container_low, 0.2)
+            return Colours.palette.surface
     }
     radius: Config.settings.borderRadius
 
@@ -42,12 +40,12 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: (parent.height / 2) - (size / 2)
 
-        property int size: 22
+        property int size: 25
         height: size
         width: size
         radius: 1000
 
-        color: Colours.palette.surface_container
+        color: "transparent"
 
         IconImage {
             source: Quickshell.iconPath(modelData.icon, "application-x-executable")
@@ -67,11 +65,9 @@ Rectangle {
             font.family: Config.settings.font
             font.weight: 400
             text: modelData.name
-            font.pixelSize: 15
+            font.pixelSize: 14
             color: {
-                if (root.selected)
-                    return Colours.palette.on_primary
-                if (root.hovered)
+                if (root.hovered || root.selected)
                     return Colours.palette.on_surface
                 else
                     return Colours.palette.outline
@@ -89,11 +85,9 @@ Rectangle {
             font.family: Config.settings.font
             font.weight: 400
             text: modelData.comment
-            font.pixelSize: 13
+            font.pixelSize: 12
             color: {
-                if (root.selected)
-                    return Qt.alpha(Colours.palette.on_primary, 0.7)
-                if (root.hovered)
+                if (root.hovered || root.selected)
                     return Qt.alpha(Colours.palette.on_surface, 0.7)
                 else
                     return Qt.alpha(Colours.palette.outline, 0.7)

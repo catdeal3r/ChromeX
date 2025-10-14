@@ -10,10 +10,6 @@ import qs.config
 Singleton {
 	id: root
 	
-	function loadWallpaper() {
-		Quickshell.execDetached(["feh", "--bg-fill", `${Config.settings.currentWallpaper}`]);
-	}
-	
 	function setNewWallpaper(path) {
 		Config.settings.currentWallpaper = `${path}`;
 		Quickshell.execDetached(["matugen", "--type", `${Config.settings.colours.genType}`, "--mode", `${Config.settings.colours.mode}`, "image", `${path}`]);

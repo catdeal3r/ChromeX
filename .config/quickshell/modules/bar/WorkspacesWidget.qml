@@ -9,7 +9,7 @@ Rectangle {
 	id: root
 	width: 45
 	height: 40 * Workspaces.niriWorkspaces.length + 5
-	color: Colours.palette.surface
+	color: "transparent"
 
 	anchors.top: parent.top
 	anchors.topMargin: (parent.height / 2) - (height / 2)
@@ -17,6 +17,54 @@ Rectangle {
 	anchors.left: parent.left
 
 	property int workspaceCount: 5
+
+	Rectangle {
+		height: root.height + 100
+		width: barBase.width
+		anchors.top: parent.top
+		anchors.topMargin: (parent.height / 2) - (height / 2)
+		color: "transparent"
+
+		RRCorner {
+			anchors.bottom: parent.bottom
+			anchors.right: parent.right
+			corner: RRCorner.CornerEnum.TopRight
+			size: Config.settings.borderRadius + 5
+			color: Colours.palette.surface_container
+		}
+
+		Rectangle {
+			height: parent.height - ((Config.settings.borderRadius + 5) * 2)
+			color: Colours.palette.surface_container
+			width: parent.width
+			anchors.top: parent.top
+			anchors.topMargin: (parent.height / 2) - (height / 2)
+
+			RRCorner {
+				anchors.bottom: parent.bottom
+				anchors.left: parent.left
+				corner: RRCorner.CornerEnum.BottomLeft
+				size: Config.settings.borderRadius
+				color: Colours.palette.surface
+			}
+
+			RRCorner {
+				anchors.top: parent.top
+				anchors.left: parent.left
+				corner: RRCorner.CornerEnum.TopLeft
+				size: Config.settings.borderRadius
+				color: Colours.palette.surface
+			}
+		}
+
+		RRCorner {
+			anchors.top: parent.top
+			anchors.right: parent.right
+			corner: RRCorner.CornerEnum.BottomRight
+			size: Config.settings.borderRadius + 5
+			color: Colours.palette.surface_container
+		}
+	}
 
 	ColumnLayout {
 		anchors.fill: parent
@@ -108,9 +156,9 @@ Rectangle {
 					anchors.top: parent.top
 
 					anchors.topMargin: parent.height / 2 - 8
-					anchors.leftMargin: parent.width / 2 - 6.5
+					anchors.leftMargin: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? parent.width / 2 - 4.8 : parent.width / 2 - 6.5
 
-					text: ""
+					text: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? "" : ""
 					color: Workspaces.niriWorkspaces[index].is_focused ? Colours.palette.on_primary : Colours.palette.outline
 
 					Behavior on color {
@@ -121,7 +169,7 @@ Rectangle {
 					}
 
 					font.family: Config.settings.font
-					font.pixelSize: 13
+					font.pixelSize: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? 11 : 13
 				}
 
 				MouseArea {

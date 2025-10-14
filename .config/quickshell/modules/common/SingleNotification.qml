@@ -20,35 +20,48 @@ Time:        NotificationUtils.getFriendlyNotifTimeString(modelData.time)
 App Name:    modelData.appName
 */
 
-Rectangle {
+ClippingRectangle {
     id: singleNotif
     property bool popup: false
     property bool expanded: false
 
     property bool areActions: !(modelData.actions.length == 0)
+    property int currentTime: 4000
+
+    onCurrentTimeChanged: {
+        if (currentTime < 100)
+            Notifications.timeoutNotification(modelData.notificationId)
+    }
 
     property var actions: modelData.actions
 
     radius: Config.settings.borderRadius + 5
     color: singleNotif.popup ? Colours.palette.surface : Qt.alpha(Colours.palette.surface_container_low, 0.6)
 
-    Timer {
-        running: true
-        repeat: false
-        interval: 5000
-        onTriggered: Notifications.timeoutNotification(modelData.notificationId)
-    }
+    
+
+    Loader {
+		active: singleNotif.popup
+		
+		sourceComponent: Timer {
+			id: dismissTimer
+			interval: 1
+			running: (singleNotif.currentTime > 0)
+			repeat: false
+			onTriggered: singleNotif.currentTime -= 1
+		}
+	}
 
     implicitHeight: {
         if (expanded)
         {
             if (areActions)
-                return 140
+                return 150
             else
-                return 100
+                return 110
         }
         else
-            return 70
+            return 80
     }
 
     implicitWidth: 400
@@ -101,24 +114,26 @@ Rectangle {
         
         Rectangle {
             id: iconImage
-            property int size: 40
+            property int size: 38
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-            Layout.topMargin: Config.settings.borderRadius
-            Layout.leftMargin: Config.settings.borderRadius
-            Layout.preferredHeight: size
-            Layout.preferredWidth: size
-            color: "transparent"
+            Layout.preferredHeight: singleNotif.implicitHeight
+            Layout.preferredWidth: size + 20
+            color: Colours.palette.surface_container_low
 
             ClippingWrapperRectangle {
-                visible: (modelData.appIcon == "") ? false : true
+                visible: (modelData.appIcon != "" || modelData.image != "")
                 radius: 1000
                 height: iconImage.size
                 width: iconImage.size
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.topMargin: (parent.Layout.preferredHeight / 2) - (height / 2)
+                anchors.leftMargin: (parent.Layout.preferredWidth / 2) - (width / 2)
                 color: "transparent"
                 
                 child: IconImage {
                     id: iconRaw
-                    visible: (modelData.appIcon == "" && modelData.image == "") ? false : true
+                    visible: (modelData.appIcon != "" || modelData.image != "")
                     source: {
                         if (modelData.image != "")
                             return Qt.resolvedUrl(modelData.image)
@@ -134,21 +149,15 @@ Rectangle {
                 }
             }
 
-            Rectangle {
-                visible: (modelData.appIcon == "")
-                radius: 1000
-                height: iconImage.size
-                width: iconImage.size
-                color: Colours.palette.primary
-                
-                Text {
-                    anchors.centerIn: parent
-                    text: "notifications"
-                    font.family: Config.settings.iconFont
-                    font.pixelSize: 20
-                    color: Colours.palette.on_primary
-                }
+            Text {
+                visible: (modelData.appIcon == "" && modelData.image == "")
+                anchors.centerIn: parent
+                text: "notifications"
+                font.family: Config.settings.iconFont
+                font.pixelSize: 22
+                color: Qt.alpha(Colours.palette.on_surface, 0.7)
             }
+            
         }
 
         Rectangle {
@@ -156,19 +165,18 @@ Rectangle {
             property int cWidth: singleNotif.implicitWidth - iconImage.size - (Config.settings.borderRadius * 3)
             property int padding: 10
 
-            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-            Layout.topMargin: Config.settings.borderRadius
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
 
             Layout.preferredHeight: {
                 if (singleNotif.expanded)
                 {
                     if (singleNotif.areActions)
-                        return iconImage.size + 60
+                        return 110
                     else
-                        return iconImage.size + 30
+                        return 70
                 }
                 else
-                    return iconImage.size
+                    return 40
             }
 
             Layout.preferredWidth: cWidth
@@ -351,21 +359,14 @@ Rectangle {
 
                         delegate: Rectangle {
                             property bool hovered: false
-                            Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 5
+                            Layout.preferredWidth: (actionsButtons.width / singleNotif.actions.length) - 15
                             Layout.preferredHeight: 32
-                            radius: hovered ? Config.settings.borderRadius : 5
+                            radius: hovered ? Config.settings.borderRadius : Config.settings.borderRadius - 5
                             color: {
-                                if (singleNotif.popup) {
-                                    if (hovered) 
-                                        return Qt.alpha(Colours.palette.primary_container, 0.8)
-                                    else
-                                        return Colours.palette.surface
-                                } else {
-                                    if (hovered) 
-                                        return Qt.alpha(Colours.palette.primary_container, 0.8)
-                                    else
-                                        return Qt.alpha(Colours.palette.surface_container_low, 0.6)
-                                }
+                                if (hovered) 
+                                    return Qt.alpha(Colours.palette.surface_container_high, 0.7)
+                                else
+                                    return Colours.palette.surface_container_low
                             }
 
                             Behavior on color {
@@ -385,9 +386,9 @@ Rectangle {
                             Text {
                                 anchors.centerIn: parent
                                 text: modelData.text
-                                color: parent.hovered ? Colours.palette.on_primary_container : Colours.palette.on_surface
+                                color: parent.hovered ? Colours.palette.on_surface : Qt.alpha(Colours.palette.on_surface, 0.9)
                                 font.family: Config.settings.font
-                                font.pixelSize: 10
+                                font.pixelSize: 12
 
                                 Behavior on color {
                                     PropertyAnimation {
@@ -412,5 +413,12 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Rectangle {
+        height: 4
+        width: singleNotif.popup ? (singleNotif.currentTime / 4000) * parent.width : 0
+        anchors.bottom: parent.bottom
+        color: Colours.palette.surface_container_highest
     }
 }

@@ -8,7 +8,7 @@ Item {
     property var corner: RRCorner.CornerEnum.TopLeft // Default to TopLeft
 
     property int size: 25
-    property color color: "#000000"
+    property color color: "#FFFFFF"
 
     implicitWidth: size
     implicitHeight: size
