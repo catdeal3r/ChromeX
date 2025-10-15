@@ -12,6 +12,7 @@ import qs.modules.lockscreen
 import qs.modules.notificationslist
 import qs.modules.desktop
 import qs.modules.dashboard
+import qs.modules.dock
 
 Scope {
 	NotificationList {}
@@ -21,6 +22,14 @@ Scope {
 		
 		sourceComponent: Bar {
 			onFinished: IPCLoader.toggleBar()
+		}
+	}
+
+	Loader {
+		active: IPCLoader.isDockOpen
+		
+		sourceComponent: Dock {
+			onFinished: IPCLoader.toggleDock()
 		}
 	}
 
@@ -34,5 +43,5 @@ Scope {
 	
 	Lockscreen {}
 
-	//Desktop {}
+	Desktop {}
 }

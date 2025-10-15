@@ -48,13 +48,11 @@ Singleton {
 			
 			property string currentWallpaper: Quickshell.shellDir + "/assets/default_blank.png"
 			
-			onCurrentWallpaperChanged: {
-				Wallpaper.loadWallpaper()
-			}
-			
 			property string font: "SF Pro Display"
 			property string iconFont: "Material Symbols Rounded"
 			property int borderRadius: 20
+
+			property bool isDockPinned: false
 
 			property int animationSpeed: 200
 

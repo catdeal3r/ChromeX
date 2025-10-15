@@ -9,7 +9,6 @@ import QtQuick
 import qs.modules
 import qs.services
 import qs.config
-import qs.modules.desktop
 
 Scope {
 	Modules {}
@@ -19,8 +18,6 @@ Scope {
 		if (Config.settings.nightmodeOnStartup)
 			Nightmode.turnOn();
 	}
-
-	Desktop {}
 	
 	EyeProtection {}
 }

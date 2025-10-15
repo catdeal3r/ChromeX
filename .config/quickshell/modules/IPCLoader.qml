@@ -11,6 +11,7 @@ Singleton {
 	id: root
 	property bool isLoadingScreenOpen: false
 	property bool isBarOpen: true
+	property bool isDockOpen: true
 	property bool isSettingsOpen: false
 	
 	property bool isDashboardOpen: false
@@ -24,6 +25,10 @@ Singleton {
 	
 	function toggleBar() {
 		root.isBarOpen = !root.isBarOpen
+	}
+
+	function toggleDock() {
+		root.isDockOpen = !root.isDockOpen
 	}
 	
 	function toggleSettings() {
@@ -48,6 +53,8 @@ Singleton {
 		function toggleLoadingScreen(): void { root.toggleLoadingScreen() }
 		
 		function toggleBar(): void { root.toggleBar() }
+
+		function toggleDock(): void { root.toggleDock() }
 		
 		function toggleSettings(): void { root.toggleSettings() }
 		

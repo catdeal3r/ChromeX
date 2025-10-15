@@ -17,7 +17,6 @@ import qs.services
 Scope {
 	signal finished();
 	id: root
-
 	
 	Variants {
 		model: Quickshell.screens;
