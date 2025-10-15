@@ -20,6 +20,8 @@ Rectangle {
 	color: Colours.palette.surface
 	
 	property int notificationCount: Notifications.list.length
+
+	clip: true
 	
 	ColumnLayout {
 		anchors.fill: parent
@@ -109,7 +111,7 @@ Rectangle {
 		}
 
 		ScrollView {
-			implicitHeight: root.height
+			implicitHeight: root.height - 100
 			implicitWidth: 400
 
 			Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
@@ -117,6 +119,10 @@ Rectangle {
 
 			ListView {
 				id: notifList
+
+				implicitHeight: parent.implicitHeight
+				implicitWidth: parent.implicitWidth
+
 				model: ScriptModel {
 					values: [...Notifications.list].reverse()
 				}
