@@ -90,6 +90,21 @@ Rectangle {
             visible: parent.visible
             width: parent?.width
             height: parent?.height
+
+            MultiEffect {
+                source: parent
+                opacity: Config.settings.dock.colouredIcons ? 1 : 0
+                anchors.fill: parent
+                colorizationColor: Colours.palette.primary
+                colorization: 1.0
+
+                Behavior on opacity {
+                    PropertyAnimation {
+                        duration: Config.settings.animationSpeed
+                        easing.type: Easing.InSine
+                    }
+                }
+            }
         }
     }
 

@@ -39,7 +39,23 @@ Scope {
             });
         }
 
-        if (pinnedList.length > 0 && ToplevelManager.toplevels.values.length > 0 && Config.settings.dock.seperator) {
+
+        var dividerAllowed = false
+
+        var unpinnedList = [];
+
+        ToplevelManager.toplevels.values.forEach(app => {
+            if (!pinnedList.includes(app.appId.toLowerCase())) {
+                unpinnedList.push({
+                    "pinned": false,
+                    "appId": app.appId,
+                    "toplevel": app
+                });
+                dividerAllowed = true
+            }
+        });
+
+        if (pinnedList.length > 0 && ToplevelManager.toplevels.values.length > 0 && Config.settings.dock.seperator && dividerAllowed) {
             list.push({
                 "pinned": null,
                 "appId": null,
@@ -47,15 +63,13 @@ Scope {
             });
         }
 
-        ToplevelManager.toplevels.values.forEach(app => {
-            if (!pinnedList.includes(app.appId.toLowerCase())) {
-                list.push({
-                    "pinned": false,
-                    "appId": app.appId,
-                    "toplevel": app
-                });
-            }
-        });
+        for (var app of unpinnedList) {
+            list.push({
+                "pinned": false,
+                "appId": app.appId,
+                "toplevel": app.toplevel
+            });
+        }
 
         return list;
     }
