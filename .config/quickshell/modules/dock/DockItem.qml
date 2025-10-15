@@ -53,16 +53,34 @@ Rectangle {
         return root.iconFromName(name || fallback, fallback)    
     }
 
-    Layout.preferredWidth: root.app.pinned === null ? 2 : 40
-    Layout.preferredHeight: root.app.pinned === null ? 30 : 43
+    Layout.preferredWidth: root.app.pinned === null ? 2 : 45
+    Layout.preferredHeight: root.app.pinned === null ? 30 : 45
     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-    color: root.app.pinned === null ? Colours.palette.surface_container_highest : "transparent"
+    color: {
+        if (root.app.pinned === null)
+            return Colours.palette.surface_container_highest
+        else if (root.hovered)
+            return Colours.palette.surface_container
+        else
+            return "transparent"
+    }
+
+    radius: Config.settings.borderRadius - 5
+
+    Behavior on color {
+		PropertyAnimation {
+		    duration: Config.settings.animationSpeed
+			easing.type: Easing.InSine
+		}
+	}
 
     ClippingWrapperRectangle {
-        width: parent.width - 6
+        width: parent.width - 13
         height: width
         anchors.left: parent.left
         anchors.leftMargin: (parent.width / 2) - (width / 2)
+        anchors.top: parent.top
+        anchors.topMargin: 5
         color: "transparent"
         radius: 10
         visible: root.app.pinned !== null
@@ -84,9 +102,9 @@ Rectangle {
             let initial = 20
 
             if (root.app.toplevel?.activated)
-                initial = 32
+                initial = 25
             else if (root.app.toplevel?.maximized)
-                initial = 32
+                initial = 25
             else if (root.app.toplevel?.minimized)
                 initial = 10
             

@@ -18,23 +18,28 @@ Scope {
 	signal finished();
 	id: root
     property bool isHovered: false
+    property bool isShown: false
 
     property var apps: {
         var list = [];
         var pinnedList = [ "org.gnome.nautilus", "firefox", "obsidian" ];
-        ToplevelManager.toplevels.values.forEach(app => {
-            if (!list.includes({ "appId": app.appId })) {
-                list.push({
-                    "pinned": false,
-                    "appId": app.appId,
-                    "toplevel": app,
-                });
-            }
-        });
+        for (var app of pinnedList) {
+            list.push({
+                "pinned": true,
+                "appId": app,
+                "toplevel": null
+            });
+        }
 
-        var listIds = list.map(function(item){ return item.appId.toLowerCase() });
+        for (var listApp of list) {
+            ToplevelManager.toplevels.values.forEach(app => {
+                if (listApp.appId === app.appId.toLowerCase()) {
+                    listApp.toplevel = app
+                }
+            });
+        }
 
-        if (pinnedList.length > 0 && ToplevelManager.toplevels.values.length > 0) {
+        if (pinnedList.length > 0 && ToplevelManager.toplevels.values.length > 0 && Config.settings.dock.seperator) {
             list.push({
                 "pinned": null,
                 "appId": null,
@@ -42,15 +47,15 @@ Scope {
             });
         }
 
-        for (var appId of pinnedList) {
-            if (!listIds.includes(appId.toLowerCase())) {
+        ToplevelManager.toplevels.values.forEach(app => {
+            if (!pinnedList.includes(app.appId.toLowerCase())) {
                 list.push({
-                    "pinned": true,
-                    "appId": appId,
-                    "toplevel": null
+                    "pinned": false,
+                    "appId": app.appId,
+                    "toplevel": app
                 });
             }
-        }
+        });
 
         return list;
     }
@@ -75,7 +80,7 @@ Scope {
             }
                     
             exclusionMode: ExclusionMode.Ignore
-            exclusiveZone: Config.settings.isDockPinned ? 30 : 0
+            exclusiveZone: Config.settings.dock.pinned ? 30 : 0
 
             implicitHeight: 110
             implicitWidth: (dockLayout.width) + 40
@@ -92,9 +97,9 @@ Scope {
 
                 anchors.top: parent.top
                 anchors.topMargin: {
-                    if (Config.settings.isDockPinned)
+                    if (Config.settings.dock.pinned)
                         return 0
-                    else if (root.isHovered)
+                    else if (root.isShown)
                         return 0
                     else
                         return height - 20
@@ -106,6 +111,20 @@ Scope {
 						easing.type: Easing.InSine
 					}
 				}
+
+                Timer {
+                    interval: 1
+                    running: root.isHovered
+                    repeat: false
+                    onTriggered: root.isShown = true
+                }
+
+                Timer {
+                    interval: 200
+                    running: !root.isHovered
+                    repeat: false
+                    onTriggered: root.isShown = false
+                }
 
                 HoverHandler {
                     parent: parent

@@ -52,7 +52,10 @@ Singleton {
 			property string iconFont: "Material Symbols Rounded"
 			property int borderRadius: 20
 
-			property bool isDockPinned: false
+			property JsonObject dock: JsonObject {
+				property bool pinned: true
+				property bool seperator: true
+			}
 
 			property int animationSpeed: 200
 

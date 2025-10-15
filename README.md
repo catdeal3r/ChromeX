@@ -32,7 +32,7 @@
 
 | **Dashboard and Notifications** |
 | ---- |
-| <img src=".github/setup1.png" alt="ChromeX Dashboard and Notifications"> |
+| <img src=".github/setup1.png?" alt="ChromeX Dashboard and Notifications"> |
 
 ---
 
