@@ -55,6 +55,7 @@ Singleton {
 			property JsonObject dock: JsonObject {
 				property bool pinned: true
 				property bool seperator: true
+				property bool colouredIcons: false
 			}
 
 			property int animationSpeed: 200

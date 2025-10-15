@@ -16,7 +16,7 @@ Rectangle {
     property bool selected: false
 
 	width: parent.width
-    height: 45
+    height: 50
     color: {
         if (selected || hovered)
             return Colours.palette.surface_container_high
@@ -59,7 +59,7 @@ Rectangle {
         anchors.topMargin: (parent.height / 2) - (height / 2)
 
         height: 40
-        spacing: -3
+        spacing: -5
 
         Text {
             font.family: Config.settings.font

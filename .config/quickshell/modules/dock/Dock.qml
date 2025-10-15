@@ -79,8 +79,8 @@ Scope {
                 right: false
             }
                     
-            exclusionMode: ExclusionMode.Ignore
-            exclusiveZone: Config.settings.dock.pinned ? 30 : 0
+            exclusionMode: ExclusionMode.Auto
+            exclusiveZone: Config.settings.dock.pinned ? 30 : -10
 
             implicitHeight: 110
             implicitWidth: (dockLayout.width) + 40

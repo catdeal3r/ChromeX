@@ -41,6 +41,7 @@ Scope {
 			visible: true
 			
 			exclusiveZone: 40
+			exclusionMode: ExclusionMode.Normal
 
 			mask: Region {
 				item: barBase

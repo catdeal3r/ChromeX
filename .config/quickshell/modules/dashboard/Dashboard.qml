@@ -18,10 +18,10 @@ Loader {
 	required property bool isDashboardOpen
 
     property int dashWidth: 515
-    property int dashHeight: 960
+    property int dashHeight: Config.settings.dock.pinned ? 930 : 960
 
     property int dashHoriPadding: 60
-    property int dashVertPadding: 60
+    property int dashVertPadding: Config.settings.dock.pinned ? 90 : 60
 	
 	property bool ani
 	
@@ -142,7 +142,7 @@ Loader {
 					Rectangle {
 						anchors.top: parent.top
 						width: root.dashWidth
-						height: 415
+						height: root.dashHeight - 545
 						
 						color: Colours.palette.surface
 						

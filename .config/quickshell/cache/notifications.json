@@ -12,6 +12,17 @@
   },
   {
     "notificationId": 4,
+    "actions": [],
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-15-18-54-31.png",
+    "appName": "notify-send",
+    "body": "Copied to clipboard",
+    "image": "",
+    "summary": "Screenshot Saved",
+    "time": 1760507673894,
+    "urgency": "1"
+  },
+  {
+    "notificationId": 8,
     "actions": [
       {
         "identifier": "0",
@@ -22,23 +33,12 @@
         "text": "Open Folder"
       }
     ],
-    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-15-18-54-31.png",
+    "appIcon": "/home/catdealer/.cache/catdealer/screenshot_cache//Screenshot_2025-10-15-19-25-18.png",
     "appName": "notify-send",
     "body": "Copied to clipboard",
     "image": "",
     "summary": "Screenshot Saved",
-    "time": 1760507673894,
-    "urgency": "1"
-  },
-  {
-    "notificationId": 7,
-    "actions": [],
-    "appIcon": "",
-    "appName": "notify-send",
-    "body": "",
-    "image": "",
-    "summary": "Screenshot cancelled",
-    "time": 1760507781173,
+    "time": 1760509520240,
     "urgency": "1"
   }
 ]
