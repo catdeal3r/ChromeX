@@ -22,7 +22,7 @@ Scope {
 
     property var apps: {
         var list = [];
-        var pinnedList = [ "org.gnome.nautilus", "firefox", "obsidian" ];
+        var pinnedList = Config.settings.dock.pinnedApps;
         for (var app of pinnedList) {
             list.push({
                 "pinned": true,
@@ -94,7 +94,7 @@ Scope {
             }
                     
             exclusionMode: ExclusionMode.Auto
-            exclusiveZone: Config.settings.dock.pinned ? 30 : -10
+            exclusiveZone: Config.settings.dock.pinned ? 40 : -10
 
             implicitHeight: 110
             implicitWidth: (dockLayout.width) + 40

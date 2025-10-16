@@ -96,7 +96,7 @@ Rectangle {
                 opacity: Config.settings.dock.colouredIcons ? 1 : 0
                 anchors.fill: parent
                 colorizationColor: Colours.palette.primary
-                colorization: 1.0
+                colorization: Config.settings.dock.colouredIconsAmount
 
                 Behavior on opacity {
                     PropertyAnimation {

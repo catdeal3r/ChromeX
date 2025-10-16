@@ -102,10 +102,10 @@ Scope {
 			}
 
 			Rectangle {
-				height: parent.height - 77
+				height: Config.settings.dock.pinned ? parent.height - 114 : parent.height - 77
 				width: Config.settings.borderRadius + 5
 				anchors.top: parent.top
-				anchors.topMargin: (parent.height / 2) - (height / 2)
+				anchors.topMargin: Config.settings.dock.pinned ? 37 : (parent.height / 2) - (height / 2)
 				anchors.left: parent.left
 				anchors.leftMargin: {
 					if (Config.settings.bar.smoothEdgesShown && Config.settings.bar.desktopRoundingShown)

@@ -53,9 +53,11 @@ Singleton {
 			property int borderRadius: 20
 
 			property JsonObject dock: JsonObject {
-				property bool pinned: true
+				property bool pinned: false
 				property bool seperator: true
 				property bool colouredIcons: false
+				property real colouredIconsAmount: 0.5
+				property list<string> pinnedApps: [ "org.gnome.Nautilus", "firefox" ]
 			}
 
 			property int animationSpeed: 200

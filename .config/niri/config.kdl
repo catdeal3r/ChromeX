@@ -256,6 +256,7 @@ layout {
 
 spawn-at-startup "sh" "-c" "qs" "-d"
 spawn-at-startup "sh" "-c" "xwayland-satellite"
+spawn-at-startup "sh" "-c" "swayidle -w timeout 300 'qs ipc call lock lock' before-sleep 'qs ipc call lock lock'"
 prefer-no-csd
 
 environment {
