@@ -146,7 +146,7 @@ Rectangle {
 
             if (root.hovered) {
                 if (root.app.toplevel.activated)
-                    return Colours.palette.primary
+                    return Qt.alpha(Colours.palette.primary, 0.9)
                 else if (root.app.toplevel.maximized)
                     return Colours.palette.primary
                 else {
@@ -154,7 +154,7 @@ Rectangle {
                 }
             } else {
                 if (root.app.toplevel.activated)
-                    return Colours.palette.primary
+                    return Qt.alpha(Colours.palette.primary, 0.7)
                 else if (root.app.toplevel.maximized)
                     return Colours.palette.primary
                 else {
