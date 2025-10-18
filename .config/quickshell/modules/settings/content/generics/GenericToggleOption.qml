@@ -7,12 +7,8 @@ import QtQuick.Effects
 import QtQuick.Controls
 import Quickshell.Widgets
 
-import qs.modules.settings
 import qs.modules.settings.content
 import qs.config
-import qs.modules.common
-import qs.modules
-import qs.services
 
 RowLayout {
     id: root

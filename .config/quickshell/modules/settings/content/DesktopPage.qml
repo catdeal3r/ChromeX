@@ -9,6 +9,7 @@ import Quickshell.Widgets
 
 import qs.modules.settings
 import qs.modules.settings.content
+import qs.modules.settings.content.generics
 import qs.config
 import qs.modules.common
 import qs.modules
@@ -43,6 +44,13 @@ Rectangle {
                 color: Colours.palette.on_surface
             }
 
+            GenericSeperator {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.topMargin: 5
+                Layout.preferredWidth: pageWrapper.width
+                Layout.preferredHeight: 3
+            }
+
             GenericToggleOption {
                 message: "Show a rounded border"
                 option: Config.settings.desktop.desktopRoundingShown
@@ -62,6 +70,13 @@ Rectangle {
                 font.family: Config.settings.font
                 font.pixelSize: 20
                 color: Colours.palette.on_surface
+            }
+
+            GenericSeperator {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.topMargin: 5
+                Layout.preferredWidth: pageWrapper.width
+                Layout.preferredHeight: 3
             }
 
             GenericToggleOption {
@@ -85,6 +100,13 @@ Rectangle {
                 color: Colours.palette.on_surface
             }
 
+            GenericSeperator {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.topMargin: 5
+                Layout.preferredWidth: pageWrapper.width
+                Layout.preferredHeight: 3
+            }
+
             GenericToggleOption {
                 message: "Always show dock"
                 option: Config.settings.dock.pinned
@@ -101,6 +123,22 @@ Rectangle {
                 message: "Colour the app icons with the current colourscheme's primary colour"
                 option: Config.settings.dock.colouredIcons
                 toRun: () => Config.settings.dock.colouredIcons = !Config.settings.dock.colouredIcons
+            }
+
+            GenericNumberOption {
+                message: "Amount to colour the app icons by"
+                value: Config.settings.dock.colouredIconsAmount
+                maxValue: 1.0
+                minValue: 0.1
+                amountIncrease: () => {
+                    Config.settings.dock.colouredIconsAmount += 0.1;
+                    Config.settings.dock.colouredIconsAmount.toFixed(1);
+                }
+                amountDecrease: () => {
+                    Config.settings.dock.colouredIconsAmount -= 0.1;
+                    Config.settings.dock.colouredIconsAmount.toFixed(1);
+                }
+                isFloat: true
             }
         }
     }

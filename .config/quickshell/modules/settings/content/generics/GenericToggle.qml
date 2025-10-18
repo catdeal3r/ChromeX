@@ -7,8 +7,7 @@ import QtQuick.Effects
 import QtQuick.Controls
 import Quickshell.Widgets
 
-import "root:/config"
-import "root:/modules/common"
+import qs.config
 
 Rectangle {
 	id: root
