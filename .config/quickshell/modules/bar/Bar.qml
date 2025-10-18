@@ -111,7 +111,7 @@ Scope {
 					SysTray {
 						Layout.preferredHeight: (SystemTray.items.values.length * 25)
 						Layout.preferredWidth: 20
-						Layout.leftMargin: 3.5
+						Layout.leftMargin: 2
 						Layout.alignment: Qt.AlignHCenter
 						bar: barWindow
 					}
@@ -227,7 +227,6 @@ Scope {
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
 						Layout.bottomMargin: -4
-						Layout.leftMargin: 3
 
 						function getTopRadius() {
 							if (hovered)
@@ -244,7 +243,7 @@ Scope {
 						bottomLeftRadius: hovered ? Config.settings.borderRadius : 5
 						bottomRightRadius: hovered ? Config.settings.borderRadius : 5
 
-						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
+						color: hovered ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface, 0.8)
 
 						Behavior on bottomLeftRadius {
 							PropertyAnimation {
@@ -332,7 +331,6 @@ Scope {
 						Layout.preferredHeight: hovered ? 105 : 100
 						Layout.preferredWidth: barBase.width - 10
 						Layout.alignment: Qt.AlignHCenter
-						Layout.leftMargin: 3
 						Layout.bottomMargin: 10
 
 						topLeftRadius: hovered ? Config.settings.borderRadius : 5
@@ -353,7 +351,7 @@ Scope {
 							}
 						}
 
-						color: isColoured() ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface_container, 0.8)
+						color: isColoured() ? Qt.alpha(Colours.palette.primary, 0.8) : Qt.alpha(Colours.palette.surface, 0.8)
 
 						Behavior on color {
 							PropertyAnimation {

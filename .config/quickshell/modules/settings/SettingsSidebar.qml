@@ -1,5 +1,105 @@
 import Quickshell
 import Quickshell.Io
-import QtQuick
 
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
+import QtQuick.Controls
+import Quickshell.Widgets
+
+import qs.modules.settings
+import qs.modules.settings.sidebar
 import qs.config
+import qs.modules.common
+import qs.modules
+import qs.services
+
+Rectangle {
+    id: root
+    color: "transparent"
+
+    property int location: SettingsControl.settingsLocation
+
+    Rectangle {
+        height: 50
+        width: parent.width - 20
+        anchors.left: parent.left
+        anchors.leftMargin: (parent.width / 2) - (width / 2)
+
+        anchors.top: parent.top
+        anchors.topMargin: 20 + 50 * root.location + 5 * root.location
+
+        radius: Config.settings.borderRadius + 12
+        color: Colours.palette.primary
+
+        Behavior on anchors.topMargin {
+            PropertyAnimation {
+                duration: Config.settings.animationSpeed
+                easing.type: Easing.InSine
+            }
+        }
+    }
+
+    ColumnLayout {
+        width: parent.width - 20
+        height: parent.height / 3
+        anchors.left: parent.left
+        anchors.leftMargin: (parent.width / 2) - (width / 2)
+
+        anchors.top: parent.top
+        anchors.topMargin: 20
+
+        spacing: 5
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "Desktop"
+            iconCode: "desk"
+            toRun: () => SettingsControl.setLocation(0)
+            number: 0
+            selected: root.location
+        }
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "Theming"
+            iconCode: "brush"
+            toRun: () => SettingsControl.setLocation(1)
+            number: 1
+            selected: root.location
+        }
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "Notifications"
+            iconCode: "notifications"
+            toRun: () => SettingsControl.setLocation(2)
+            number: 2
+            selected: root.location
+        }
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "Miscellaneous"
+            iconCode: "stars"
+            iconSize: 26
+            toRun: () => SettingsControl.setLocation(3)
+            number: 3
+            selected: root.location
+        }
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "About"
+            iconCode: "info"
+            toRun: () => SettingsControl.setLocation(4)
+            number: 4
+            selected: root.location
+        }
+    }
+}

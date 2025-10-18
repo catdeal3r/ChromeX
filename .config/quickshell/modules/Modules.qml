@@ -13,6 +13,7 @@ import qs.modules.notificationslist
 import qs.modules.desktop
 import qs.modules.dashboard
 import qs.modules.dock
+import qs.modules.settings
 
 Scope {
 	NotificationList {}
@@ -44,4 +45,8 @@ Scope {
 	Lockscreen {}
 
 	Desktop {}
+
+	SettingsWindow {
+		isSettingsWindowOpen: IPCLoader.isSettingsOpen
+	}
 }

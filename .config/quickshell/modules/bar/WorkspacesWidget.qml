@@ -8,61 +8,20 @@ import qs.modules.common
 Rectangle {
 	id: root
 	width: 45
-	height: 40 * Workspaces.niriWorkspaces.length + 5
+	height: 40 * (Workspaces.niriWorkspaces.length) + 3 * (Workspaces.niriWorkspaces.length - 1) + 5
 	color: "transparent"
 
 	anchors.top: parent.top
-	anchors.topMargin: (parent.height / 2) - (height / 2)
+	anchors.topMargin: Config.settings.bar.workspacesCenterAligned ? (parent.height / 2) - (height / 2) : 60				
 
 	anchors.left: parent.left
 
 	property int workspaceCount: 5
 
-	Rectangle {
-		height: root.height + 100
-		width: barBase.width
-		anchors.top: parent.top
-		anchors.topMargin: (parent.height / 2) - (height / 2)
-		color: "transparent"
-
-		RRCorner {
-			anchors.bottom: parent.bottom
-			anchors.right: parent.right
-			corner: RRCorner.CornerEnum.TopRight
-			size: Config.settings.borderRadius + 5
-			color: Colours.palette.surface_container
-		}
-
-		Rectangle {
-			height: parent.height - ((Config.settings.borderRadius + 5) * 2)
-			color: Colours.palette.surface_container
-			width: parent.width
-			anchors.top: parent.top
-			anchors.topMargin: (parent.height / 2) - (height / 2)
-
-			RRCorner {
-				anchors.bottom: parent.bottom
-				anchors.left: parent.left
-				corner: RRCorner.CornerEnum.BottomLeft
-				size: Config.settings.borderRadius
-				color: Colours.palette.surface
-			}
-
-			RRCorner {
-				anchors.top: parent.top
-				anchors.left: parent.left
-				corner: RRCorner.CornerEnum.TopLeft
-				size: Config.settings.borderRadius
-				color: Colours.palette.surface
-			}
-		}
-
-		RRCorner {
-			anchors.top: parent.top
-			anchors.right: parent.right
-			corner: RRCorner.CornerEnum.BottomRight
-			size: Config.settings.borderRadius + 5
-			color: Colours.palette.surface_container
+	Behavior on anchors.topMargin {
+		PropertyAnimation {
+			duration: Config.settings.animationSpeed
+			easing.type: Easing.InSine
 		}
 	}
 
@@ -76,8 +35,9 @@ Rectangle {
 			Rectangle {
 				property bool hovered: false
 
-				Layout.alignment: Qt.AlignHCenter
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 				Layout.preferredWidth: Workspaces.niriWorkspaces[index].is_focused ? root.width - 17 : root.width - 18
+				Layout.rightMargin: 2
 
 				Layout.preferredHeight: {
 					if (hovered)
@@ -88,7 +48,14 @@ Rectangle {
 						return 40;
 				}
 
-				color: Workspaces.niriWorkspaces[index].is_focused ? Colours.palette.primary : Colours.palette.surface_container
+				color: {
+					if (Workspaces.niriWorkspaces[index].is_focused)
+						return Colours.palette.primary
+					else if (Workspaces.niriWorkspaces[index].active_window_id != null)
+						return Colours.palette.surface_container
+					else
+						return "transparent"
+				}
 
 				function getTopRadius() {
 					if (hovered)
@@ -155,7 +122,7 @@ Rectangle {
 					anchors.left: parent.left
 					anchors.top: parent.top
 
-					anchors.topMargin: parent.height / 2 - 8
+					anchors.topMargin: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? parent.height / 2 - 6 : parent.height / 2 - 7
 					anchors.leftMargin: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? parent.width / 2 - 4.8 : parent.width / 2 - 6.5
 
 					text: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? "" : ""

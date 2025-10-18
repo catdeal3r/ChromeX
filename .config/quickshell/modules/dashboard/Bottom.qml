@@ -174,6 +174,7 @@ Rectangle {
 
     Rectangle {
         id: settingsBtn
+        property bool hovered: false
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 15
 
@@ -183,8 +184,23 @@ Rectangle {
         height: 30
         width: 30
 
-        color: Colours.palette.surface_container_high
-        radius: Config.settings.borderRadius
+        color: hovered ? Colours.palette.surface_container_high : Colours.palette.surface_container
+        
+        radius: hovered ? Config.settings.borderRadius : Config.settings.borderRadius - 4
+
+        Behavior on color {
+			PropertyAnimation {
+				duration: Config.settings.animationSpeed
+				easing.type: Easing.InSine
+			}
+		}
+
+        Behavior on radius {
+			PropertyAnimation {
+				duration: Config.settings.animationSpeed
+				easing.type: Easing.InSine
+			}
+		}
 
         Text {
             anchors.centerIn: parent
@@ -192,7 +208,24 @@ Rectangle {
             font.family: Config.settings.iconFont
             font.pixelSize: 16
             
-            color: Qt.alpha(Colours.palette.on_surface, 0.8)
+            color: settingsBtn.hovered ? Colours.palette.on_surface : Qt.alpha(Colours.palette.on_surface, 0.8)
+
+            Behavior on color {
+                PropertyAnimation {
+                    duration: Config.settings.animationSpeed
+                    easing.type: Easing.InSine
+                }
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+
+            onEntered: settingsBtn.hovered = true
+            onExited: settingsBtn.hovered = false
+            onClicked: IPCLoader.toggleSettings()
         }
     }
 

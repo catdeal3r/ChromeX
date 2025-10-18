@@ -137,9 +137,9 @@ Rectangle {
 					
 					color: Colours.palette.on_surface
 					
-					text: "Password"
+					text: "Password ..."
 					
-					opacity: ( root.context.currentText == "" ) ? 1 : 0
+					opacity: ( root.context.currentText == "" ) ? 0.9 : 0
 					
 					Behavior on opacity {
 						PropertyAnimation {

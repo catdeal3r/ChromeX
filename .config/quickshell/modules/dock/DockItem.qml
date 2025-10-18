@@ -123,8 +123,12 @@ Rectangle {
             else if (root.app.toplevel?.minimized)
                 initial = 10
             
-            if (root.hovered)
-                initial += 5
+            if (root.hovered) {
+                if (root.app.toplevel?.activated)
+                    initial += 3
+                else
+                    initial += 5
+            }
 
             return initial
         }
@@ -145,17 +149,17 @@ Rectangle {
                 return "transparent"
 
             if (root.hovered) {
-                if (root.app.toplevel.activated)
+                if (root.app.toplevel?.activated)
                     return Qt.alpha(Colours.palette.primary, 0.9)
-                else if (root.app.toplevel.maximized)
+                else if (root.app.toplevel?.maximized)
                     return Colours.palette.primary
                 else {
                     return Qt.alpha(Colours.palette.outline, 0.7)
                 }
             } else {
-                if (root.app.toplevel.activated)
+                if (root.app.toplevel?.activated)
                     return Qt.alpha(Colours.palette.primary, 0.7)
-                else if (root.app.toplevel.maximized)
+                else if (root.app.toplevel?.maximized)
                     return Colours.palette.primary
                 else {
                     return Colours.palette.surface_container_highest

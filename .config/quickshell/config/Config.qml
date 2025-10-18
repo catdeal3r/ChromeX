@@ -44,6 +44,7 @@ Singleton {
 				property string barLocation: "bottom"
 				property bool smoothEdgesShown: false
 				property bool desktopRoundingShown: true
+				property bool workspacesCenterAligned: true
 			}
 			
 			property string currentWallpaper: Quickshell.shellDir + "/assets/default_blank.png"
@@ -92,10 +93,6 @@ Singleton {
 
 			property string nightmodeColourTemp: "4500K"
 			property bool nightmodeOnStartup: true
-			
-			onBorderRadiusChanged: {
-				Quickshell.execDetached(["swaymsg", "corner_radius", `${root.settings.borderRadius}`])
-			}
 			
 			property string weatherLocation: "REPLACE"
 			
