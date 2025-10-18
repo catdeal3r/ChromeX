@@ -89,15 +89,14 @@ Scope {
             anchors {
                 top: false
                 bottom: true
-                left: false
-                right: false
+                left: true
+                right: true
             }
                     
             exclusionMode: ExclusionMode.Auto
             exclusiveZone: Config.settings.dock.pinned ? 40 : -10
 
             implicitHeight: 110
-            implicitWidth: (dockLayout.width) + 40
             
             mask: Region {
 				item: hoverBase
@@ -105,7 +104,7 @@ Scope {
 
             Rectangle {
                 id: hoverBase
-                width: parent.width
+                width: (dockLayout.width) + 40
                 height: 110
                 color: "transparent"
 
@@ -119,7 +118,17 @@ Scope {
                         return height - 20
                 }
 
+                anchors.left: parent.left
+                anchors.leftMargin: (parent.width / 2) - (width / 2)
+
                 Behavior on anchors.topMargin {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+
+                Behavior on width {
 					PropertyAnimation {
 						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
