@@ -131,6 +131,29 @@ Loader {
 						color: Colours.palette.surface
 						radius: Config.settings.borderRadius
 
+						Text {
+							id: windowIcon
+							text: "settings"
+							font.family: Config.settings.iconFont
+							font.pixelSize: 17
+							color: Qt.alpha(Colours.palette.on_surface, 0.8)
+							anchors.top: parent.top
+							anchors.left: parent.left
+							anchors.topMargin: 12
+							anchors.leftMargin: 10
+						}
+
+						Text {
+							text: "Settings"
+							font.family: Config.settings.font
+							font.pixelSize: 16
+							color: Qt.alpha(Colours.palette.on_surface, 0.8)
+							anchors.top: parent.top
+							anchors.left: windowIcon.right
+							anchors.topMargin: 12
+							anchors.leftMargin: 10
+						}
+
 						Rectangle {
 							id: closeBtn
 							property bool hovered: false
