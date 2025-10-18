@@ -225,7 +225,11 @@ Rectangle {
 
             onEntered: settingsBtn.hovered = true
             onExited: settingsBtn.hovered = false
-            onClicked: IPCLoader.toggleSettings()
+            onClicked: {
+                if (IPCLoader.isSettingsOpen === false)
+                    IPCLoader.toggleDashboard()
+                IPCLoader.toggleSettings()
+            }
         }
     }
 

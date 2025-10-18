@@ -43,8 +43,12 @@ Singleton {
 			property JsonObject bar: JsonObject {
 				property string barLocation: "bottom"
 				property bool smoothEdgesShown: false
-				property bool desktopRoundingShown: true
 				property bool workspacesCenterAligned: true
+			}
+
+			property JsonObject desktop: JsonObject {
+				property bool desktopRoundingShown: true
+				property bool dimDesktopWallpaper: false
 			}
 			
 			property string currentWallpaper: Quickshell.shellDir + "/assets/default_blank.png"
@@ -56,7 +60,7 @@ Singleton {
 			property JsonObject dock: JsonObject {
 				property bool pinned: false
 				property bool seperator: true
-				property bool colouredIcons: false
+				property bool colouredIcons: true
 				property real colouredIconsAmount: 0.5
 				property list<string> pinnedApps: [ "org.gnome.Nautilus", "firefox" ]
 			}

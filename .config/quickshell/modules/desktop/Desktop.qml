@@ -44,11 +44,11 @@ Scope {
 			ClippingWrapperRectangle {
 				anchors.top: parent.top
 				anchors.left: parent.left
-				width: Config.settings.bar.desktopRoundingShown ? parent.width - 10 : parent.width
-				height: Config.settings.bar.desktopRoundingShown ? parent.height - 10 : parent.height
+				width: Config.settings.desktop.desktopRoundingShown ? parent.width - 10 : parent.width
+				height: Config.settings.desktop.desktopRoundingShown ? parent.height - 10 : parent.height
 				anchors.topMargin: (parent.height / 2) - (height / 2)
 				anchors.leftMargin: (parent.width / 2) - (width / 2)
-				radius: Config.settings.bar.desktopRoundingShown ? Config.settings.borderRadius : 0
+				radius: Config.settings.desktop.desktopRoundingShown ? Config.settings.borderRadius : 0
 				color: "transparent"
 
 				Behavior on radius {
@@ -81,15 +81,16 @@ Scope {
 						id: darkenEffect
 						source: background
 						anchors.fill: background
-						opacity: {
-							if (Config.settings.currentRice == "cavern") {
-								if (colorQuantizer.colors[0].hslLightness > 0.5)
-									return 1
+						opacity: Config.settings.desktop.dimDesktopWallpaper ? 1 : 0
+
+						Behavior on opacity {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
 							}
-							return 0
 						}
 						
-						brightness: -0.5
+						brightness: -0.1
 					}
 				}
 			}
@@ -108,9 +109,9 @@ Scope {
 				anchors.topMargin: Config.settings.dock.pinned ? 37 : (parent.height / 2) - (height / 2)
 				anchors.left: parent.left
 				anchors.leftMargin: {
-					if (Config.settings.bar.smoothEdgesShown && Config.settings.bar.desktopRoundingShown)
+					if (Config.settings.bar.smoothEdgesShown && Config.settings.desktop.desktopRoundingShown)
 						return 5
-					else if (Config.settings.bar.smoothEdgesShown)
+					else if (Config.settings.desktop.smoothEdgesShown)
 						return 0
 					else
 						return -1 * (Config.settings.borderRadius + 5)
