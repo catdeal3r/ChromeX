@@ -65,19 +65,26 @@ Scope {
 					id: icon
 					width: 25
 					height: 25
-					visible: !Config.settings.usePfpInsteadOfLogo
+					opacity: Config.settings.usePfpInsteadOfLogo ? 0 : 1
 					anchors.top: parent.top
 					anchors.left: parent.left
 					anchors.leftMargin: (parent.width / 2) - (width / 2) - 1
 					anchors.topMargin: 15
 					source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/icon.png")
+
+					Behavior on opacity {
+						PropertyAnimation {
+							duration: Config.settings.animationSpeed
+							easing.type: Easing.InSine
+						}
+					}
 				}
 
 				ClippingWrapperRectangle {
 					id: pfp
 					width: 25
 					height: 25
-					visible: Config.settings.usePfpInsteadOfLogo
+					opacity: Config.settings.usePfpInsteadOfLogo ? 1 : 0
 					anchors.top: parent.top
 					anchors.left: parent.left
 					anchors.leftMargin: (parent.width / 2) - (width / 2) - 1
@@ -87,6 +94,13 @@ Scope {
 
 					IconImage {
 						source: `file://${Config.settings.pfpLocation}`
+					}
+
+					Behavior on opacity {
+						PropertyAnimation {
+							duration: Config.settings.animationSpeed
+							easing.type: Easing.InSine
+						}
 					}
 				}
 

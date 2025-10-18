@@ -386,6 +386,7 @@ binds {
     Alt+Space hotkey-overlay-title="Run an Application" { spawn "qs" "ipc" "call" "root" "toggleLauncher"; }
     Super+L hotkey-overlay-title="Lock the Screen" { spawn "qs" "ipc" "call" "lock" "lock"; }
     Super+Shift+S hotkey-overlay-title="Take a screenshot" { spawn "sh" "-c" "~/.config/scripts/screenshot.sh --select"; }
+    Super+I hotkey-overlay-title="Open Settings menu" { spawn "qs" "ipc" "call" "root" "toggleSettings"; }
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }

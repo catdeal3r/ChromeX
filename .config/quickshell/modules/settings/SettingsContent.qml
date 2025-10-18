@@ -25,9 +25,7 @@ Rectangle {
 
         DesktopPage {}
 
-        GenericPageWrapper {
-            page: 1
-        }
+        ThemingPage {}
 
         GenericPageWrapper {
             page: 2

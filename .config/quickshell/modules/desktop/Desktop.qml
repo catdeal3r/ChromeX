@@ -111,7 +111,7 @@ Scope {
 				anchors.leftMargin: {
 					if (Config.settings.bar.smoothEdgesShown && Config.settings.desktop.desktopRoundingShown)
 						return 5
-					else if (Config.settings.desktop.smoothEdgesShown)
+					else if (Config.settings.bar.smoothEdgesShown)
 						return 0
 					else
 						return -1 * (Config.settings.borderRadius + 5)

@@ -138,11 +138,11 @@ Loader {
 							anchors.right: parent.right
 							anchors.topMargin: 10
 							anchors.rightMargin: 10
-							color: hovered ? Colours.palette.surface_container_highest : Colours.palette.surface_container_high
+							color: hovered ? Colours.palette.surface_container_highest : Colours.palette.surface_container
 							radius: Config.settings.borderRadius
 
-							width: 20
-							height: 20
+							width: 30
+							height: 30
 
 							Behavior on color {
 								PropertyAnimation {
@@ -155,7 +155,7 @@ Loader {
 								anchors.centerIn: parent
 								text: "close"
 								font.family: Config.settings.iconFont
-								font.pixelSize: 15
+								font.pixelSize: 18
 								color: closeBtn.hovered ? Qt.alpha(Colours.palette.on_surface, 0.8) : Qt.alpha(Colours.palette.on_surface, 0.5)
 
 								Behavior on color {

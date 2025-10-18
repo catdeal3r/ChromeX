@@ -55,7 +55,7 @@ Rectangle {
             rWidth: parent.width
             rHeight: 50
             bigText: "Desktop"
-            iconCode: "desk"
+            iconCode: "shelf_auto_hide"
             toRun: () => SettingsControl.setLocation(0)
             number: 0
             selected: root.location
@@ -65,7 +65,7 @@ Rectangle {
             rWidth: parent.width
             rHeight: 50
             bigText: "Theming"
-            iconCode: "brush"
+            iconCode: "format_paint"
             toRun: () => SettingsControl.setLocation(1)
             number: 1
             selected: root.location
@@ -75,7 +75,8 @@ Rectangle {
             rWidth: parent.width
             rHeight: 50
             bigText: "Notifications"
-            iconCode: "notifications"
+            iconCode: "notifications_active"
+            iconSize: 23
             toRun: () => SettingsControl.setLocation(2)
             number: 2
             selected: root.location
@@ -85,8 +86,7 @@ Rectangle {
             rWidth: parent.width
             rHeight: 50
             bigText: "Miscellaneous"
-            iconCode: "stars"
-            iconSize: 26
+            iconCode: "flare"
             toRun: () => SettingsControl.setLocation(3)
             number: 3
             selected: root.location
@@ -100,6 +100,35 @@ Rectangle {
             toRun: () => SettingsControl.setLocation(4)
             number: 4
             selected: root.location
+        }
+    }
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        width: 10
+        height: 10
+
+        anchors.left: parent.left
+
+        color: "transparent"
+
+        Text {
+            id: icon
+            anchors.bottom: parent.bottom
+            text: "info"
+            font.family: Config.settings.iconFont
+            font.pixelSize: 14
+            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+        }
+
+        Text {
+            anchors.bottom: parent.bottom
+            anchors.left: icon.right
+            anchors.leftMargin: 5
+            text: "Not all option are currently available in this window. Vist ~/.config/quickshell/settings/settings.json for the full list."
+            font.family: Config.settings.font
+            font.pixelSize: 13
+            color: Qt.alpha(Colours.palette.on_surface, 0.7)
         }
     }
 }
