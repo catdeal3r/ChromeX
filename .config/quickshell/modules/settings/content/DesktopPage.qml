@@ -60,12 +60,16 @@ Rectangle {
                     message: "Show a rounded border"
                     option: Config.settings.desktop.desktopRoundingShown
                     toRun: () => Config.settings.desktop.desktopRoundingShown = !Config.settings.desktop.desktopRoundingShown
+                    withIcon: true
+                    iconCode: "capture"
                 }
 
                 GenericToggleOption {
                     message: "Dim the wallpaper"
                     option: Config.settings.desktop.dimDesktopWallpaper
                     toRun: () => Config.settings.desktop.dimDesktopWallpaper = !Config.settings.desktop.dimDesktopWallpaper
+                    withIcon: true
+                    iconCode: "brightness_6"
                 }
 
                 GenericTitle {
@@ -87,18 +91,24 @@ Rectangle {
                     message: "Show smooth edges around bar"
                     option: Config.settings.bar.smoothEdgesShown
                     toRun: () => Config.settings.bar.smoothEdgesShown = !Config.settings.bar.smoothEdgesShown
+                    withIcon: true
+                    iconCode: "line_curve"
                 }
 
                 GenericToggleOption {
                     message: "Center workspaces in bar"
                     option: Config.settings.bar.workspacesCenterAligned
                     toRun: () => Config.settings.bar.workspacesCenterAligned = !Config.settings.bar.workspacesCenterAligned
+                    withIcon: true
+                    iconCode: "align_vertical_center"
                 }
 
                 GenericToggleOption {
                     message: "Show profile picture instead of icon"
                     option: Config.settings.usePfpInsteadOfLogo
                     toRun: () => Config.settings.usePfpInsteadOfLogo = !Config.settings.usePfpInsteadOfLogo
+                    withIcon: true
+                    iconCode: "account_circle"
                 }
 
                 GenericTitle {
@@ -120,18 +130,24 @@ Rectangle {
                     message: "Always show dock"
                     option: Config.settings.dock.pinned
                     toRun: () => Config.settings.dock.pinned = !Config.settings.dock.pinned
+                    withIcon: true
+                    iconCode: "bottom_drawer"
                 }
 
                 GenericToggleOption {
                     message: "Show a seperator between the pinned and running apps"
                     option: Config.settings.dock.seperator
                     toRun: () => Config.settings.dock.seperator = !Config.settings.dock.seperator
+                    withIcon: true
+                    iconCode: "splitscreen_right"
                 }
 
                 GenericToggleOption {
                     message: "Colour the dock icons with the current colourscheme"
                     option: Config.settings.dock.colouredIcons
                     toRun: () => Config.settings.dock.colouredIcons = !Config.settings.dock.colouredIcons
+                    withIcon: true
+                    iconCode: "colors"
                 }
 
                 GenericNumberOption {
@@ -150,6 +166,8 @@ Rectangle {
                         }
                     }
                     isFloat: true
+                    withIcon: true
+                    iconCode: "subdirectory_arrow_right"
                 }
             }
         }

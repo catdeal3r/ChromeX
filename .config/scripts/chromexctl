@@ -29,13 +29,6 @@ function toggleLauncher()
 
 function setWall() {
 	wall="$1"
-
-	pkill swaybg
-	swaybg -o \* -m fill -i $wall >/dev/null 2>&1 & disown
-
-	echo "#!/bin/sh" > ~/.config/wayfire_wall.sh
-	echo "swaybg -o \\* -m fill -i $wall >/dev/null 2>&1 & disown" >> ~/.config/wayfire_wall.sh
-	
 	$(which qs) ipc call root setWallpaper $wall
 }
 

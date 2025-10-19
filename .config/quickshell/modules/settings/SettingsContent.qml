@@ -35,8 +35,10 @@ Rectangle {
             page: 3
         }
 
+        ComponentsPage {}
+
         GenericPageWrapper {
-            page: 4
+            page: 5
         }
     }
 }

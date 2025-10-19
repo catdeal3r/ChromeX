@@ -52,6 +52,9 @@ Singleton {
 			}
 			
 			property string currentWallpaper: Quickshell.shellDir + "/assets/default_blank.png"
+			property string previousWallpaper: "null"
+			property string secondPreviousWallpaper: "null"
+			property string wallpaperToSet: "null"
 			
 			property string font: "SF Pro Display"
 			property string iconFont: "Material Symbols Rounded"
@@ -87,6 +90,16 @@ Singleton {
 					if (useCustom == false)
 						Wallpaper.changeColourProp()
 				}
+			}
+
+			property JsonObject componentControl: JsonObject {
+				property bool barIsEnabled: true
+				property bool notifsIsEnabled: true
+				property bool dashboardIsEnabled: true
+				property bool dockIsEnabled: true
+				property bool lockscreenIsEnabled: true
+				property bool desktopIsEnabled: true
+				property bool launcherIsEnabled: true
 			}
 
 			property JsonObject recorder: JsonObject {

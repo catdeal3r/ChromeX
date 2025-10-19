@@ -16,35 +16,62 @@ import qs.modules.dock
 import qs.modules.settings
 
 Scope {
-	NotificationList {}
+	Loader {
+		active: Config.settings.componentControl.notifsIsEnabled
+		sourceComponent: NotificationList {}
+	}
 	
 	Loader {
-		active: IPCLoader.isBarOpen
-		
-		sourceComponent: Bar {
-			onFinished: IPCLoader.toggleBar()
+		active: Config.settings.componentControl.barIsEnabled
+
+		sourceComponent: Loader {
+			active: IPCLoader.isBarOpen
+			
+			sourceComponent: Bar {
+				onFinished: IPCLoader.toggleBar()
+			}
 		}
 	}
 
 	Loader {
-		active: IPCLoader.isDockOpen
-		
-		sourceComponent: Dock {
-			onFinished: IPCLoader.toggleDock()
+		active: Config.settings.componentControl.dockIsEnabled
+
+		sourceComponent: Loader {
+			active: IPCLoader.isDockOpen
+			
+			sourceComponent: Dock {
+				onFinished: IPCLoader.toggleDock()
+			}
 		}
 	}
 
-	Dashboard {
-		isDashboardOpen: IPCLoader.isDashboardOpen
+	Loader {
+		active: Config.settings.componentControl.dashboardIsEnabled
+
+		sourceComponent: Dashboard {
+			isDashboardOpen: IPCLoader.isDashboardOpen
+		}
 	}
 
-	Launcher {
-		isLauncherOpen: IPCLoader.isLauncherOpen
-	}
-	
-	Lockscreen {}
+	Loader {
+		active: Config.settings.componentControl.launcherIsEnabled
 
-	Desktop {}
+		sourceComponent: Launcher {
+			isLauncherOpen: IPCLoader.isLauncherOpen
+		}
+	}
+		
+	Loader {
+		active: Config.settings.componentControl.lockscreenIsEnabled
+
+		sourceComponent: Lockscreen {}
+	}
+
+	Loader {
+		active: Config.settings.componentControl.desktopIsEnabled
+
+		sourceComponent: Desktop {}
+	}
 
 	SettingsWindow {
 		isSettingsWindowOpen: IPCLoader.isSettingsOpen

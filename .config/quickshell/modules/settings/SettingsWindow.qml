@@ -140,7 +140,7 @@ Loader {
 							anchors.top: parent.top
 							anchors.left: parent.left
 							anchors.topMargin: 12
-							anchors.leftMargin: 10
+							anchors.leftMargin: 15
 						}
 
 						Text {

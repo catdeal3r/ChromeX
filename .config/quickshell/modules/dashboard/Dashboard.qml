@@ -18,10 +18,24 @@ Loader {
 	required property bool isDashboardOpen
 
     property int dashWidth: 515
-    property int dashHeight: Config.settings.dock.pinned ? 930 : 960
+    property int dashHeight: {
+		if (!Config.settings.componentControl.dockIsEnabled)
+			return 960
+		else if (Config.settings.dock.pinned)
+			return 930
+		else
+			return 960
+	}
 
     property int dashHoriPadding: 60
-    property int dashVertPadding: Config.settings.dock.pinned ? 90 : 60
+    property int dashVertPadding: {
+		if (!Config.settings.componentControl.dockIsEnabled)
+			return 60
+		else if (Config.settings.dock.pinned)
+			return 90
+		else
+			return 60
+	}
 	
 	property bool ani
 	

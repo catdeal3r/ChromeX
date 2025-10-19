@@ -57,22 +57,95 @@ Rectangle {
                     Layout.preferredHeight: 3
                 }
 
-                ClippingWrapperRectangle {
-                    color: "transparent"
-                    radius: Config.settings.borderRadius
+                RowLayout {
                     Layout.preferredWidth: pageWrapper.width
                     Layout.preferredHeight: pageWrapper.width / 2
+                    spacing: 5
 
-                    Image {
-                        id: background
-                        source: Config.settings.currentWallpaper
-                        fillMode: Image.PreserveAspectCrop
+                    ClippingWrapperRectangle {
+                        color: "transparent"
+                        radius: Config.settings.borderRadius
+                        Layout.preferredWidth: {
+                            if (Config.settings.currentWallpaper === Config.settings.previousWallpaper && Config.settings.currentWallpaper === Config.settings.secondPreviousWallpaper)
+                                return pageWrapper.width
+                            else
+                                return pageWrapper.width - ((pageWrapper.width / 4) + 10)
+                        }
+                        Layout.preferredHeight: pageWrapper.width / 2
 
-                        MultiEffect {
-                            id: darkenEffect
-                            source: background
-                            anchors.fill: background
-                            opacity: Config.settings.desktop.dimDesktopWallpaper ? 1 : 0
+                        Behavior on Layout.preferredWidth {
+                            PropertyAnimation {
+                                duration: Config.settings.animationSpeed
+                                easing.type: Easing.InSine
+                            }
+                        }
+
+                        Image {
+                            id: background
+                            source: Config.settings.currentWallpaper
+                            fillMode: Image.PreserveAspectCrop
+
+                            MultiEffect {
+                                id: darkenEffect
+                                source: background
+                                anchors.fill: background
+                                opacity: Config.settings.desktop.dimDesktopWallpaper ? 1 : 0
+
+                                Behavior on opacity {
+                                    PropertyAnimation {
+                                        duration: Config.settings.animationSpeed
+                                        easing.type: Easing.InSine
+                                    }
+                                }
+                                
+                                brightness: -0.1
+                            }
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.preferredWidth: pageWrapper.width / 4
+                        Layout.preferredHeight: pageWrapper.width / 2
+
+                        spacing: 8
+
+                        ClippingWrapperRectangle {
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+                            Layout.preferredWidth: pageWrapper.width / 4
+                            Layout.preferredHeight: {
+                                if (Config.settings.previousWallpaper === Config.settings.secondPreviousWallpaper)
+                                    return pageWrapper.width / 2
+                                else
+                                    return (pageWrapper.width / 4) - 5
+                            }
+
+                            Behavior on Layout.preferredHeight {
+                                PropertyAnimation {
+                                    duration: Config.settings.animationSpeed
+                                    easing.type: Easing.InSine
+                                }
+                            }
+
+                            Image {
+                                source: Config.settings.previousWallpaper
+                                fillMode: Image.PreserveAspectCrop
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: Wallpaper.setNewWallpaper(Config.settings.previousWallpaper)
+                                }
+                            }
+                        }
+
+                        ClippingWrapperRectangle {
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+                            Layout.preferredWidth: pageWrapper.width / 4
+                            Layout.preferredHeight: (pageWrapper.width / 4) - 5
+                            opacity: Config.settings.previousWallpaper === Config.settings.secondPreviousWallpaper ? 0 : 1
 
                             Behavior on opacity {
                                 PropertyAnimation {
@@ -80,8 +153,18 @@ Rectangle {
                                     easing.type: Easing.InSine
                                 }
                             }
-                            
-                            brightness: -0.1
+
+                            Image {
+                                source: Config.settings.secondPreviousWallpaper
+                                fillMode: Image.PreserveAspectCrop
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: Wallpaper.setNewWallpaper(Config.settings.secondPreviousWallpaper)
+                                }
+                            }
                         }
                     }
                 }
@@ -142,6 +225,8 @@ Rectangle {
                         Config.settings.borderRadius -= 1;
                     }
                     isFloat: false
+                    withIcon: true
+                    iconCode: "rounded_corner"
                 }
 
                 GenericNumberOption {
@@ -156,6 +241,8 @@ Rectangle {
                         Config.settings.animationSpeed -= 100;
                     }
                     isFloat: true
+                    withIcon: true
+                    iconCode: "speed"
                 }
 
                 GenericTitle {
@@ -182,12 +269,16 @@ Rectangle {
                         else
                             Config.settings.colours.mode = "dark"
                     }
+                    withIcon: true
+                    iconCode: "dark_mode"
                 }
 
                 GenericToggleOption {
                     message: "Use custom colours (overrides generated colours for widgets)"
                     option: Config.settings.colours.useCustom
                     toRun: () => Config.settings.colours.useCustom = !Config.settings.colours.useCustom
+                    withIcon: true
+                    iconCode: "category"
                 }
             }
         }

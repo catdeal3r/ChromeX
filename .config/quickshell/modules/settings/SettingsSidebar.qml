@@ -95,10 +95,20 @@ Rectangle {
         SidebarButton {
             rWidth: parent.width
             rHeight: 50
-            bigText: "About"
-            iconCode: "info"
+            bigText: "Components"
+            iconCode: "build"
             toRun: () => SettingsControl.setLocation(4)
             number: 4
+            selected: root.location
+        }
+
+        SidebarButton {
+            rWidth: parent.width
+            rHeight: 50
+            bigText: "About"
+            iconCode: "info"
+            toRun: () => SettingsControl.setLocation(5)
+            number: 5
             selected: root.location
         }
     }

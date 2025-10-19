@@ -31,7 +31,7 @@ Rectangle {
 
         Text {
             anchors.centerIn: parent
-            text: "Empty (for now) ..."
+            text: "Coming soon ..."
             color: Colours.palette.on_surface
             font.family: Config.settings.font
             font.pixelSize: 25

@@ -291,7 +291,7 @@ Singleton {
             root.initDone()
         }
         onLoadFailed: (error) => {
-            if(error == FileViewError.FileNotFound) {
+            if (error == FileViewError.FileNotFound) {
                 console.log("[Notifications] File not found, creating new file.")
                 root.list = []
                 notifFileView.setText(stringifyList(root.list));

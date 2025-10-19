@@ -8,7 +8,7 @@ import qs.modules.common
 Rectangle {
 	id: root
 	width: 45
-	height: 40 * (Workspaces.niriWorkspaces.length) + 3 * (Workspaces.niriWorkspaces.length - 1) + 5
+	height: 40 * (Workspaces.niriWorkspaces?.length) + 3 * (Workspaces.niriWorkspaces?.length - 1) + 5
 	color: "transparent"
 
 	anchors.top: parent.top

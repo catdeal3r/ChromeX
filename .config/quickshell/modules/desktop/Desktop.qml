@@ -40,8 +40,16 @@ Scope {
 			exclusionMode: ExclusionMode.Ignore
 			exclusiveZone: 0
 
+			Connections {
+				target: Config.settings
+
+				function onWallpaperToSetChanged() {
+					realWallpaper.opacity = 0;
+				}
+			}
 
 			ClippingWrapperRectangle {
+				id: wallpaperUnderlay
 				anchors.top: parent.top
 				anchors.left: parent.left
 				width: Config.settings.desktop.desktopRoundingShown ? parent.width - 10 : parent.width
@@ -50,6 +58,7 @@ Scope {
 				anchors.leftMargin: (parent.width / 2) - (width / 2)
 				radius: Config.settings.desktop.desktopRoundingShown ? Config.settings.borderRadius : 0
 				color: "transparent"
+				opacity: 1
 
 				Behavior on radius {
 					PropertyAnimation {
@@ -69,6 +78,76 @@ Scope {
 					PropertyAnimation {
 						duration: Config.settings.animationSpeed
 						easing.type: Easing.InSine
+					}
+				}
+			
+				Image {
+					id: backgroundUnderlay
+					source: Config.settings.wallpaperToSet
+					fillMode: Image.PreserveAspectCrop
+
+					MultiEffect {
+						id: darkenEffectUnderlay
+						source: backgroundUnderlay
+						anchors.fill: background
+						opacity: Config.settings.desktop.dimDesktopWallpaper ? 1 : 0
+
+						Behavior on opacity {
+							PropertyAnimation {
+								duration: Config.settings.animationSpeed
+								easing.type: Easing.InSine
+							}
+						}
+						
+						brightness: -0.1
+					}
+				}
+			}
+
+			ClippingWrapperRectangle {
+				id: realWallpaper
+				anchors.top: parent.top
+				anchors.left: parent.left
+				width: Config.settings.desktop.desktopRoundingShown ? parent.width - 10 : parent.width
+				height: Config.settings.desktop.desktopRoundingShown ? parent.height - 10 : parent.height
+				anchors.topMargin: (parent.height / 2) - (height / 2)
+				anchors.leftMargin: (parent.width / 2) - (width / 2)
+				radius: Config.settings.desktop.desktopRoundingShown ? Config.settings.borderRadius : 0
+				color: "transparent"
+				opacity: 1
+
+				Behavior on radius {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+
+				Behavior on height {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+
+				Behavior on width {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+
+				Behavior on opacity {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed + 400
+						easing.type: Easing.InSine
+					}
+				}
+
+				onOpacityChanged: {
+					if (opacity === 0) {
+						Config.settings.currentWallpaper = Config.settings.wallpaperToSet
+						realWallpaper.opacity = 1;
 					}
 				}
 			
