@@ -84,7 +84,7 @@ Loader {
 					Timer {
 						running: root.ani
 						repeat: false
-						interval: 1
+						interval: 20
 						onTriggered: {
                             maskId.anchors.bottomMargin = (settingsWindow.height / 2) - (maskId.height / 2)
                             maskId.opacity = 1

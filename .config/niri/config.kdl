@@ -384,10 +384,11 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Alt+Space hotkey-overlay-title="Run an Application" { spawn "qs" "ipc" "call" "root" "toggleLauncher"; }
+    Super+E hotkey-overlay-title="Open the file manager" { spawn "nautilus" "-w"; }
     Super+L hotkey-overlay-title="Lock the Screen" { spawn "qs" "ipc" "call" "lock" "lock"; }
     Super+Shift+S hotkey-overlay-title="Take a screenshot" { spawn "sh" "-c" "~/.config/scripts/screenshot.sh --select"; }
     Super+I hotkey-overlay-title="Open Settings menu" { spawn "qs" "ipc" "call" "root" "toggleSettings"; }
-    Super+Space { spawn "qs" "ipc" "call" "root" "toggleDashboard"; }
+    Super+Space hotkey-overlay-title="Open dashboard"{ spawn "qs" "ipc" "call" "root" "toggleDashboard"; }
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }

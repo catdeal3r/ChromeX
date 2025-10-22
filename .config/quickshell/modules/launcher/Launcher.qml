@@ -83,7 +83,7 @@ Loader {
 					Timer {
 						running: root.ani
 						repeat: false
-						interval: 5
+						interval: 10
 						onTriggered: {
 							maskId.anchors.topMargin = maskId.topMarginPadding
 						}

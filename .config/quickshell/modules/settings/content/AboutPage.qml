@@ -63,7 +63,7 @@ Rectangle {
                     Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                     Layout.preferredHeight: 20
                     Layout.topMargin: 10
-                    text: "Created By"
+                    text: "People involved"
                     iconCode: "account_circle"
                 }
 
@@ -72,6 +72,147 @@ Rectangle {
                     Layout.topMargin: 5
                     Layout.preferredWidth: pageWrapper.width
                     Layout.preferredHeight: 3
+                }
+
+                RowLayout {
+                    Layout.topMargin: 20
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    Layout.preferredWidth: pageWrapper.width
+        
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_catdeal3r_.png")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "catdeal3r"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Lead Developer and Designer"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_hauntedcupoftea_.jpg")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "hauntedcupoftea"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Bluetooth tooth fairy"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_sillyman_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Sillyman"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Playtester"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
                 }
             }
         }
