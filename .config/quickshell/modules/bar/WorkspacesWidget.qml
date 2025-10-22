@@ -126,7 +126,14 @@ Rectangle {
 					anchors.leftMargin: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? parent.width / 2 - 4.8 : parent.width / 2 - 6.5
 
 					text: Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused ? "" : ""
-					color: Workspaces.niriWorkspaces[index].is_focused ? Colours.palette.on_primary : Colours.palette.outline
+					color: {
+						if (Workspaces.niriWorkspaces[index].active_window_id != null && !Workspaces.niriWorkspaces[index].is_focused)
+							return Qt.alpha(Colours.palette.on_surface, 0.8)
+						else if (Workspaces.niriWorkspaces[index].is_focused)
+							return Colours.palette.on_primary
+						else
+							return Colours.palette.outline
+					}
 
 					Behavior on color {
 						PropertyAnimation {
