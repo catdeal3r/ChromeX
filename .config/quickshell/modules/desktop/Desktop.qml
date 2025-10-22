@@ -182,7 +182,14 @@ Scope {
 			}
 
 			Rectangle {
-				height: Config.settings.dock.pinned ? parent.height - 114 : parent.height - 77
+				height: {
+					if (!Config.settings.componentControl.dockIsEnabled)
+						return parent.height - 77
+					if (Config.settings.dock.pinned)
+						return parent.height - 114
+					else
+						return parent.height - 77
+				}
 				width: Config.settings.borderRadius + 5
 				anchors.top: parent.top
 				anchors.topMargin: Config.settings.dock.pinned ? 37 : (parent.height / 2) - (height / 2)

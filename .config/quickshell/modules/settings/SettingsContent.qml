@@ -37,8 +37,6 @@ Rectangle {
 
         ComponentsPage {}
 
-        GenericPageWrapper {
-            page: 5
-        }
+        AboutPage {}
     }
 }
