@@ -30,9 +30,9 @@
 
 ### Photos
 
-| **Dashboard, Notifications, Bar, Dock, and Launcher** |
-| ---- |
-| <img src=".github/setup1.png?" alt="ChromeX Dashboard and Notifications"> |
+| **Dashboard, Notifications, Bar, Dock, and Launcher** | **Settings Window and Colour Theming** |
+| ---- | ---- |
+| <img src=".github/setup1.png?" alt="ChromeX Dashboard and Notifications"> | <img src=".github/setup2.png" alt="ChromeX Settings Window"> |
 
 ---
 
