@@ -258,7 +258,7 @@ Rectangle {
 
                         Text {
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                            text: "Design inspiration and launcher code"
+                            text: "Design inspiration and service code"
                             font.family: Config.settings.font
                             font.pixelSize: 12
                             color: Qt.alpha(Colours.palette.on_surface, 0.7)

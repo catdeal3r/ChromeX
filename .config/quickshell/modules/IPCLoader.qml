@@ -12,7 +12,7 @@ Singleton {
 	property bool isLoadingScreenOpen: false
 	property bool isBarOpen: true
 	property bool isDockOpen: true
-	property bool isSettingsOpen: true
+	property bool isSettingsOpen: false
 	
 	property bool isDashboardOpen: false
 	
