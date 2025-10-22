@@ -94,7 +94,7 @@ Rectangle {
                             radius: Config.settings.borderRadius
 
                             IconImage {
-                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_catdeal3r_.png")
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_catdeal3r_.png")
                             }
 
                         }
@@ -139,7 +139,7 @@ Rectangle {
                             radius: Config.settings.borderRadius
 
                             IconImage {
-                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_hauntedcupoftea_.jpg")
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_hauntedcupoftea_.jpg")
                             }
 
                         }
@@ -184,7 +184,7 @@ Rectangle {
                             radius: Config.settings.borderRadius
 
                             IconImage {
-                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/author_sillyman_.webp")
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_sillyman_.webp")
                             }
 
                         }
@@ -213,6 +213,297 @@ Rectangle {
                             color: Qt.alpha(Colours.palette.on_surface, 0.7)
                         }
                     }
+                }
+
+                RowLayout {
+                    Layout.topMargin: 20
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    Layout.preferredWidth: pageWrapper.width
+        
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_soramane_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Soramane"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Design inspiration and launcher code"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_rexiel_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Rexiel"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "ListView animations and notification code"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_end_4_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "End_4"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Notification daemon and much, much more"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+                }
+
+                RowLayout {
+                    Layout.topMargin: 20
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    Layout.preferredWidth: pageWrapper.width
+        
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_tiffany_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Tiffany"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Literally cheat-code-like design critique"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_eve_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Eve"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "General linux stuff and design critique"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.topMargin: 20
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        Layout.preferredWidth: pageWrapper.width / 4
+
+                        spacing: 6
+                    
+                        ClippingWrapperRectangle {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            Layout.preferredWidth: pageWrapper.width / 10
+                            Layout.preferredHeight: Layout.preferredWidth
+                            color: "transparent"
+                            radius: Config.settings.borderRadius
+
+                            IconImage {
+                                source: Qt.resolvedUrl(Quickshell.shellDir + "/assets/authors/author_chadcat7_.webp")
+                            }
+
+                        }
+
+                        Text {
+                            Layout.topMargin: 5
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Chadcat7"
+                            font.family: Config.settings.font
+                            font.pixelSize: 20
+                            color: Colours.palette.on_surface
+                        }
+
+                        GenericSeperator {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.topMargin: 5
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 3
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                            text: "Biggest design inspiration"
+                            font.family: Config.settings.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Colours.palette.on_surface, 0.7)
+                        }
+                    }
+                }
+
+                Text {
+                    Layout.topMargin: 30
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                    text: "Nothing in this project would have been achieved without these amazing people."
+                    font.family: Config.settings.font
+                    font.pixelSize: 20
+                    color: Colours.palette.on_surface
                 }
             }
         }
