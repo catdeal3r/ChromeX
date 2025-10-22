@@ -2,7 +2,7 @@
 <div align="center">
 <img src=".github/icon.png?" alt="ChromeX Icon" width="258" height="299">
 
-# ChromeX
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Roboto&weight=400&size=35&duration=3500&pause=2000&color=FFFFFF&center=true&vCenter=true&width=435&lines=ChromeX)](https://github.com/catdeal3r/chromex)
 
 ![commits](https://img.shields.io/github/last-commit/catdeal3r/ChromeX?style=for-the-badge&labelColor=1B1919&color=74be88)
 ![top language](https://img.shields.io/github/languages/top/catdeal3r/ChromeX?color=6d92bf&style=for-the-badge&labelColor=1B1919)
