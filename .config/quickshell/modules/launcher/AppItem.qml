@@ -47,8 +47,12 @@ Rectangle {
 
         color: "transparent"
 
-        IconImage {
+        child: Image {
             source: Quickshell.iconPath(modelData.icon, "application-x-executable")
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                saturation: Config.settings.colours.genType == "scheme-monochrome" && !Config.settings.colours.useCustom ? -1.0 : 1.0
+            }
         }
     }
 

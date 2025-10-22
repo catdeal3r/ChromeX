@@ -127,7 +127,7 @@ Rectangle {
 							fillMode: Image.PreserveAspectCrop
                             layer.enabled: true
                             layer.effect: MultiEffect {
-                                saturation: Config.settings.colours.genType == "scheme-monochrome" ? -1.0 : 1.0
+                                saturation: Config.settings.colours.genType == "scheme-monochrome" && !Config.settings.colours.useCustom ? -1.0 : 1.0
                             }
 						}
 					}
