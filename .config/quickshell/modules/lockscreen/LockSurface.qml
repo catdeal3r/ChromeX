@@ -6,12 +6,11 @@ import QtQuick.Effects
 import Quickshell.Wayland
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Io
 
 import qs.modules.lockscreen
 import qs.config
 import qs.modules.common
-
-import qs.modules.lockscreen
 
 Rectangle {
 	id: root
@@ -34,6 +33,112 @@ Rectangle {
 		brightness: -0.2
 	}
 	
+	Rectangle {
+		width: 500
+		height: 130
+		anchors.left: parent.left
+		anchors.bottom: parent.bottom
+		anchors.leftMargin: 30
+		anchors.bottomMargin: 30
+		radius: Config.settings.borderRadius
+		color: Colours.palette.surface
+
+		LockMusic {}
+	}
+
+	Rectangle {
+		width: 300
+		height: 80
+		anchors.right: parent.right
+		anchors.bottom: parent.bottom
+		anchors.rightMargin: 30
+		anchors.bottomMargin: 30
+		radius: Config.settings.borderRadius
+		color: Colours.palette.surface
+
+		RowLayout {
+			anchors.centerIn: parent
+			width: parent.width - 40
+			height: parent.height - 10
+			spacing: 5
+
+			Text {
+				text: Network.getIcon()
+				color: Network.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
+					
+				font.family: Config.settings.iconFont
+				font.weight: 600
+
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignHCenter
+				font.pixelSize: 27
+
+				Behavior on color {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+			}
+
+			Text {
+				text: Bluetooth.getIcon()
+				color: Bluetooth.getBool() ? Qt.alpha(Colours.palette.on_surface, 0.8) : Colours.palette.outline
+					
+				font.family: Config.settings.iconFont
+				font.weight: 600
+
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignHCenter
+				font.pixelSize: 27
+
+				Behavior on color {
+					PropertyAnimation {
+						duration: Config.settings.animationSpeed
+						easing.type: Easing.InSine
+					}
+				}
+			}
+					
+			BatteryWidget {
+				color: Qt.alpha(Colours.palette.on_surface, 0.8)
+
+				font.family: Config.settings.iconFont
+				font.weight: 600
+				
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignHCenter
+				font.pixelSize: 27
+			}
+
+			Text {
+				id: timeText
+				property string time: ""
+	
+				Process {
+					id: dateProc
+
+					command: [ "date", "+%I:%M" ]
+					running: true
+
+					stdout: SplitParser {
+						onRead: data => timeText.time = `${data}`
+					}
+				}
+
+				Timer {
+					interval: 1000
+					running: true
+					repeat: true
+					onTriggered: dateProc.running = true
+				}
+
+				text: timeText.time
+				color: Qt.alpha(Colours.palette.on_surface, 0.8)
+				font.family: Config.settings.font
+				font.pixelSize: 30
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignHCenter
+			}
+		}
+	}
+
 
 	ColumnLayout {
 		spacing: 10
@@ -106,9 +211,6 @@ Rectangle {
 						}
 					}
 					
-					border.width: 2
-					border.color: (root.context.currentText != "" ) ? Colours.palette.primary : Colours.palette.on_surface
-					
 					Keys.onPressed: event => {
 						if (root.context.unlockInProgress)
 							return;
@@ -150,7 +252,6 @@ Rectangle {
 					
 				}
 					
-				
 				ListView {
 					id: charList
 
@@ -199,8 +300,18 @@ Rectangle {
 		}
 
 		Label {
-			visible: root.context.showFailure
+			visible: true
+			opacity: root.context.showFailure ? 1 : 0
+			
 			text: "Incorrect password"
+
+			Layout.topMargin: 5
+			
+			font.family: Config.settings.font
+			
+			color: Qt.alpha(Colours.palette.on_surface, 0.9)
+			Layout.alignment: Qt.AlignHCenter
+			font.pixelSize: 20
 		}
 	}
 }
