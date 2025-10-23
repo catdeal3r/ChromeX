@@ -135,7 +135,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.left: icon.right
             anchors.leftMargin: 5
-            text: "Not all option are currently available in this window. Vist ~/.config/quickshell/settings/settings.json for the full list."
+            text: "Not all option are currently available in this window. Visit ~/.config/quickshell/settings/settings.json for the full list."
             font.family: Config.settings.font
             font.pixelSize: 13
             color: Qt.alpha(Colours.palette.on_surface, 0.7)

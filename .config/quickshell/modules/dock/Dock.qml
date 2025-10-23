@@ -22,7 +22,12 @@ Scope {
 
     property var apps: {
         var list = [];
-        var pinnedList = Config.settings.dock.pinnedApps;
+        var pinnedList = [];
+
+        for (var app of Config.settings.dock.pinnedApps) {
+            pinnedList.push(app.toLowerCase());
+        }
+
         for (var app of pinnedList) {
             list.push({
                 "pinned": true,
