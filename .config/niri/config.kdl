@@ -382,7 +382,7 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot"; }
     Alt+Space hotkey-overlay-title="Run an Application" { spawn "qs" "ipc" "call" "root" "toggleLauncher"; }
     Super+E hotkey-overlay-title="Open the file manager" { spawn "nautilus" "-w"; }
     Super+L hotkey-overlay-title="Lock the Screen" { spawn "qs" "ipc" "call" "lock" "lock"; }

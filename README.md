@@ -13,6 +13,9 @@
 
 </div>
 
+> [!Important]
+> Update: this project is dying as I am planning to switch to a more personalized, productivity based setup for my studies.
+
 - **What's this?**: This is a combination of ChromeOS, Material 3 Design, and GNOME, all put together with quickshell on niri.
 - **This looks cool; should I use it?**: Not yet. Many things are not complete, including a settings menu, network and bluetooth menus, and calendar. It's best if you wait until those have been made.
 
